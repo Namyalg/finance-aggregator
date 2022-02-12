@@ -12,6 +12,13 @@ This is to connect to the database
 
 - Run the server using `nodemon index.js`. The server will run on `PORT 9001`
 
+The current status of the database : 
+
+Name of database : finance-aggregator
+
+Name of collection : examples
+
+![image](https://user-images.githubusercontent.com/53875297/153704644-ac5ce04f-7529-4c9b-b8b0-57b9e1912e43.png)
 
 
 ### API Endpoints
