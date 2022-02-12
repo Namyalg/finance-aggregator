@@ -2,6 +2,12 @@
 - The backend is written in Node.js
 - The frontend and backend are two separate applications connected via REST APIs
 
+In the backend folder, create a file `.env` and add this line
+
+`DB=mongodb+srv://admin:admin@cluster0.lbxjt.mongodb.net/finance-aggregator?retryWrites=true&w=majority`
+
+This is to connect to the database
+
 ### API Endpoints
 
 |    ENDPOINT           |   METHOD   |  USE     |
