@@ -4,14 +4,15 @@
 
 
 ### Steps to run
-- Clone the folder from the Github Repository
 - Install the dependencies using `npm install`
-- Run the server using `nodemon index.js` on `PORT 9001`
+
 - In the backend folder, create a file `.env` and add this line
-
 `DB=mongodb+srv://admin:admin@cluster0.lbxjt.mongodb.net/finance-aggregator?retryWrites=true&w=majority`
-
 This is to connect to the database
+
+- Run the server using `nodemon index.js`. The server will run on `PORT 9001`
+
+
 
 ### API Endpoints
 
