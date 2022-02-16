@@ -5,7 +5,7 @@
 
 const mongoose = require('mongoose')
 
-const ExampleSchema = mongoose.Schema({
+const BankSchema = mongoose.Schema({
   email: {
     type: String,
     required: true
@@ -16,4 +16,4 @@ const ExampleSchema = mongoose.Schema({
   }
 }, { timestamp: true })
 
-module.exports = mongoose.model('examples', ExampleSchema)
+module.exports = mongoose.model('fd-banks', BankSchema)
