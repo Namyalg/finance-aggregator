@@ -1,0 +1,95 @@
+
+  form {
+      width: 100%;
+      max-width: 200px;
+      margin: 30px auto;
+  }
+  form input {
+      font-size: 15px;
+      padding: 0;
+      border: 2px solid #ccc;
+      border-left: 0;
+      width: 100%;
+      color: #666;
+      border-radius: 0 7px 7px 0;
+      font-family: 'PT Sans', sans-serif;
+      font-weight: 300;
+      line-height: 2.5;
+  }
+  form input:focus {
+      outline: 0;
+  }
+  form input.error {
+      border-color: #ff0000;	
+  }
+  form label.error {
+      background-color: #ff0000;
+      color: #fff;
+      padding: 6px;
+      font-size: 11px;
+  }
+  
+  label {
+      color: #8c8b8b;
+      display: block;
+      margin-bottom: 7px;
+      font-size: 14px;
+      font-weight: 800 !important;
+      letter-spacing: 0.05em;
+  }
+  .flex {
+      display: flex;
+      justify-content: flex-start;
+  }
+  .flex input {
+      max-width: 200px;
+      flex: 1 1 200px;
+  }
+  .flex .currency {
+      font-size: 20px;
+      padding: 0 10px 0 20px;
+      color: #999;
+      border: 2px solid #ccc;
+      border-right: 0;
+      line-height: 2;
+      border-radius: 7px 0 0 7px;
+      background: white;
+  }
+
+  .multiselect {
+    width: 200px;
+  }
+  
+  .selectBox {
+    position: relative;
+  }
+  
+  .selectBox select {
+    width: 100%;
+    font-weight: bold;
+  }
+  
+  .overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  
+  #checkboxes {
+    display: none;
+    border: 1px #dadada solid;
+  }
+  
+  #checkboxes label {
+    display: block;
+  }
+
+  #checkboxes label input{
+      width: auto;
+  }
+  
+  #checkboxes label:hover {
+    background-color: #1e90ff;
+  }
