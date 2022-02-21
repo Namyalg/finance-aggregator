@@ -93,3 +93,14 @@
   #checkboxes label:hover {
     background-color: #1e90ff;
   }
+
+  #filters{
+    width: 150px;
+    height: 30px;
+    font-family: 'PT-Sans';
+    color: gray;
+    /* border: 1px solid gainsboro; */
+    /* border-radius: 3px; */
+  }
+
+  
