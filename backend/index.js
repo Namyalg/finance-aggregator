@@ -41,6 +41,9 @@ app.use('/example', exampleRouter)
 const FDRouter = require('./routes/FixedDepositRouter')
 app.use('/fd', FDRouter)
 
+const UserRouter = require('./routes/UserRouter')
+app.use('/user', UserRouter)
+
 const port = process.env.PORT || 9001
 app.listen(port, function () {
   console.log('server started on PORT ', port)

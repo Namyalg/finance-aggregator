@@ -153,7 +153,7 @@
                 </div>
                 <br>
                 <div class="text-center mb-5">
-                  <button class="btn btn-danger px-4" type="submit" onclick="validateInput()">Submit</button>
+                  <button class="btn btn-danger px-4" type="submit" onclick="resetFilter(); validateInput()">Submit</button>
                 </div>
               </div>
             </div>
@@ -168,8 +168,10 @@
                         <div class="filters">
                             <div class="select">
                               <select name="filters" id="filters">
-                                <option value="1" selected="selected" onclick="validateInput(1)">Interest rate</option>
-                                <option value="2" onclick="validateInput(2)">Safety</option>
+                                <!-- <option value="1" selected="selected" onclick="validateInput(1)">Interest rate</option>
+                                <option value="2" onclick="validateInput(2)">Safety</option> -->
+                                <option onclick="validateInput(0)">Interest rate</option>
+                                <option onclick="validateInput(1)">Safety</option>
                               </select>
                             </div>
                           </div>
@@ -215,6 +217,7 @@
                         <td>Name</td>
                         <td>Interest (In Rs)</td>
                         <td>Bank type</td>
+                        <td onclick="bookmarkOption(this)">Save</td>
                       </tr>
                 </table>
                 </div>
