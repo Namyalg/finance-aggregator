@@ -110,17 +110,18 @@ function recommendOptions(data, principal, totalTenure, isSenior, cumulative, no
     var allBanks = data.message 
     for(bank of allBanks){
         var interest = 0
+        var policy = ""
         var bankDetails = {}
         if(principal < 20000000){
-            interest = calculateInterest(bank.under_two_cr, principal, totalTenure, isSenior, cumulative, nonCumulative, monthly, quarterly, semiAnnually)
+            [interest, policy] = calculateInterest(bank.under_two_cr, principal, totalTenure, isSenior, cumulative, nonCumulative, monthly, quarterly, semiAnnually)
         }
         else{
-            interest = calculateInterest(bank.two_five_cr, principal, totalTenure, isSenior, cumulative, nonCumulative, monthly, quarterly, semiAnnually)
+            [interest, policy] = calculateInterest(bank.two_five_cr, principal, totalTenure, isSenior, cumulative, nonCumulative, monthly, quarterly, semiAnnually)
         }
         bankDetails["name"] = bank.name
         bankDetails["interest"] = interest
         bankDetails["type"] = bank.type
-        bankDetails["policy"] = bank._id.toString()
+        bankDetails["policy"] = policy
         results.push(bankDetails)
     }
 
@@ -149,16 +150,19 @@ function recommendOptions(data, principal, totalTenure, isSenior, cumulative, no
 
 function calculateInterest(tenureSlabs, principal, totalTenure, isSenior, cumulative, nonCumulative, monthly, quarterly, semiAnnually){
     for(slab of tenureSlabs){
+        
         if(findTenureSlab(slab, totalTenure)){
-            if(isSenior){
-                return compute(principal, totalTenure, slab.senior, cumulative, nonCumulative, monthly, quarterly, semiAnnually)
+            var interest = 0
+            var policy = slab._id.toString()
+            if(isSenior){    
+                interest = compute(principal, totalTenure, slab.senior, cumulative, nonCumulative, monthly, quarterly, semiAnnually)
             }
             else{
-                return compute(principal, totalTenure, slab.general, cumulative, nonCumulative, monthly, quarterly, semiAnnually)
+                interest = compute(principal, totalTenure, slab.general, cumulative, nonCumulative, monthly, quarterly, semiAnnually)
             }
         }
     }
-    return 0
+    return [interest, policy]
 }
 
 //return the time slab where the total tenure is present
@@ -234,11 +238,14 @@ function showTable(resultTable){
 
 //bookmarks the option chosen
 function bookmarkOption(policy, type){
-    console.log(policy)
+
+    //assuming that the user details will be stored in localStorage on login/signup, so that will be used
+    
     localStorage.setItem("email", "test")
     var email = localStorage.getItem("email", email)
-    console.log("email is " + email)
     const option = { email : email, bookmarks : {fd : policy} };
+    //alert(policy)
+    console.log("policy added is " + policy)
     var URL = "http://localhost:9001/user/bookmark/" + type
     axios.post(URL, option)
     .then(response => {
