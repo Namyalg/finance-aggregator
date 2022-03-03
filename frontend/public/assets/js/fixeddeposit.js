@@ -91,6 +91,7 @@ function getData(principal, totalTenure, isSenior, cumulative, nonCumulative, mo
     axios.get("http://localhost:9001/fd")
     .then(response => {
         data = response.data
+        console.log(data)
         recommendOptions(data, principal, totalTenure, isSenior, cumulative, nonCumulative, monthly, quarterly, semiAnnually, filter);
     })
     .catch(error => {
