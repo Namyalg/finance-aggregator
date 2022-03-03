@@ -1,6 +1,7 @@
 // include packages
 var express = require('express');
 var path = require('path');
+var bodyParser = require('body-parser');
 
 // include sub-routers
 var fixedDepositRouter = require('./routes/fixed-deposit');
@@ -10,6 +11,11 @@ var travelInsuranceRouter = require('./routes/travel-insurance');
 var healthInsuranceRouter = require('./routes/health-insurance');
 
 var app = express();
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+
+app.use(bodyParser.json());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,7 +30,6 @@ app.use('/personal-loan', personalLoanRouter);
 app.use('/home-loan', homeLoanRouter);
 app.use('/travel-insurance', travelInsuranceRouter);
 app.use('/health-insurance', healthInsuranceRouter);
-
 // connect to an endpoint
 module.exports = app;
 const port = 8000
