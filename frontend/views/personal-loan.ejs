@@ -68,14 +68,17 @@
                                         <div class="flex">
                                             <span class="currency"> </span>
                                             <% if(typeof(interestRate) == 'undefined') { %>
-                                                <input id="interest-rate" name="interest-rate" type="number" maxlength="15" />
-                                                <% } else { %> <input id="interest-rate" name="interest-rate" type="number" maxlength="15" value="<%= interestRate %>" />
+                                                <input id="interest-rate" name="interest-rate" type="number" step=any />
+                                                <% } else { %> <input id="interest-rate" name="interest-rate" type="number" step=any value="<%= interestRate %>" />
                                                     <% } %>
                                         </div>
-                                        <label for="age" class="mt-3">Age</label>
+                                        <!-- <label for="age" class="mt-3">Age</label>
                                         <div class="flex">
                                             <span class="currency"> </span>
-                                            <input id="age" name="age" type="text" maxlength="15" />
+                                            <% if(typeof(age) == 'undefined') { %>
+                                                <input id="age" name="age" type="text" maxlength="15" />
+                                                <% } else { %><input id="age" name="age" type="text" maxlength="15" value="<%= age %>" />
+                                                    <% } %>
                                         </div>
                                         <label for="employment" class="mt-3">Type of Employment</label>
                                         <div class="employment">
@@ -92,8 +95,11 @@
                                         <label for="income" class="mt-3">Gross Income (monthly)</label>
                                         <div class="flex">
                                             <span class="currency">&#8377</span>
-                                            <input id="income" name="income" type="text" maxlength="15" />
-                                        </div>
+                                            <% if(typeof(income) == 'undefined') { %>
+                                                <input id="income" name="income" type="text" maxlength="15" />
+                                                <% } else { %> <input id="income" name="income" type="text" maxlength="15" value="<%= income %>" />
+                                                    <% } %>
+                                        </div> -->
                                         <!-- to be integrated in future -->
                                         <!-- <label for="work-experience" class="mt-3">Work Experience (years)</label>
                                     <div class="flex">
@@ -105,7 +111,7 @@
                                         <span class="currency"> </span>
                                         <input id="outgoing-emis" name="outgoing-emis" type="text" maxlength="15" />
                                     </div> -->
-                                        <div class="text-center mb-5">
+                                        <div class="text-center m-5">
                                             <!-- <div class="d-block"> -->
                                             <button class="btn btn-danger px-4" type="submit">Go</button>
                                             <!-- </div> -->
