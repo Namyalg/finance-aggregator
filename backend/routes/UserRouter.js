@@ -13,11 +13,28 @@ router.get('/', async(req, res) => {
     }
 })
 
+// verify user login
+router.post('/login', async(req, res) => {
+    try {
+        await User.find({ email: req.body.email }).then(data => {
+            if (data[0].password = req.body.password) {
+                res.status(200).json({ message: "successful", status: 1 })
+            }
+        }).catch(err => {
+            console.log(err)
+        })
+        res.status(400)
+    } catch (err) {
+        console.log(err)
+    }
+})
+
 // create a user, for the first time (Bookmarks are null here, only personal details added)
 router.post('/', async(req, res) => {
     const UserObject = new User({
         name: req.body.name,
         email: req.body.email,
+        password: req.body.password,
         age: req.body.age,
         address: req.body.address,
         bookmarks: {
@@ -27,15 +44,26 @@ router.post('/', async(req, res) => {
         }
     })
     try {
-        User.create(UserObject)
-            .then(data => {
-                res.status(200).json({ status: 1 })
-            })
-            .catch(err => {
-                const resp = { status: 0, message: 'Error is ' + err }
-                console.log(resp)
-                res.status(400).json(resp)
-            })
+        // check if a user with this email already exits
+        await User.find({ "email": req.body.email }).then(data => {
+            if (data.length > 0) {
+                res.status(200).json({ status: 0, message: 'A user with this email already exists. Please login instead.' })
+                return;
+            } else {
+                // create user
+                User.create(UserObject)
+                    .then(data => {
+                        res.status(200).json({ status: 1 })
+                        return;
+                    })
+                    .catch(err => {
+                        const resp = { status: 0, message: 'Error is ' + err }
+                        res.status(400).json(resp)
+                        return;
+                    })
+            }
+        })
+
     } catch (err) {
         res.status(400).json({ status: 0, message: 'Error is ' + err })
     }
