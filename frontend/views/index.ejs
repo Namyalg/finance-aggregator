@@ -23,7 +23,7 @@
     <link rel="manifest" href="../assets/img/favicons/manifest.json">
     <meta name="msapplication-TileImage" content="../assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- ===============================================-->
     <!--    Stylesheets-->
@@ -57,14 +57,16 @@
                             </form>
                         </div>
                     </div><a class="btn btn-primary order-1 order-lg-0 ms-lg-3" href="#!">Contact Us</a>
-                    <form class="d-flex my-3 d-block d-lg-none">
-                        <input class="form-control me-2 border-200 bg-light" type="search" placeholder="Search" aria-label="Search" />
-                        <button class="btn btn-outline-primary" type="submit">Search</button>
-                    </form>
+                    <%- include('partials/userMenu'); %>
+                        <form class="d-flex my-3 d-block d-lg-none">
+                            <input class="form-control me-2 border-200 bg-light" type="search" placeholder="Search" aria-label="Search" />
+                            <button class="btn btn-outline-primary" type="submit">Search</button>
+                        </form>
                 </div>
             </div>
         </nav>
         <section class="py-xxl-10 pb-0" id="home">
+
             <div class="bg-holder bg-size" style="background-image:url(../assets/img/gallery/hero-header-bg.png);background-position:top center;background-size:cover;">
             </div>
             <!--/.bg-holder-->
