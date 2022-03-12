@@ -9,10 +9,6 @@ router.get("/", async(req, res) => {
     try {
         const allLoans = await personalLoanDB.find();
         q = await personalLoanDB.find({ "interest.general": { $exists: false } });
-        // q = await personalLoanDB.find({ "Minimum Work Experience": { $exists: true, $ne: null } })
-        console.log(q);
-        console.log(q.length);
-        console.log(allLoans.length, " loans returned");
         res.status(200).json({ message: allLoans, status: 1 });
     } catch (err) {
         console.log(err);
@@ -26,7 +22,6 @@ router.post("/query", async(req, res) => {
         const loanAmount = parseFloat(req.body.amount);
         const tenure = parseFloat(req.body.tenure);
         const interest = parseFloat(req.body.interest);
-        console.log(loanAmount, tenure, interest)
         var queryConditions = {}
 
         if (loanAmount) {
@@ -44,7 +39,6 @@ router.post("/query", async(req, res) => {
         }
 
         var eligibleLoans = await personalLoanDB.find(queryConditions);
-        console.log(eligibleLoans)
         res.status(200).json({ message: eligibleLoans, status: 1 });
     } catch (err) {
         console.log(err);
