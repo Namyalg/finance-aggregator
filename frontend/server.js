@@ -1,6 +1,10 @@
 // include packages
 var express = require('express');
 var path = require('path');
+var cors = require('cors')
+var app = express()
+
+app.use(cors())
 
 // include sub-routers
 var fixedDepositRouter = require('./routes/fixed-deposit');
@@ -8,8 +12,6 @@ var personalLoanRouter = require('./routes/personal-loan');
 var homeLoanRouter = require('./routes/home-loan');
 var travelInsuranceRouter = require('./routes/travel-insurance');
 var healthInsuranceRouter = require('./routes/health-insurance');
-
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
