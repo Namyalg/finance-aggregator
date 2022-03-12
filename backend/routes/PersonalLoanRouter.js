@@ -21,6 +21,7 @@ router.get("/", async(req, res) => {
 });
 
 router.post("/query", async(req, res) => {
+    console.log("query recvd", req.body)
     try {
         const loanAmount = parseFloat(req.body.amount);
         const tenure = parseFloat(req.body.tenure);
