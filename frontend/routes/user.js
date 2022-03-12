@@ -29,6 +29,9 @@ router.post("/signup", async(req, res) => {
             if (response.data.status == 0) {
                 res.render("signup", { error: response.data.message });
             } else {
+                // successfull signup
+                var session = req.session
+                session.email = email
                 res.render("index");
             }
         }).catch((error) => {
@@ -54,6 +57,7 @@ router.post("/login", async(req, res) => {
         if (response.data.status == 0) {
             res.render("login", { error: "Invalid Credentials" })
         } else {
+            req.session.email = req.body.email
             res.render("index")
         }
     })
