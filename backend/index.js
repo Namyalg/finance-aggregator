@@ -44,10 +44,12 @@ app.use('/fd', FDRouter)
 const UserRouter = require('./routes/UserRouter')
 app.use('/user', UserRouter)
 
+const LogRouter = require('./routes/LogRouter')
+app.use('/log', LogRouter)
 const personalLoanRouter = require('./routes/PersonalLoanRouter')
 app.use('/personalLoan', personalLoanRouter)
 
 const port = process.env.PORT || 9001
 app.listen(port, function() {
-    console.log('server started on PORT ', port)
+  console.log('server started on PORT ', port)
 })

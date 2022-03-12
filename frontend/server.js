@@ -1,6 +1,10 @@
 // include packages
 var express = require('express');
 var path = require('path');
+var cors = require('cors')
+var app = express()
+
+app.use(cors())
 var bodyParser = require('body-parser');
 var sessions = require('express-session');
 const cookieParser = require("cookie-parser");
@@ -16,7 +20,6 @@ var travelInsuranceRouter = require('./routes/travel-insurance');
 var healthInsuranceRouter = require('./routes/health-insurance');
 var userRouter = require('./routes/user')
 
-var app = express();
 app.use(bodyParser.urlencoded({
     extended: false
 }));
