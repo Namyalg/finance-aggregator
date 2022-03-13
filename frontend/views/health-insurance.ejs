@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>Finance Aggregator</title>
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicons/favicon.ico">
+    <link rel="manifest" href="../assets/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="../assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&display=swap" rel="stylesheet">
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="../assets/css/theme.css" rel="stylesheet" />
+    <link href="../assets/css/product.css" rel="stylesheet" />
+
+</head>
+
+
+<body>
+    <%- include('template.ejs') -%>
+
+        <section class="py-7" id="services" container-xl="container-xl">
+            <div class="container">
+                <div class="row h-200 justify-content-center">
+                    <div class="col-md-3 pt-4 px-md-2 px-lg-3">
+                        <div class="card px-lg-5 card-span">
+                            <div class="card-body d-flex flex-column justify-content-around">
+                                <div class="text-center pt-5">
+                                    <img class="img-fluid" src="../assets/img/icons/Shape 1.png" width="55" alt="..." />
+                                    <h4 class="my-4">Health Insurance</h4>
+                                </div>
+                                <div>
+                                    <form id="form" method="post" action="/health-insurance/query">
+                                        <label for="tenure" class="mt-3">No of people</label>
+                                        <div class="flex">
+                                            <span class="currency"> </span>
+                                            <% if(typeof(tenure) == 'undefined') { %>
+                                                <input id="tenure" name="tenure" type="number" maxlength="15" required/>
+                                                <% } else { %> <input id="tenure" name="tenure" type="number" maxlength="15" value="<%= tenure %>" required/>
+                                                    <% } %>
+                                        </div>
+                                        <label for="interest-rate" class="mt-3">No of diseases</label>
+                                        <div class="flex">
+                                            <span class="currency"> </span>
+                                            <% if(typeof(interestRate) == 'undefined') { %>
+                                                <input id="interest-rate" name="interest-rate" type="number" maxlength="15" />
+                                                <% } else { %> <input id="interest-rate" name="interest-rate" type="number" maxlength="15" value="<%= interestRate %>" />
+                                                    <% } %>
+                                        </div>
+                                        <label for="age" class="mt-3">Age</label>
+                                        <div class="flex">
+                                            <span class="currency"> </span>
+                                            <input id="age" name="age" type="text" maxlength="15" />
+                                        </div>
+                                        
+                                        <!-- <label for="employment" class="mt-3">Type of Employment</label>
+                                        <div class="employment">
+                                            <div class="select">
+                                                <select name="employment" id="employment">
+                                            <option value="1" selected="selected">Salaried</option>
+                                            <option value="2">Self employed</option>
+                                            <option value="3">Business Owner</option>
+                                            <option value="4">Pensioner</option>
+                                            <option value="5">None</option>
+                                        </select>
+                                            </div>
+                                        </div> -->
+                                        <!-- <label for="income" class="mt-3">Gross Income (monthly)</label>
+                                        <div class="flex">
+                                            <span class="currency">&#8377</span>
+                                            <input id="income" name="income" type="text" maxlength="15" />
+                                        </div> -->
+                                        <!-- to be integrated in future -->
+                                        <!-- <label for="work-experience" class="mt-3">Work Experience (years)</label>
+                                    <div class="flex">
+                                        <span class="currency"> </span>
+                                        <input id="work-experience" name="work-experience" type="text" maxlength="15" />
+                                    </div>
+                                    <label for="outgoing-emis" class="mt-3">Outgoing EMIs</label>
+                                    <div class="flex">
+                                        <span class="currency"> </span>
+                                        <input id="outgoing-emis" name="outgoing-emis" type="text" maxlength="15" />
+                                    </div> -->
+                                    <br>
+                                        <div class="text-center mb-5">
+                                            <!-- <div class="d-block"> -->
+                                            <button class="btn btn-danger px-4" type="submit">Go</button>
+                                            <!-- </div> -->
+                                        </div>
+                                    </form>
+                                    <div class="filters">
+                                        <h5> Sort </h5>
+                                        <div class="select">
+                                            <select name="filters" id="filters">
+                                        <option value="1" selected="selected">Premium</option>
+                                        <option value="2">Cover</option>
+                                        <option value="3">Cashless hospitals</option>
+                                    </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9 pt-4 px-md-2 px-lg-3">
+                        <div class="card px-lg-5 card-span">
+                            <div class="card-body d-flex flex-column justify-content-around">
+                                <div class="row">
+                                    <div class="card bg-light border-0">
+                                        <div class="row py-2">
+                                            <!-- <div class="col-sm-2">
+                                                <div class="filters">
+                                                    <div class="select">
+                                                        <select name="filters" id="filters">
+                                                    <option value="1" selected="selected">Premium</option>
+                                                    <option value="2">Cover</option>
+                                                    <option value="3">Cashless hospitals</option>
+                                                </select>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <div class="col-sm-2 text-center">
+                                                <p class="fw-bolder mb-0">Insurance</p>
+                                            </div>
+                                            <div class="col-sm-2 text-center">
+                                                <p class="fw-bolder mb-0">Premium</p>
+                                            </div>
+                                            <div class="col-sm-2 text-center">
+                                                <p class="fw-bolder mb-0">Cover</p>
+                                            </div>
+                                            <div class="col-sm-2 text-center">
+                                                <p class="fw-bolder mb-0">Cashless Hospitals</p>
+                                            </div>
+                                            <div class="col-sm-2 text-center">
+                                                <p class="fw-bolder mb-0">Diseases Covered</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% for (var index = 0; index < allInsurances.length; index++) { %>
+                                        <div class="card mt-2">
+                                            <div class="py-3 px-2 row">
+                                                
+                                                <div class="col-sm-2 d-flex justify-content-center text-center align-items-center">
+                                                    <p class="my-0" style="font-family:'Times New Roman', Times, serif">
+                                                        <%= allInsurances[index]["agency"] %>
+                                                    </p>
+                                                </div>
+                                                <div class="col-sm-2 d-flex justify-content-center text-center align-items-center">
+                                                    <p class="my-0" style="font-family:'Times New Roman', Times, serif">
+                                                        <%= allInsurances[index]["premium"] %>
+                                                    </p>
+                                                </div>
+                                                <div class="col-sm-2 d-flex justify-content-center text-center align-items-center">
+                                                    <p class="my-0" style="font-family:'Times New Roman', Times, serif">
+                                                        <%= allInsurances[index]["cover"] %>
+                                                    </p>
+                                                </div>
+                                                <div class="col-sm-2 d-flex justify-content-center text-center align-items-center">
+                                                    <p class="my-0" style="font-family:'Times New Roman', Times, serif">
+                                                        <%= allInsurances[index]["cashless_hospitals"] %>
+                                                    </p>
+                                                </div>
+                                                <div class="col-sm-2 d-flex justify-content-center text-center align-items-center">
+                                                    <p class="my-0" style="font-family:'Times New Roman', Times, serif">
+                                                        <%= allInsurances[index]["diseases"] %>
+                                                    </p>
+                                                </div>
+                                                <!-- <div class="col-sm-2 d-flex justify-content-center text-center align-items-center">
+                                                    <h3 style="font-family: 'PT Sans';">
+                                                        <%= allInsurances[index]["premium"]%>
+                                                    </h3>
+                                                </div>
+                                                <div class="col-sm-2 d-flex justify-content-center text-center align-items-center">
+                                                    <h3 style="font-family: 'PT Sans';"><span style="font-family: Arial, Helvetica, sans-serif;"></span>
+                                                        <%= allInsurances[index]["cover"] %> 
+                                                    </h3>
+                                                </div>
+                                                <div class="col-sm-2 d-flex justify-content-center text-center align-items-center">
+                                                    <h3 style="font-family: 'PT Sans';"><span style="font-family: Arial, Helvetica, sans-serif;"></span>
+                                                        <%= allInsurances[index]["cashless_hospitals"] %> 
+                                                    </h3>
+                                                </div>
+                                                <div class="col-sm-2 d-flex justify-content-center text-center align-items-center">
+                                                    <h3 style="font-family: 'PT Sans';"><span style="font-family: Arial, Helvetica, sans-serif;"></span>
+                                                        <%= allInsurances[index]["diseases"] %> 
+                                                    </h3>
+                                                </div> -->
+                                                <div class="col-sm-2 d-flex flex-column align-items-center justify-content-center">
+                                                    <div class="d-flex justify-content-center"><i class="far fa-list-alt text-secondary fw-light"></i></div>
+                                                    <div class="text-secondary text-center">
+                                                        <h6 class="mb-0 mt-2 text-secondary fw-light">Bookmark</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                </div>
+                            </div>
+                            <div class="center text-center">
+                                <p>
+                                    <%= allInsurances.length %>
+                                        results</p>
+                            </div>
+                        </div>
+                    </div>
+        </section>
+
+        <script src="vendors/@popperjs/popper.min.js"></script>
+        <script src="vendors/bootstrap/bootstrap.min.js"></script>
+        <script src="vendors/is/is.min.js"></script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+        <script src="vendors/fontawesome/all.min.js"></script>
+        <script src="../assets/js/theme.js"></script>
+        <script src="../assets/js/product.js"></script>
+        <script src="./routes/health-insurance.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+</body>
+
+</html>

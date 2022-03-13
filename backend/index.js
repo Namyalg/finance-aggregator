@@ -47,7 +47,10 @@ app.use('/user', UserRouter)
 const personalLoanRouter = require('./routes/PersonalLoanRouter')
 app.use('/personalLoan', personalLoanRouter)
 
+const healthInsuranceRouter = require('./routes/HealthInsuranceRouter')
+app.use('/healthInsurance', healthInsuranceRouter)
+
 const port = process.env.PORT || 9001
 app.listen(port, function() {
-    console.log('server started on PORT ', port)
+  console.log('server started on PORT ', port)
 })
