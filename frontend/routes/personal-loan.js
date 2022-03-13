@@ -18,13 +18,11 @@ router.get("/", async(req, res) => {
     await axios
         .get(backendURL)
         .then((res) => {
-            console.log(`statusCode: ${res.status}`);
             loans = res.data.message;
         })
         .catch((error) => {
             console.error(error);
         });
-    console.log(loans.length, " loans returned");
     res.render("personal-loan", { loans: loans, emi: [] });
 });
 
@@ -37,22 +35,28 @@ router.post("/query", async(req, res) => {
     var age = req.body.age;
     var employment = req.body.employment;
     var income = req.body.income;
-    console.log(interestRate);
 
-    queryParams = {}
+    queryParams = {
+        amount: loanAmount,
+        tenure: Math.round(tenure)
+    }
+    if (interestRate) {
+        queryParams["interest"] = interestRate
+    }
+    if (age) {
+        queryParams["age"] = age
+    }
+    if (employment) {
+        queryParams["employment"] = employment
+    }
+    if (income) {
+        queryParams["income"] = income
+    }
     await axios
         .post(
-            backendURL + "/query", {
-                amount: loanAmount,
-                tenure: Math.round(tenure)
-            }, {
-                params: {
-                    amount: loanAmount,
-                },
-            }
+            backendURL + "/query", queryParams
         )
         .then((res) => {
-            console.log(`statusCode: ${res.status}`);
             eligibleLoans = res.data.message;
         })
         .catch((error) => {
@@ -60,13 +64,14 @@ router.post("/query", async(req, res) => {
         });
 
     eligibleLoans.forEach((loan) => {
-        if (!interestRate) interestRate = loan["interest"]["general"]["range_from"];
-        console.log(loanAmount, tenure, interestRate);
+        var rate
+        if (!interestRate) rate = loan["interest"]["general"]["range_from"];
+        else rate = interestRate
         emis.push(
             calcluateEMI(
                 parseFloat(loanAmount),
                 parseFloat(tenure),
-                parseFloat(interestRate)
+                parseFloat(rate)
             )
         );
     });
@@ -75,7 +80,10 @@ router.post("/query", async(req, res) => {
         emi: emis,
         amount: loanAmount,
         tenure: tenure,
-        interestRate: interestRate
+        interestRate: interestRate,
+        age: age,
+        employ: employment,
+        income: income
     });
 });
 

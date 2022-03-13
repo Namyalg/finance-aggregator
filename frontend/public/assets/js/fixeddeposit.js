@@ -230,7 +230,8 @@ function showTable(resultTable){
         button.innerHTML = "save"
         with ({ policy : bank.policy }) {
             button.onclick = function() {
-              bookmarkOption(policy, "fd");
+              addChoiceToLog(policy, "fd")
+              bookmarkOption(policy, "fd")
             };
         }
         cell4.appendChild(button)
@@ -245,13 +246,12 @@ function bookmarkOption(policy, type){
     localStorage.setItem("email", "test")
     var email = localStorage.getItem("email", email)
     const option = { email : email, bookmarks : {fd : policy} };
-    //alert(policy)
     console.log("policy added is " + policy)
     var URL = "http://localhost:9001/user/bookmark/" + type
     axios.post(URL, option)
     .then(response => {
         if(response.data.status === 1){
-            alert("bookmark added")
+            console.log("bookmark added")
         }
         else{
             alert("An error occured, try again :(")
@@ -259,5 +259,25 @@ function bookmarkOption(policy, type){
     });
 }
 
-
+function addChoiceToLog(policy, type){
+    const currentdate = new Date()
+    const datetime = currentdate.getDate() + '/' +
+                (currentdate.getMonth() + 1) + '/' +
+                currentdate.getFullYear() + ' @ ' +
+                currentdate.getHours() + ':' +
+                currentdate.getMinutes() + ':' +
+                currentdate.getSeconds() + ' IST'
+    const log = { policy : policy, type: type, date: datetime};
+    console.log(log)
+    var URL = "http://localhost:9001/log/"
+    axios.post(URL, log)
+    .then(response => {
+        if(response.data.status === 1){
+            console.log("log added")
+        }
+        else{
+            alert("An error occured, try again :(")
+        }
+    });
+}
 
