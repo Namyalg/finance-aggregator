@@ -7,8 +7,8 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-
-    res.render('fixed-deposit', {result : [req.body.amount, req.body.time]});
+    console.log(req)
+    res.render('fixed-deposit', {result : [23, req.body.principal, req.body.time]});
 })
 
 module.exports = router;
