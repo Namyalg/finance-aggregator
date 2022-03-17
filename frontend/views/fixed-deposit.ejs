@@ -105,7 +105,15 @@
                 </div>
                 <div>
                   <form id="form" action="/fixed-deposit" method="post">
-
+                    <div class="select">
+                      <select name="filters" id="filters">
+                        <!-- <option value="1" selected="selected" onclick="validateInput(1)">Interest rate</option>
+                        <option value="2" onclick="validateInput(2)">Safety</option> -->
+                        <option name="interestRate" value="interestRate">Interest rate</option>
+                        <option name="safety" value="safety">Safety</option>
+                      
+                      </select>
+                    </div>
                     <label for="principal">Principal</label>
                     <div class="flex">
                       <span class="currency">&#8377</span>
@@ -162,6 +170,16 @@
                             <input id="semiannually" type="radio" name="frequency" value="semiannually"/>
                         </div>
                         <br>
+                        <div class="select">
+                            <select name="filters" id="filters">
+                              <!-- <option value="1" selected="selected" onclick="validateInput(1)">Interest rate</option>
+                              <option value="2" onclick="validateInput(2)">Safety</option> -->
+                              <option name="interestRate" value="interestRate">Interest rate</option>
+                              <option name="safety" value="safety">Safety</option>
+                            
+                            </select>
+                        
+                        </div>
                     </div>
                     <input type="submit" id="btn">
                   </form>
@@ -181,14 +199,15 @@
                     <div class="row py-2">
                       <div class="col-sm-4">
                         <div class="filters">
-                            <div class="select">
-                              <select name="filters" id="filters">
-                                <!-- <option value="1" selected="selected" onclick="validateInput(1)">Interest rate</option>
-                                <option value="2" onclick="validateInput(2)">Safety</option> -->
-                                <option onclick="validateInput(0)">Interest rate</option>
-                                <option onclick="validateInput(1)">Safety</option>
-                              </select>
-                            </div>
+                            <!-- <div class="select">
+                              <form method="post" action="/fixed-deposit" onchange="this.form.submit()">
+                                <select name="filters" id="filters">
+                                  <option>Interest rate</option>
+                                  <option>Safety</option>
+                                
+                                </select>
+                              </form>
+                            </div>-->
                           </div>
                       </div>
                      
