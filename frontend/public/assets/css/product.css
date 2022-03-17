@@ -16,6 +16,9 @@
       font-weight: 300;
       line-height: 2.5;
   }
+  form input[type = "radio"]{
+    width: 20%;
+  }
   form input:focus {
       outline: 0;
   }
