@@ -130,18 +130,18 @@
                     <br>
                     <div class="flex">
                         <span>Age > 60</span>
-                        <input id="senior" type="checkbox" />
+                        <input id="senior" type="checkbox" name="senior" value="senior"/>
                     </div>
                     <br>
                     <label for="interest" class="mt-3">Interest Type</label>
                     <div class="flex">
                         <span>Cumulative</span>
-                        <input id="cumulative" type="checkbox"/>
+                        <input id="cumulative" type="radio" onchange="showOptions()" name="interestType" value="cumulative"/>
                     </div>
                     <br>
                     <div class="flex">
                         <span>Non-cumulative</span>
-                        <input id="noncumulative" type="checkbox" onchange="showOptions()"/>
+                        <input id="noncumulative" type="radio" onchange="showOptions()" name="interestType" value="noncumulative"/>
                     </div>
                     <br>
                     <div style="display:none" id="text" class="flex">
@@ -149,17 +149,17 @@
                         <br>
                         <div class="flex">
                             <span>Monthly</span>
-                            <input id="monthly" type="checkbox"/>
+                            <input id="monthly" type="radio" name="frequency" value="monthly"/>
                         </div>
                         <br>
                         <div class="flex">
                             <span>Quarterly</span>
-                            <input id="quarterly" type="checkbox"/>
+                            <input id="quarterly" type="radio" name="frequency" value="quarterly"/>
                         </div>
                         <br>
                         <div class="flex">
                             <span>Semi-annually</span>
-                            <input id="semiannually" type="checkbox"/>
+                            <input id="semiannually" type="radio" name="frequency" value="semiannually"/>
                         </div>
                         <br>
                     </div>
@@ -226,5 +226,4 @@
     <!-- ============================================-->
   </main>
 </body>
-
 </html>
