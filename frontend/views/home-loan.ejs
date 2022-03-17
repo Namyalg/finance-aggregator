@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>Finance Aggregator</title>
+
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/favicon.ico">
+    <link rel="manifest" href="assets/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&display=swap" rel="stylesheet">
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="assets/css/theme.css" rel="stylesheet" />
+    <link href="assets/css/product.css" rel="stylesheet" />
+
+</head>
+
+
+<body>
+
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main" id="top">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block"
+            data-navbar-on-scroll="data-navbar-on-scroll">
+            <div class="container"><a class="navbar-brand" href="index.html"><img src="assets/img/gallery/logo.png"
+                        height="45" alt="logo" /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon">
+                    </span></button>
+                <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
+                        <li class="nav-item px-2"><a class="nav-link" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item px-2"><a class="nav-link" href="#services">Our Services</a></li>
+                        <li class="nav-item px-2"><a class="nav-link" href="#findUs">Find Us</a></li>
+                    </ul>
+                    <div class="dropdown d-none d-lg-block">
+                        <button class="btn bg-soft-warning ms-2" id="dropdownMenuButton1" type="submit"
+                            data-bs-toggle="dropdown" aria-expanded="false"><i
+                                class="fas fa-search text-warning"></i></button>
+                        <div class="dropdown-menu dropdown-menu-lg-end p-0 rounded"
+                            aria-labelledby="dropdownMenuButton1" style="top:55px">
+                            <form>
+                                <input class="form-control border-200" type="search" placeholder="Search"
+                                    aria-label="Search" style="background:#FDF1DF;" />
+                            </form>
+                        </div>
+                    </div><a class="btn btn-primary order-1 order-lg-0 ms-lg-3" href="#!">Contact Us</a>
+                    <form class="d-flex my-3 d-block d-lg-none">
+                        <input class="form-control me-2 border-200 bg-light" type="search" placeholder="Search"
+                            aria-label="Search" />
+                        <button class="btn btn-outline-primary" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ============================================-->
+        <!-- <section> begin ============================-->
+        <section class="py-7" id="services" container-xl="container-xl">
+
+            <div class="container">
+                <div class="row h-200 justify-content-center">
+                    <div class="col-md-3 pt-4 px-md-2 px-lg-3">
+                        <div class="card h-100 px-lg-5 card-span">
+                            <div class="card-body d-flex flex-column">
+                                <div class="text-center pt-5"><img class="img-fluid" src="assets/img/icons/Shape 1.png"
+                                        width="55" alt="..." />
+                                    <h3 class="my-4">Home Loan</h3>
+                                </div>
+                                <div>
+                                    <form id="form" method="post" action="/home-loan">
+
+                                        <label for="amount">Desired Loan amount</label>
+                                        <div class="flex">
+                                            <span class="currency">&#8377</span>
+                                            <% if(typeof(amount)=='undefined') { %>
+                                            <input id="amount" name="amount" type="text" maxlength="15" required />
+                                            <% } else { %>
+                                            <input id="amount" name="amount" type="text" maxlength="15"
+                                                value="<%= amount %>" required />
+                                            <% } %>
+                                        </div>
+                                        <label for="tenure" class="mt-3">Tenure (years)</label>
+                                        <div class="flex">
+                                            <span class="currency"> </span>
+                                            <% if(typeof(tenure)=='undefined') { %>
+                                            <input id="tenure" name="tenure" type="number" maxlength="15" required />
+                                            <% } else { %>
+                                            <input id="tenure" name="tenure" type="number" maxlength="15"
+                                                value="<%= tenure %>" required />
+                                            <% } %>
+                                        </div>
+                                        <label for="income" class="mt-3">Gross monthly income</label>
+                                        <div class="flex">
+                                            <span class="currency">&#8377</span>
+                                            <% if(typeof(income)=='undefined') { %>
+                                            <input id="income" name="income" type="text" maxlength="15" required />
+                                            <% } else { %>
+                                            <input id="income" name="income" type="text" maxlength="15"
+                                                value="<%= income %>" required />
+                                            <% } %>
+                                        </div>
+                                        <label for="age" class="mt-3">Age</label>
+                                        <div class="flex">
+                                            <span class="currency"> </span>
+                                            <% if(typeof(age)=='undefined') { %>
+                                            <input id="age" name="age" type="number" maxlength="15" required />
+                                            <% } else { %>
+                                            <input id="age" name="age" type="number" maxlength="15" value="<%= age %>"
+                                                required />
+                                            <% } %>
+                                        </div>
+                                        <label for="employment_type" class="mt-3">Employment type</label>
+                                        <div id="employment_type">
+                                            <input type="radio" name="employment_type" value="salaried"> salaried
+                                            <br>
+                                            <input type="radio" name="employment_type" value="self_employed"> Self
+                                            Employed
+                                        </div>
+                                        <label for="gender" class="mt-3">Gender</label>
+                                        <div id="gender">
+                                            <input type="radio" name="gender" value="male"> Male
+                                            <br>
+                                            <input type="radio" name="gender" value="female"> Female
+                                        </div>
+                                        <label for="rate_packages" class="mt-3">Rate packages</label>
+                                        <div id="rate_packages">
+                                            <input type="radio" name="rate_packages" value="fixed"> Fixed
+                                            <br>
+                                            <input type="radio" name="rate_packages" value="floating"> Floating
+                                        </div>
+                                        <div class="text-center mb-5 mt-3">
+                                            <!-- <div class="d-block"> -->
+                                            <button class="btn btn-danger px-4" type="submit">Go</button>
+                                            <!-- </div> -->
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9 pt-4 px-md-2 px-lg-3">
+                        <div class="card px-lg-5 card-span">
+                            <div class="card-body d-flex flex-column justify-content-around">
+                                <div class="row">
+                                    <div class="card bg-light border-0">
+                                        <div class="row py-2">
+                                            <div class="col-sm-2">
+                                                <!-- <div class="filters">
+                                                    <div class="select">
+                                                        <select name="filters" id="filters">
+                                                            <option value="1" selected="selected">Interest rate</option>
+                                                            <option value="2">Users rating</option>
+                                                            <option value="3">Most visited</option>
+                                                            <option value="4">Security</option>
+                                                        </select>
+                                                    </div>
+                                                </div> -->
+
+                                            </div>
+                                            <div class="col-sm-3 text-center">
+                                                <p class="fw-bolder mb-0">Processing Fees</p>
+                                            </div>
+                                            <div class="col-sm-3 text-center">
+                                                <p class="fw-bolder mb-0">Interest Rate</p>
+                                            </div>
+                                            <div class="col-sm-3 text-center">
+                                                <p class="fw-bolder mb-0">EMI</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- card to display loans-->
+                                    <p style="color: red;"><%= msg %></p>
+                                    <% for(var i=0; i<loans.length;i++) { %>
+                                    <div class="card mt-2">
+                                        <div class="py-3 px-2 row">
+                                            <div class="col-sm-2 border-end py-4">
+                                                <p class="my-0" style="font-family:'Times New Roman', Times, serif">
+                                                    <% if(computedLoans.length) { %>
+                                                    <%= loans[computedLoans[i]["index"]]["Bank"]%>
+                                                    <% } else{ %>
+                                                    <%= loans[i]["Bank"]%>
+                                                    <% } %>
+                                                </p>
+                                            </div>
+
+                                            <!-- <div class="vr"></div> -->
+                                            <div
+                                                class="col-sm-3 d-flex justify-content-center text-center align-items-center">
+                                                <p class="my-0" style="font-family:'Times New Roman', Times, serif">
+                                                    <% if(computedLoans.length) { %>
+                                                    <%= computedLoans[i]["processing_fee"] %>
+                                                    <% } else{ %>
+                                                    -
+                                                    <% } %>
+                                                </p>
+                                            </div>
+                                            <div
+                                                class="col-sm-3 d-flex justify-content-center text-center align-items-center">
+                                                <h3 style="font-family: 'PT Sans';">
+                                                    <% if(computedLoans.length) { %>
+                                                    <span
+                                                        style="font-family: Arial, Helvetica, sans-serif;">&#8377</span>
+                                                    <%= computedLoans[i]["interest"] %>
+                                                    <% } else{ %>
+                                                    <%= loans[i]["starting_interest_rate"]%>
+                                                    <% } %>
+                                                </h3>
+                                            </div>
+                                            <div
+                                                class="col-sm-3 d-flex justify-content-center text-center align-items-center">
+                                                <h3 style="font-family: 'PT Sans';">
+                                                    <% if(computedLoans.length) { %>
+                                                    <span
+                                                        style="font-family: Arial, Helvetica, sans-serif;">&#8377</span>
+                                                    <%= computedLoans[i]["emi"] %>
+                                                    <% } else{ %>
+                                                    -
+                                                    <% } %>
+                                                </h3>
+                                            </div>
+                                            <div
+                                                class="col-sm-1 d-flex flex-column align-items-center justify-content-center">
+                                                <div class="d-flex justify-content-center"><i
+                                                        class="far fa-list-alt text-secondary fw-light"></i></div>
+                                                <div class="text-secondary text-center">
+                                                    <h6 class="mb-0 mt-2 text-secondary fw-light">Details</h6>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end of .container-->
+
+        </section>
+        <!-- <section> close ============================-->
+        <!-- ============================================-->
+
+
+
+
+
+
+    </main>
+    <!-- ===============================================-->
+    <!--    End of Main Content-->
+    <!-- ===============================================-->
+
+
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+    <script src="vendors/@popperjs/popper.min.js"></script>
+    <script src="vendors/bootstrap/bootstrap.min.js"></script>
+    <script src="vendors/is/is.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+    <script src="vendors/fontawesome/all.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/product.js"></script>
+    <!-- <script src="assets/js/home-loan.js"></script> -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet">
+</body>
+<!-- <script>
+    console.log(loans);
+</script> -->
+
+</html>
