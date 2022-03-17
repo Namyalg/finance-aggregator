@@ -3,45 +3,63 @@ let axios = require('axios')
 let router = express.Router();
 let backendURL = "http://localhost:9001/fd";
 
-router.get('/', (req, res) => {
-    res.render('fixed-deposit', {status : 1, result : [1,2,4]});
+router.get('/', async (req, res) => {
+    var result = []
+    let queryParams = {
+        valid: true,
+        principal: 1000,
+        totalTenure: 7,
+        isSenior: false,
+        cumulative: true,
+        nonCumulative: false,
+        monthly: false,
+        semiAnnually: false,
+        quarterly: false,
+        filters: 'interestRate'
+    }
+    await axios
+        .post(
+            backendURL + "/", queryParams
+        )
+        .then((res) => {
+            result = res.data.message;
+        })
+        .catch((error) => {
+            console.error(error);
+    });
+    res.render("fixed-deposit", {
+        result : result, input : queryParams  
+    });
 })
 
 router.post("/", async(req, res) => {
+    console.log("params are ")
+    console.log(req.body)
+    let result = []
     let queryParams = parseInput(req)
     await axios
         .post(
             backendURL + "/", queryParams
         )
         .then((res) => {
-            eligibleLoans = res.data.message;
+            result = res.data.message;
         })
         .catch((error) => {
             console.error(error);
         });
-
-    eligibleLoans.forEach((loan) => {
-       console.log(loan)
-    });
+    console.log("sending to frontend ")
+    console.log(result)
     res.render("fixed-deposit", {
-        result : [1,3,4]        
+        result : result, input: queryParams     
     });
 });
-
-// router.post('/', (req, res) => {
-    
-
-//     res.render('fixed-deposit', {result : [1,23]});
-// })
 
 function parseInput (req){
     let valid = false
     let principal, totalTenure, isSenior = false, cumulative = false, nonCumulative = false, monthly = false, quarterly = false, semiAnnually = false
     principal = parseInt(req.body.principal)
+    let filters = ""
     totalTenure = tenureInDays(parseInt(req.body.years), parseInt(req.body.months), parseInt(req.body.days))
-    console.log("In parse Input ")
-    console.log("checking the inputs and tenure is ")
-    console.log(typeof(totalTenure))
     if (req.body.senior !==  undefined){
         senior = true
     }
@@ -85,14 +103,14 @@ function parseInput (req){
         nonCumulative: nonCumulative,
         monthly: monthly,
         semiAnnually: semiAnnually,
-        quarterly: quarterly
+        quarterly: quarterly,
+        filters : req.body.filters
     }
     return inputs
 }
 
 function tenureInDays(years, months, days){
-    console.log("In tenuse days ")
-    console.log(years, months, days)
     return 365 * years + 30 * months + days
 }
+
 module.exports = router;

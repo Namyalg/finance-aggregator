@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
   }
 })
 
-router.post('/query', async (req, res) => {
+router.post('/add', async (req, res) => {
   const FDObject = new FD({
     name: req.body.name,
     type: req.body.type,
@@ -38,18 +38,20 @@ router.post('/', async (req, res) => {
   try {
     console.log(req.body)
     const data = await FD.find()
-    console.log('data is ')
-    console.log(data)
-    for (const x of data) {
-      console.log(x)
-    }
     let result = []
-    result = recommendOptions(data, req.body.principal,
-      req.body.totalTenure, req.body.isSenior,
-      req.body.cumulative, req.body.nonCumulative,
-      req.body.monthly, req.body.quarterly, req.body.semiAnnually, 0)
-    console.log('GOT THIS AS A RESULT')
-    console.log(result)
+    console.log('In the backend CHECKING FOR FILTER')
+    console.log(req.body.filters)
+    if (req.body.filters === 'interestRate') {
+      result = recommendOptions(data, req.body.principal,
+        req.body.totalTenure, req.body.isSenior,
+        req.body.cumulative, req.body.nonCumulative,
+        req.body.monthly, req.body.quarterly, req.body.semiAnnually, 0)
+    } else {
+      result = recommendOptions(data, req.body.principal,
+        req.body.totalTenure, req.body.isSenior,
+        req.body.cumulative, req.body.nonCumulative,
+        req.body.monthly, req.body.quarterly, req.body.semiAnnually, 1)
+    }
     res.status(200).json({ message: result, status: 1 })
   } catch (err) {
     res.status(400).json({ message: 'Error is ' + err, status: 0 })
@@ -59,92 +61,80 @@ router.post('/', async (req, res) => {
 // computation performed and choiced returned
 function recommendOptions (data, principal, totalTenure, isSenior, cumulative, nonCumulative, monthly, quarterly, semiAnnually, filter) {
   // stores the resulting ordering of options
-  const results = []
+  var results = []
   let ret = []
   let info
   let bankDetails = {}
   let interest = 0.0
   let policy = ''
   for (const bank of data) {
-    console.log(bank)
     bankDetails = {}
-    console.log('just going now ')
     if (principal < 20000000) {
-      console.log('working ahh this is ')
-      console.log('before goign interss t ' + interest)
-      console.log('before g policy is ' + policy)
-      // let a, b
-      // console.log(calculateInterest(bank.under_two_cr, principal, totalTenure, isSenior, cumulative, nonCumulative, monthly, quarterly, semiAnnually))
       info = calculateInterest(bank.under_two_cr, principal, totalTenure, isSenior, cumulative, nonCumulative, monthly, quarterly, semiAnnually)
-      console.log('A IS ' + info)
-      // [interest, policy] = calculateInterest(bank.under_two_cr, principal, totalTenure, isSenior, cumulative, nonCumulative, monthly, quarterly, semiAnnually)
-      // console.log("AFTER")
-      // console.log(interest, policy)
     } else {
       info = calculateInterest(bank.two_five_cr, principal, totalTenure, isSenior, cumulative, nonCumulative, monthly, quarterly, semiAnnually)
     }
-    console.log('Got data back, will add it now ')
-    console.log([interest, policy])
-    interest = info[0]
+    interest = Math.round(info[0], 2)
     policy = info[1]
-    console.log(bankDetails)
     bankDetails.name = bank.name
     bankDetails.interest = interest
     bankDetails.type = bank.type
     bankDetails.policy = policy
-    // console.log("added the result  ")
-    // console.log(bankDetails)
+    bankDetails.interestRate = info[2]
+    bankDetails.slab = info[3].period
     results.push(bankDetails)
   }
-
   // Filter chosen is safety
   if (filter === 1) {
-    // group by public_banks, private_banks banks
+    console.log('results here ')
+    console.log(results)
+    // group by public_banks, privateBanks banks
     const group = results.reduce((r, a) => {
       r[a.type] = [...r[a.type] || [], a]
       return r
     }, {})
+    const publicBanks = group.public
+    const privateBanks = group.private
+    console.log(publicBanks)
+    console.log(privateBanks)
 
-    const public_banks = group.public_banks
-    const private_banks = group.private_banks
-
-    public_banks.sort(decreasingInterestOrder)
-    private_banks.sort(decreasingInterestOrder)
-    public_banks_banks.push.apply(public_banks, private_banks)
-    // showTable(public_banks)
-    ret = public_banks
-  } else if (filter == 0) {
+    publicBanks.sort(decreasingInterestOrder)
+    privateBanks.sort(decreasingInterestOrder)
+    publicBanks.push.apply(publicBanks, privateBanks)
+    ret = publicBanks
+  } else if (filter === 0) {
     // console.log('The results are after sorting')
     results.sort(decreasingInterestOrder)
     // showTable(results)
     ret = results
   }
-  console.log('options recommended ')
-  console.log(ret)
+  for(var x of ret){
+    console.log(x)
+  }
   return ret
 }
 
 function calculateInterest (tenureSlabs, principal, totalTenure, isSenior, cumulative, nonCumulative, monthly, quarterly, semiAnnually) {
   let interest = 0
   let policy = ''
-  for (slab of tenureSlabs) {
+  let interestRate
+  let reqSlab
+  for (const slab of tenureSlabs) {
     if (findTenureSlab(slab, totalTenure)) {
+      reqSlab = slab
       interest = 0
       policy = slab._id.toString()
       if (isSenior) {
-        console.log(compute(principal, totalTenure, slab.senior, cumulative, nonCumulative, monthly, quarterly, semiAnnually))
         interest = compute(principal, totalTenure, slab.senior, cumulative, nonCumulative, monthly, quarterly, semiAnnually)
+        interestRate = slab.senior
       } else {
-        console.log('NOT A SENIOR')
-        console.log(slab.general)
-        console.log(principal, totalTenure, slab.general, cumulative, nonCumulative, monthly, quarterly, semiAnnually)
         interest = compute(principal, totalTenure, slab.general, cumulative, nonCumulative, monthly, quarterly, semiAnnually)
+        interestRate = slab.general
       }
+      break
     }
   }
-  console.log('In calculate interest these work now ')
-  console.log([interest, policy])
-  return [interest, policy]
+  return [interest, policy, interestRate, reqSlab]
 }
 
 // return the time slab where the total tenure is present
@@ -160,7 +150,6 @@ function findTenureSlab (slab, totalTenure) {
 
 // Based on the options chosen, the interest is calculated
 function compute (principal, totalTenure, interestRate, cumulative, nonCumulative, monthly, quarterly, semiAnnually) {
-  console.log('in compute fd ')
   console.log(principal, totalTenure, interestRate, cumulative, nonCumulative, monthly, quarterly, semiAnnually)
   if (cumulative) {
     console.log(cumulativeFD(principal, totalTenure, interestRate))
@@ -198,7 +187,6 @@ function nonCumulativeFD (principal, totalTenure, interestRate, monthly, quarter
 // bookmarks the option chosen
 function bookmarkOption (policy, type) {
   // assuming that the user details will be stored in localStorage on login/signup, so that will be used
-
   localStorage.setItem('email', 'test')
   const email = localStorage.getItem('email', email)
   const option = { email: email, bookmarks: { fd: policy } }
@@ -235,13 +223,6 @@ function addChoiceToLog (policy, type) {
     })
 }
 
-// computes the total tenure in days
-function tenureInDays (years, months, days) {
-  console.log('In tenusre days ')
-  console.log(years, months, days)
-  return 365 * years + 30 * months + days
-}
-
 // custom comparator to sort banks based on decreasing interest
 function decreasingInterestOrder (firstAmount, secondAmount) {
   if (firstAmount.interest > secondAmount.interest) {
@@ -251,17 +232,6 @@ function decreasingInterestOrder (firstAmount, secondAmount) {
     return 1
   }
   return 0
-}
-
-// display monthly, quarterly, semi-annual interest return options
-function showOptions () {
-  const nonCumulative = document.getElementById('noncumulative').checked
-  const text = document.getElementById('text')
-  if (nonCumulative == true) {
-    text.style.display = 'block'
-  } else {
-    text.style.display = 'none'
-  }
 }
 
 module.exports = router
