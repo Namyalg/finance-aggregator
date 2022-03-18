@@ -165,7 +165,6 @@ function cumulativeFD (principal, totalTenure, interestRate) {
   totalTenure = (totalTenure / 365) * 4
   interestRate = interestRate / 400
   const interest = principal * Math.pow((1 + interestRate), totalTenure)
-  console.log('interest is ', interest - principal)
   return interest - principal
 }
 

@@ -17,6 +17,22 @@ router.get('/', async (req, res) => {
         quarterly: false,
         filters: 'interestRate'
     }
+
+    let inputs = {
+        valid: true,
+        principal: "1000",
+        days: "7",
+        months: "0",
+        years: "0",
+        isSenior: true,
+        cumulative: true,
+        nonCumulative: false,
+        monthly: false,
+        semiAnnually: false,
+        quarterly: false,
+        filters: 'interestRate'
+    }
+
     await axios
         .post(
             backendURL + "/", queryParams
@@ -28,7 +44,7 @@ router.get('/', async (req, res) => {
             console.error(error);
     });
     res.render("fixed-deposit", {
-        result : result, input : queryParams  
+        result : result, principal: "1000", days: "7", months: "0", years: "0", senior: false, cumulative: true, nonCumulative: false, monthly: false, quarterly: false, semiAnnually: false
     });
 })
 
@@ -47,10 +63,17 @@ router.post("/", async(req, res) => {
         .catch((error) => {
             console.error(error);
         });
-    console.log("sending to frontend ")
-    console.log(result)
+    // console.log("sending to frontend ")
+    // console.log(result)
     res.render("fixed-deposit", {
-        result : result, input: queryParams     
+        result : result, principal: req.body.principal, 
+        days: req.body.days, months: req.body.months, 
+        years: req.body.years, senior: req.body.senior != undefined ? true : false, 
+        cumulative: req.body.interestType == 'cumulative' ? true : false, 
+        nonCumulative: req.body.interestType == 'noncumulative' ? true : false, 
+        monthly: req.body.frequency == 'monthly' ? true : false, 
+        quarterly: req.body.frequency == 'quarterly' ? true : false, 
+        semiAnnually: req.body.frequency == 'semiannually' ? true : false    
     });
 });
 

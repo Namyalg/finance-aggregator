@@ -61,7 +61,47 @@
       } else {
           text.style.display = "none"
       }
-  }
+    }
+
+    function saveData(){
+      let principal = document.getElementById("principal").value
+      let years = parseInt(document.getElementById("years").value)
+      let months = parseInt(document.getElementById("months").value)
+      let days = parseInt(document.getElementById("days").value)
+      let isSenior = document.getElementById("senior").checked
+      let cumulative = document.getElementById("cumulative").checked
+      let nonCumulative = document.getElementById("noncumulative").checked
+      let monthly = document.getElementById("monthly").checked
+      let quarterly = document.getElementById("quarterly").checked
+      let semiAnnually = document.getElementById("semiannually").checked
+
+      sessionStorage.setItem('principal', principal)
+      sessionStorage.setItem('years', years)
+      sessionStorage.setItem('months', months)
+      sessionStorage.setItem('days', days)
+      sessionStorage.setItem('isSenior', isSenior)
+      sessionStorage.setItem('cumulative', cumulative)
+      sessionStorage.setItem('nonCumulative', nonCumulative)
+      sessionStorage.setItem('monthly', monthly)
+      sessionStorage.setItem('quarterly', quarterly)
+      sessionStorage.setItem('semiAnnually', semiAnnually)
+    }
+
+    // window.onload = (event) => {
+    //   //document.getElementById("red").checked = true;
+    //   document.getElementById('principal').value = sessionStorage.getItem('principal') == null ? "1000" : sessionStorage.getItem('principal')
+    //   document.getElementById('years').value = sessionStorage.getItem('years') ==  null ? "0" : sessionStorage.getItem('years')
+    //   document.getElementById('months').value = sessionStorage.getItem('months')  ==  null ? "0" : sessionStorage.getItem('months')
+    //   document.getElementById('days').value = sessionStorage.getItem('days')  ==  null ? '7' : sessionStorage.getItem('days')
+    //   document.getElementById('isSenior').checked = sessionStorage.getItem('isSenior')  ==  null ? false : sessionStorage.getItem('isSenior')    
+    //   document.getElementById('cumulative').checked = sessionStorage.getItem('cumulative') ==  null ? true : sessionStorage.getItem('cumulative')
+    //   document.getElementById('nonCumulative').checked = sessionStorage.getItem('nonCumulative') ==  null ? true : sessionStorage.getItem('nonCumulative')
+    //   document.getElementById('monthly').checked = sessionStorage.getItem('monthly')
+    //   document.getElementById('quarterly').checked = sessionStorage.getItem('quarterly')
+    //   document.getElementById('semiAnnually').checked = sessionStorage.getItem('semiAnnually')
+
+      
+    // }
   </script>
 
   <!-- ===============================================-->
@@ -121,47 +161,70 @@
                         <!-- <option value="1" selected="selected" onclick="validateInput(1)">Interest rate</option>
                         <option value="2" onclick="validateInput(2)">Safety</option> -->
                         <!-- id="quarterly" type="radio" name="frequency" value="quarterly" -->
-                        <option name="filter" name="filter" value="interestRate">Interest rate</option>
+                        <option name="filter" name="filter" value="interestRate">Interest principal</option>
                         <option name="filter" name="filter" value="safety">Safety</option>
                       
                       </select>
                     </div>
+                    
                     <label for="principal">Principal</label>
                     <div class="flex">
                       <span class="currency">&#8377</span>
-                      <input id="principal" name="principal" type="number" maxlength="15" min="1000" max="50000000" value="1000"/>
+                      <!-- <input id="principal" name="principal" type="number" maxlength="15" min="1000" max="50000000" value="1000"/> -->
+                      <% if(typeof(principal) == 'undefined') { %> <input id="principal" name="principal" type="text" maxlength="15" required />
+                      <% } else { %> <input id="principal" name="principal" type="text" maxlength="15"
+                            value="<%= principal %>" required /><% } %>
                     </div>
+                    <h1>Here</h1>
+                    <h1><%= nonCumulative %></h1>
                     <label for="tenure" class="mt-3">Total Tenure</label>
                     <label for="years" class="mt-3">Years</label>
                     <div class="flex">
                       <span class="currency"> </span>
-                      <input id="years" name="years" type="number" min="0" max="10"value="0"/>
+                      <!-- <input id="years" name="years" type="number" min="0" max="10"value="0"/> -->
+                      <% if(typeof(years) == 'undefined') { %> <input id="years" name="years" type="number" min="0" max="10" value="0" />
+                      <% } else { %> <input id="years" name="years" type="number" min="0" max="10" value="<%= years %>" />
+                         <% } %>
                     </div>
                     <label for="months" class="mt-3">Months</label>
                     <div class="flex">
                       <span class="currency"> </span>
-                      <input id="months" name="months" type="number" min="0" max="120"value="0"/>
+                      <!-- <input id="months" name="months" type="number" min="0" max="120"value="0"/> -->
+                      <% if(typeof(months) == 'undefined') { %> <input id="months" name="months" type="number" min="0" max="120" value="0" />
+                      <% } else { %> <input id="months" name="months" type="number" min="0" max="120" value="<%= months %>" />
+                         <% } %>
                     </div>
                     <label for="days" class="mt-3">Days</label>
                     <div class="flex">
                       <span class="currency"> </span>
-                      <input id="days" name="days" type="number"  min="7" max="3650" value="7"/>
+                      <!-- <input id="days" name="days" type="number"  min="7" max="3650" value="7"/> -->
+                      <% if(typeof(days) == 'undefined') { %> <input id="days" name="days" type="number" min="0" max="3650" value="0" />
+                      <% } else { %> <input id="days" name="days" type="number" min="0" max="3650" value="<%= days %>" />
+                         <% } %>
                     </div>
                     <br>
                     <div class="flex">
                         <span>Age > 60</span>
-                        <input id="senior" type="checkbox" name="senior" value="senior"/>
+                        <!-- <input id="senior" type="checkbox" name="senior" value="senior"/> -->
+                        <% if(typeof(senior) == 'undefined') { %> <input id="senior" name="senior" type="checkbox"/>
+                      <% } else { %> <input id="senior" name="senior" type="checkbox" <%= senior ? "checked" : "" %> />
+                         <% } %>
                     </div>
                     <br>
                     <label for="interest" class="mt-3">Interest Type</label>
                     <div class="flex">
                         <span>Cumulative</span>
-                        <input id="cumulative" type="radio" onchange="showOptions()" name="interestType" value="cumulative"/>
+                        <% if(typeof(cumulative) == 'undefined') { %> <input id="cumulative" type="radio" onchange="showOptions()" name="interestType" value="cumulative" <%= 1 ? "checked" : "" %>/>
+                        <% } else { %> <input id="cumulative" type="radio" onchange="showOptions()" name="interestType" value="cumulative" <%= cumulative ? "checked" : "" %> />
+                           <% } %>
                     </div>
                     <br>
                     <div class="flex">
                         <span>Non-cumulative</span>
-                        <input id="noncumulative" type="radio" onchange="showOptions()" name="interestType" value="noncumulative"/>
+                        <% if(typeof(noncumulative) == 'undefined') { %> <input  id="noncumulative" type="radio" onchange="showOptions()" name="interestType" value="noncumulative"/>
+                        <% } else { %> <input  id="noncumulative" type="radio" onchange="showOptions()" name="interestType" value="noncumulative" <%= nonCumulative ? "checked" : "" %> />
+                          <% } %>
+                        <!-- <input id="noncumulative" type="radio" onchange="showOptions()" name="interestType" value="noncumulative"/> -->
                     </div>
                     <br>
                     <div style="display:none" id="text" class="flex">
@@ -169,25 +232,35 @@
                         <br>
                         <div class="flex">
                             <span>Monthly</span>
-                            <input id="monthly" type="radio" name="frequency" value="monthly"/>
+                            <% if(typeof(monthly) == 'undefined') { %> <input  id="monthly" type="radio" name="frequency" value="monthly"/>
+                            <% } else { %> <input id="monthly" type="radio" name="frequency" value="monthly" <%= monthly ? "checked" : "" %> />
+                              <% } %>
+                            <!-- <input id="monthly" type="radio" name="frequency" value="monthly"/> -->
                         </div>
                         <br>
                         <div class="flex">
                             <span>Quarterly</span>
-                            <input id="quarterly" type="radio" name="frequency" value="quarterly"/>
+                            <% if(typeof(quarterly) == 'undefined') { %> <input id="quarterly" type="radio" name="frequency" value="quarterly"/>
+                            <% } else { %> <input id="quarterly" type="radio" name="frequency" value="quarterly" <%= quarterly ? "checked" : "" %> />
+                              <% } %>
+                            <!-- <input id="quarterly" type="radio" name="frequency" value="quarterly"/> -->
                         </div>
                         <br>
                         <div class="flex">
                             <span>Semi-annually</span>
-                            <input id="semiannually" type="radio" name="frequency" value="semiannually"/>
+                            <% if(typeof(semiannually) == 'undefined') { %> <input  id="semiannually" type="radio" name="frequency" value="semiannually"/>
+                            <% } else { %> <input  id="semiannually" type="radio" name="frequency" value="semiannually" <%= semiAnnually ? "checked" : "" %> />
+                              <% } %>
+                            <!-- <input id="semiannually" type="radio" name="frequency" value="semiannually"/> -->
                         </div>
                         <br>
-                       
+                      
                     </div>
-                    <!-- <div class="text-center m-5">
-                      <input type="submit">Submit</input>
-                  </div> -->
-                  <input type="submit"></input>
+                    <div class="text-center m-5">
+                      <!-- <input type="submit">Submit</input> -->
+                      <input type="submit"></input>
+                  </div>
+                  
                   </form>
                 </div>
                 <br>
@@ -246,7 +319,7 @@
                         <div class="d-flex justify-content-center"><i
                             class="far fa-solid fa-star text-secondary fw-light"></i></div>
                         <div class="text-secondary text-center">
-                          <h5 class="mb-0 mt-2 text-secondary fw-light">Bookmark</h5>
+                          <h6 class="mb-0 mt-2 text-secondary fw-light">Bookmark</h6>
                         </div>
                       </div>
                     </div>
