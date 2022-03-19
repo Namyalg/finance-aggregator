@@ -5,17 +5,16 @@ const healthInsuranceDB = require("../models/HealthInsurance");
 
 router.post("/query", async(req, res) => {
     try{
-        const age=parseFloat(req.query.age);
-        const no_of_people=parseFloat(req.query.noOfPeople);
-        const no_of_diseases=parseFloat(req.query.noOfDiseases);
-       const sortCriteria= req.query.criteria ;
-       console.log('string', sortCriteria);
+        const age=parseFloat(req.body.age);
+        const no_of_people=parseFloat(req.body.noOfPeople);
+        const no_of_diseases=parseFloat(req.body.noOfDiseases);
+      const sortCriteria= req.body.criteria ;
        let allInsurances;
        if(sortCriteria == 'premium')
             allInsurances = await healthInsuranceDB.find().sort({'premium':1});
         else if(sortCriteria == 'cover')
             allInsurances = await healthInsuranceDB.find().sort({'cover':1});
-        else if(sortCriteria == 'cashless_hospitals')
+        else 
             allInsurances = await healthInsuranceDB.find().sort({'cashless_hospitals':1});
       
         for (let i = 0 ; i < allInsurances.length;i++){
