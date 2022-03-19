@@ -36,6 +36,7 @@ router.post("/query", async(req, res) => {
     var age = req.body.age;
     var employment = req.body.employment;
     var income = req.body.income;
+    var filter = req.body.filters;
 
     queryParams = {
         amount: loanAmount,
@@ -53,9 +54,11 @@ router.post("/query", async(req, res) => {
     if (income) {
         queryParams["income"] = income
     }
-    if (req.body.filters) {
-        if (req.body.filters != "emi")
-            queryParams["sector"] = req.body.filters
+    if (filter) {
+        if (filter != "emi")
+            queryParams["sector"] = filter
+    } else {
+        filter = ""
     }
     await axios
         .post(
@@ -94,12 +97,12 @@ router.post("/query", async(req, res) => {
     res.render("personal-loan", {
         loans: eligibleLoans,
         emi: emis,
-        amount: loanAmount,
-        tenure: tenure,
-        interestRate: interestRate,
-        age: age,
-        employ: employment,
-        income: income
+        input: {
+            amount: loanAmount,
+            tenure: tenure,
+            interestRate: interestRate,
+            filter: filter
+        }
     });
 });
 
