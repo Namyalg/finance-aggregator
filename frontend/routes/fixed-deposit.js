@@ -15,20 +15,41 @@ router.get('/', async (req, res) => {
         monthly: false,
         semiAnnually: false,
         quarterly: false,
-        filters: 'interestRate'
+        filters: 'amount'
     }
+
+    let inputs = {
+        valid: true,
+        principal: "1000",
+        days: "7",
+        months: "0",
+        years: "0",
+        isSenior: true,
+        cumulative: true,
+        nonCumulative: false,
+        monthly: false,
+        semiAnnually: false,
+        quarterly: false,
+        filters: 'amount'
+    }
+    let input = []
     await axios
         .post(
             backendURL + "/", queryParams
         )
         .then((res) => {
-            result = res.data.message;
+            result = res.data.message
+            input = res.data.input
         })
         .catch((error) => {
             console.error(error);
     });
     res.render("fixed-deposit", {
-        result : result, input : queryParams  
+        result : result, principal: "1000", days: "7", months: "0", 
+        input: input,
+        years: "0", senior: false, cumulative: true, 
+        noncumulative: false, monthly: false, quarterly: false, 
+        semiAnnually: false, amount: true, safety: false
     });
 })
 
@@ -36,6 +57,7 @@ router.post("/", async(req, res) => {
     console.log("params are ")
     console.log(req.body)
     let result = []
+    let inputs = []
     let queryParams = parseInput(req)
     await axios
         .post(
@@ -43,16 +65,28 @@ router.post("/", async(req, res) => {
         )
         .then((res) => {
             result = res.data.message;
+            input = res.data.input
         })
         .catch((error) => {
             console.error(error);
         });
-    console.log("sending to frontend ")
-    console.log(result)
+    // console.log("sending to frontend ")
+    // console.log(result)
     res.render("fixed-deposit", {
-        result : result, input: queryParams     
+        result : result, principal: req.body.principal, 
+        input: input,
+        days: req.body.days, months: req.body.months, 
+        years: req.body.years, senior: req.body.senior != undefined ? true : false, 
+        cumulative: req.body.interestType == 'cumulative' ? true : false, 
+        noncumulative: req.body.interestType == 'noncumulative' ? true : false, 
+        monthly: req.body.frequency == 'monthly' ? true : false, 
+        quarterly: req.body.frequency == 'quarterly' ? true : false, 
+        semiAnnually: req.body.frequency == 'semiannually' ? true : false,
+        amount: req.body.filterType == 'amount' ? true: false,
+        safety: req.body.filterType ==  'amount' ? false: true
     });
 });
+
 
 function parseInput (req){
     let valid = false
@@ -104,7 +138,7 @@ function parseInput (req){
         monthly: monthly,
         semiAnnually: semiAnnually,
         quarterly: quarterly,
-        filters : req.body.filters
+        filters : req.body.filterType
     }
     return inputs
 }
