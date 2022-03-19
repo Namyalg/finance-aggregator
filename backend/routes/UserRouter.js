@@ -39,8 +39,10 @@ router.post('/', async (req, res) => {
     address: req.body.address,
     bookmarks: {
       fd: [],
-      loans: [],
-      insurance: []
+      personalLoan: [],
+      healthInsurance: [],
+      homeLoan: [],
+      travelInsurance: []
     }
   })
   try {

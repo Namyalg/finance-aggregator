@@ -2,6 +2,7 @@
 const express = require('express')
 const router = express.Router()
 const FD = require('../models/FixedDeposit')
+const axios = require('axios')
 
 router.get('/', async (req, res) => {
   try {
@@ -49,6 +50,10 @@ router.post('/', async (req, res) => {
         req.body.cumulative, req.body.nonCumulative,
         req.body.monthly, req.body.quarterly, req.body.semiAnnually, 1)
     }
+    console.log('The results are ')
+    for (const x of result) {
+      addChoiceToLog(x.policy, 'fd')
+    }
     res.status(200).json({ message: result, status: 1, input: req.body })
   } catch (err) {
     res.status(400).json({ message: 'Error is ' + err, status: 0 })
@@ -82,7 +87,7 @@ router.post('/bookmark', async (req, res) => {
 // computation performed and choiced returned
 function recommendOptions (data, principal, totalTenure, isSenior, cumulative, nonCumulative, monthly, quarterly, semiAnnually, filter) {
   // stores the resulting ordering of options
-  var results = []
+  const results = []
   let ret = []
   let info
   let bankDetails = {}

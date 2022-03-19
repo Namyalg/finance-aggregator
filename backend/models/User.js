@@ -31,9 +31,23 @@ const UserSchema = mongoose.Schema({
       type: String,
       required: true
     }],
-    insurance: [{
-      type: String,
-      required: true
+    healthInsurance: [{
+        //output
+        //premium, agency, cover, cashless hospitals : num, diseases covered : []
+    }],
+    homeLoan : [{
+        // inputs : 
+        // outputs : processing fee, interest rate, EMI, name
+    }],
+    travelInsurance: [{
+      input: {
+        destination: {
+          type: String
+        }
+      },
+      output: {
+
+      }
     }],
     fd: [{
       output: {

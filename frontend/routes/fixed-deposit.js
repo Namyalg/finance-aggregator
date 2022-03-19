@@ -87,25 +87,6 @@ router.post("/", async(req, res) => {
     });
 });
 
-router.post("/bookmark", async(req, res) => {
-    console.log("params are ")
-    console.log(req.body)
-    await axios
-        .post(
-            "http://localhost:9001/user/bookmark/fd", req.body
-        )
-        .then((res) => {
-            result = res.data.status;
-            if(result == 1){
-                console.log("SUCCESSFUL")
-            }
-            
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-    res.render("fixed-deposit");
-});
 
 function parseInput (req){
     let valid = false
