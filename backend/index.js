@@ -49,6 +49,9 @@ app.use('/log', LogRouter)
 const personalLoanRouter = require('./routes/PersonalLoanRouter')
 app.use('/personalLoan', personalLoanRouter)
 
+const homeLoanRouter = require('./routes/HomeLoanRouter')
+app.use('/homeLoan', homeLoanRouter)
+
 const healthInsuranceRouter = require('./routes/HealthInsuranceRouter')
 app.use('/healthInsurance', healthInsuranceRouter)
 

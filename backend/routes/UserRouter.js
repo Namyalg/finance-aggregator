@@ -18,7 +18,7 @@ router.post('/login', async(req, res) => {
     try {
         await User.find({ email: req.body.email }).then(data => {
             if (data[0].password = req.body.password) {
-                res.status(200).json({ message: "successful", status: 1 })
+                res.status(200).json({ message: 'successful', status: 1 })
             }
         }).catch(err => {
             console.log(err)
@@ -39,31 +39,29 @@ router.post('/', async(req, res) => {
         address: req.body.address,
         bookmarks: {
             fd: [],
-            loans: [],
-            insurance: []
+            personalLoan: [],
+            healthInsurance: [],
+            homeLoan: [],
+            travelInsurance: []
         }
     })
     try {
         // check if a user with this email already exits
-        await User.find({ "email": req.body.email }).then(data => {
+        await User.find({ email: req.body.email }).then(data => {
             if (data.length > 0) {
                 res.status(200).json({ status: 0, message: 'A user with this email already exists. Please login instead.' })
-                return;
             } else {
                 // create user
                 User.create(UserObject)
                     .then(data => {
                         res.status(200).json({ status: 1 })
-                        return;
                     })
                     .catch(err => {
                         const resp = { status: 0, message: 'Error is ' + err }
                         res.status(400).json(resp)
-                        return;
                     })
             }
         })
-
     } catch (err) {
         res.status(400).json({ status: 0, message: 'Error is ' + err })
     }
@@ -71,21 +69,27 @@ router.post('/', async(req, res) => {
 
 // based on type (fd, loan or insurance the update is made) the chosen policy is added as a bookmark
 router.post('/bookmark/:type', async(req, res) => {
+    console.log('BODY GOT IS ')
+    console.log(req.body)
+    console.log('params got is ' + req.params.type)
     try {
         const allUsers = await User.find()
         for (const obj of allUsers) {
-            if (obj.email === req.body.email) {
-                var allBookmarks = obj.bookmarks
+            if (obj.email === 'liza@gmail.com') {
+                const allBookmarks = obj.bookmarks
                 if (req.params.type === 'fd') {
-                    var fd = allBookmarks.fd
-                    fd.push(req.body.bookmarks.fd)
+                    const fd = allBookmarks.fd
+                    const newObj = { output: {}, input: {} }
+                    newObj.output = req.body.output
+                    newObj.input = req.body.input
+                    fd.push(newObj)
                     allBookmarks.fd = fd
                 } else if (req.params.type === 'loan') {
-                    var loan = allBookmarks.loan
+                    const loan = allBookmarks.loan
                     loan.push(req.body.bookmarks.loan)
                     allBookmarks.loan = loan
                 } else if (req.params.type === 'insurance') {
-                    var insurance = allBookmarks.insurance
+                    const insurance = allBookmarks.insurance
                     insurance.push(req.body.bookmarks.insurance)
                     allBookmarks.insurance = insurance
                 }
