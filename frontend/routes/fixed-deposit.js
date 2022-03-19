@@ -44,7 +44,10 @@ router.get('/', async (req, res) => {
             console.error(error);
     });
     res.render("fixed-deposit", {
-        result : result, principal: "1000", days: "7", months: "0", years: "0", senior: false, cumulative: true, nonCumulative: false, monthly: false, quarterly: false, semiAnnually: false
+        result : result, principal: "1000", days: "7", months: "0", 
+        years: "0", senior: false, cumulative: true, 
+        noncumulative: false, monthly: false, quarterly: false, 
+        semiAnnually: false, amount: true, safety: false
     });
 })
 
@@ -70,10 +73,12 @@ router.post("/", async(req, res) => {
         days: req.body.days, months: req.body.months, 
         years: req.body.years, senior: req.body.senior != undefined ? true : false, 
         cumulative: req.body.interestType == 'cumulative' ? true : false, 
-        nonCumulative: req.body.interestType == 'noncumulative' ? true : false, 
+        noncumulative: req.body.interestType == 'noncumulative' ? true : false, 
         monthly: req.body.frequency == 'monthly' ? true : false, 
         quarterly: req.body.frequency == 'quarterly' ? true : false, 
-        semiAnnually: req.body.frequency == 'semiannually' ? true : false    
+        semiAnnually: req.body.frequency == 'semiannually' ? true : false,
+        amount: req.body.filterType == 'amount' ? true: false,
+        safety: req.body.filterType ==  'amount' ? false: true
     });
 });
 
@@ -127,7 +132,7 @@ function parseInput (req){
         monthly: monthly,
         semiAnnually: semiAnnually,
         quarterly: quarterly,
-        filters : req.body.filters
+        filters : req.body.filterType
     }
     return inputs
 }

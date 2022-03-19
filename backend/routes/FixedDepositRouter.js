@@ -41,7 +41,7 @@ router.post('/', async (req, res) => {
     let result = []
     console.log('In the backend CHECKING FOR FILTER')
     console.log(req.body.filters)
-    if (req.body.filters === 'interestRate') {
+    if (req.body.filters === 'amount') {
       result = recommendOptions(data, req.body.principal,
         req.body.totalTenure, req.body.isSenior,
         req.body.cumulative, req.body.nonCumulative,
