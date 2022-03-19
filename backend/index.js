@@ -54,9 +54,5 @@ app.use('/healthInsurance', healthInsuranceRouter)
 
 const port = process.env.PORT || 9001
 app.listen(port, function() {
-  console.log('server started on PORT ', port)
-// <<<<<<< HEAD
-// })
-// =======
-// })
-// >>>>>>> ef7913d695eb022cfb87a1e2b3850692e9d76db6
+    console.log('server started on PORT ', port)
+})

@@ -103,4 +103,14 @@ router.post('/bookmark/:type', async(req, res) => {
     }
 })
 
+router.post('/data:email', async(req, res) => {
+    try {
+        const userDetails = await User.find({
+            email: req.body.email
+        })
+    } catch (error) {
+        console.log(err)
+        res.status(400).json({ status: 0, message: 'Could not fetch details' })
+    }
+})
 module.exports = router

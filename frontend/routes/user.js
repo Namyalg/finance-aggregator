@@ -64,8 +64,20 @@ router.post("/login", async(req, res) => {
 });
 
 // dashboard
-router.get("/dashboard", (req, res) => {
-    res.render("dashboard");
+router.get("/dashboard", async(req, res) => {
+    var name = "",
+        email = req.session.email
+    await axios.post(backendURL, {
+        email: email
+    }).then((userDetails) => {
+        name = userDetails.data.name
+    }).catch((error) => {
+        console.log(error)
+    })
+    res.render("dashboard", {
+        name: name,
+        email: email
+    });
 });
 
 module.exports = router;

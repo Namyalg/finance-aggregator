@@ -34,10 +34,13 @@ router.post("/query", async(req, res) => {
         }
 
         if (interest) {
-            queryConditions["interest.general.range_from"] = { $lte: interest }
-            queryConditions["interest.general.range_upto"] = { $gte: interest }
+            queryConditions["interest.general.range_from"] = { $lte: interest - 0.5 }
+            queryConditions["interest.general.range_upto"] = { $gte: interest - 0.5 }
         }
 
+        if (req.body.sector) {
+            queryConditions["sector"] = req.body.sector
+        }
         var eligibleLoans = await personalLoanDB.find(queryConditions);
         res.status(200).json({ message: eligibleLoans, status: 1 });
     } catch (err) {
