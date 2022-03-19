@@ -26,7 +26,6 @@ router.post('/add', async (req, res) => {
       })
       .catch(err => {
         const resp = { status: 0, message: 'Error is ' + err }
-        console.log(resp)
         res.status(400).json(resp)
       })
   } catch (err) {
@@ -39,8 +38,30 @@ router.post('/', async (req, res) => {
     console.log(req.body)
     const data = await FD.find()
     let result = []
-    console.log('In the backend CHECKING FOR FILTER')
-    console.log(req.body.filters)
+    if (req.body.filters === 'amount') {
+      result = recommendOptions(data, req.body.principal,
+        req.body.totalTenure, req.body.isSenior,
+        req.body.cumulative, req.body.nonCumulative,
+        req.body.monthly, req.body.quarterly, req.body.semiAnnually, 0)
+    } else {
+      result = recommendOptions(data, req.body.principal,
+        req.body.totalTenure, req.body.isSenior,
+        req.body.cumulative, req.body.nonCumulative,
+        req.body.monthly, req.body.quarterly, req.body.semiAnnually, 1)
+    }
+    res.status(200).json({ message: result, status: 1, input: req.body })
+  } catch (err) {
+    res.status(400).json({ message: 'Error is ' + err, status: 0 })
+  }
+})
+
+router.post('/bookmark', async (req, res) => {
+  try {
+    console.log(req.body)
+    const data = await FD.find()
+    let result = []
+    // console.log('In the backend CHECKING FOR FILTER')
+    // console.log(req.body.filters)
     if (req.body.filters === 'amount') {
       result = recommendOptions(data, req.body.principal,
         req.body.totalTenure, req.body.isSenior,
@@ -86,8 +107,8 @@ function recommendOptions (data, principal, totalTenure, isSenior, cumulative, n
   }
   // Filter chosen is safety
   if (filter === 1) {
-    console.log('results here ')
-    console.log(results)
+    // console.log('results here ')
+    // console.log(results)
     // group by public_banks, privateBanks banks
     const group = results.reduce((r, a) => {
       r[a.type] = [...r[a.type] || [], a]
@@ -95,9 +116,6 @@ function recommendOptions (data, principal, totalTenure, isSenior, cumulative, n
     }, {})
     const publicBanks = group.public
     const privateBanks = group.private
-    console.log(publicBanks)
-    console.log(privateBanks)
-
     publicBanks.sort(decreasingInterestOrder)
     privateBanks.sort(decreasingInterestOrder)
     publicBanks.push.apply(publicBanks, privateBanks)
@@ -107,9 +125,6 @@ function recommendOptions (data, principal, totalTenure, isSenior, cumulative, n
     results.sort(decreasingInterestOrder)
     // showTable(results)
     ret = results
-  }
-  for(var x of ret){
-    console.log(x)
   }
   return ret
 }
@@ -150,9 +165,8 @@ function findTenureSlab (slab, totalTenure) {
 
 // Based on the options chosen, the interest is calculated
 function compute (principal, totalTenure, interestRate, cumulative, nonCumulative, monthly, quarterly, semiAnnually) {
-  console.log(principal, totalTenure, interestRate, cumulative, nonCumulative, monthly, quarterly, semiAnnually)
+  // console.log(principal, totalTenure, interestRate, cumulative, nonCumulative, monthly, quarterly, semiAnnually)
   if (cumulative) {
-    console.log(cumulativeFD(principal, totalTenure, interestRate))
     return cumulativeFD(principal, totalTenure, interestRate)
   } else {
     return nonCumulativeFD(principal, totalTenure, interestRate, monthly, quarterly, semiAnnually)

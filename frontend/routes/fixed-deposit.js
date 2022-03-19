@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
         monthly: false,
         semiAnnually: false,
         quarterly: false,
-        filters: 'interestRate'
+        filters: 'amount'
     }
 
     let inputs = {
@@ -30,21 +30,23 @@ router.get('/', async (req, res) => {
         monthly: false,
         semiAnnually: false,
         quarterly: false,
-        filters: 'interestRate'
+        filters: 'amount'
     }
-
+    let input = []
     await axios
         .post(
             backendURL + "/", queryParams
         )
         .then((res) => {
-            result = res.data.message;
+            result = res.data.message
+            input = res.data.input
         })
         .catch((error) => {
             console.error(error);
     });
     res.render("fixed-deposit", {
         result : result, principal: "1000", days: "7", months: "0", 
+        input: input,
         years: "0", senior: false, cumulative: true, 
         noncumulative: false, monthly: false, quarterly: false, 
         semiAnnually: false, amount: true, safety: false
@@ -55,6 +57,7 @@ router.post("/", async(req, res) => {
     console.log("params are ")
     console.log(req.body)
     let result = []
+    let inputs = []
     let queryParams = parseInput(req)
     await axios
         .post(
@@ -62,6 +65,7 @@ router.post("/", async(req, res) => {
         )
         .then((res) => {
             result = res.data.message;
+            input = res.data.input
         })
         .catch((error) => {
             console.error(error);
@@ -70,6 +74,7 @@ router.post("/", async(req, res) => {
     // console.log(result)
     res.render("fixed-deposit", {
         result : result, principal: req.body.principal, 
+        input: input,
         days: req.body.days, months: req.body.months, 
         years: req.body.years, senior: req.body.senior != undefined ? true : false, 
         cumulative: req.body.interestType == 'cumulative' ? true : false, 
@@ -80,6 +85,26 @@ router.post("/", async(req, res) => {
         amount: req.body.filterType == 'amount' ? true: false,
         safety: req.body.filterType ==  'amount' ? false: true
     });
+});
+
+router.post("/bookmark", async(req, res) => {
+    console.log("params are ")
+    console.log(req.body)
+    await axios
+        .post(
+            "http://localhost:9001/user/bookmark/fd", req.body
+        )
+        .then((res) => {
+            result = res.data.status;
+            if(result == 1){
+                console.log("SUCCESSFUL")
+            }
+            
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    res.render("fixed-deposit");
 });
 
 function parseInput (req){
