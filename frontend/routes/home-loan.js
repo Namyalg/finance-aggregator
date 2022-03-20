@@ -40,7 +40,16 @@ router.get('/', async (req, res) => {
         .catch((error) => {
             console.error(error);
         });
-    res.render('home-loan', { loans: loans, computedLoans, msg });
+        let input = {
+            amount : 1000,
+            tenure: 2,
+            age: 23,
+            employment_type: "salaried",
+            rate_packages: "fixed",
+            income: 100000,
+            gender: "female"
+    }
+    res.render('home-loan', { loans: loans, computedLoans, msg, input: input });
 })
 
 router.post("/", async (req, res) => {
@@ -62,8 +71,7 @@ router.post("/", async (req, res) => {
             tenure: tenure,
             age: age,
             rate_packages: rate_packages,
-        }
-        )
+        })
         .then((res) => {
             console.log(`statusCode: ${res.status}`);
             loans = res.data.message;
@@ -87,11 +95,20 @@ router.post("/", async (req, res) => {
 
     });
     var msg = "";
+    let input = {
+        amount : amount,
+        tenure: tenure,
+        age: age,
+        employment_type: employment_type,
+        rate_packages: rate_packages,
+        income: income,
+        gender: gender
+    }
     console.log(computedLoans.length);
     if (!loans.length) msg = "Sorry, no offers for the given input available at the moment!!";
     else if (!computedLoans.length) msg = "Sorry, your income is not sufficient to acquire the loan. Please either increase the tenure or decrease the amount."
     computedLoans.sort(function (a, b) { return a.interest - b.interest });
-    res.render('home-loan', { loans, computedLoans, amount, tenure, age, employment_type, rate_packages, msg, income });
+    res.render('home-loan', { loans, computedLoans, amount, tenure, age, employment_type, rate_packages, msg, income, input: input });
 })
 
 module.exports = router;
