@@ -71,6 +71,28 @@ const UserSchema = mongoose.Schema({
       // outputs : processing fee, interest rate, EMI, name
     }],
     travelInsurance: [{
+      output: {
+        agency_name: {
+          type: String
+        },
+        product_name: {
+          type: String
+        },
+        destination: {
+          type: String
+        },
+        premium: {
+          type: Number
+        },
+        duration: {
+          type: String
+        }
+      },
+      input: {
+        destination: {
+          type: String
+        }
+      }
     }],
     fd: [{
       output: {
