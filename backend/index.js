@@ -18,20 +18,20 @@ app.use(cors())
 // make the database connection
 const uri = process.env.DB
 mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 }).then(() => {
-    console.log('connection to the database is successful')
+  console.log('connection to the database is successful')
 }).catch((err) => {
-    console.log('error is' + err)
+  console.log('error is ' + err)
 })
 
 app.get('/test', (req, res) => {
-    res.json({ message: 'This is a test route' })
+  res.json({ message: 'This is a test route' })
 })
 
 app.get('/', (req, res) => {
-    res.json({ message: 'Landing page' })
+  res.json({ message: 'Landing page' })
 })
 
 // sample CRUD functionality requiring, name and age of a user
@@ -46,6 +46,7 @@ app.use('/user', UserRouter)
 
 const LogRouter = require('./routes/LogRouter')
 app.use('/log', LogRouter)
+
 const personalLoanRouter = require('./routes/PersonalLoanRouter')
 app.use('/personalLoan', personalLoanRouter)
 
@@ -55,7 +56,10 @@ app.use('/homeLoan', homeLoanRouter)
 const healthInsuranceRouter = require('./routes/HealthInsuranceRouter')
 app.use('/healthInsurance', healthInsuranceRouter)
 
+const travelInsuranceRouter = require('./routes/TravelInsuranceRouter')
+app.use('/travelInsurance', travelInsuranceRouter)
+
 const port = process.env.PORT || 9001
 app.listen(port, function () {
-    console.log('server started on PORT ', port)
+  console.log('server started on PORT ', port)
 })
