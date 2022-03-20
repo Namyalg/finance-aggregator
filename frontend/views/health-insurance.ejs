@@ -30,6 +30,29 @@
     <!-- ===============================================-->
     <link href="../assets/css/theme.css" rel="stylesheet" />
     <link href="../assets/css/product.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+    async function bookmarkOption(option, input){
+        console.log(option)
+        console.log(input)
+        localStorage.setItem('email', 'liza@gmail.com')
+        let email = 'liza@gmail.com'
+        const body = { email: email, output: option, input: input }
+        await axios
+            .post(
+                "http://localhost:9001/user/bookmark/healthInsurance", body
+            )
+            .then((res) => {
+                result = res.data.status;
+                alert("Bookmark added")
+                console.log("SUCCESSFUL")
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        }
+    </script>
+
 
 </head>
 
@@ -206,7 +229,7 @@
                                                 <div class="col-sm-2 d-flex flex-column align-items-center justify-content-center">
                                                     <div class="d-flex justify-content-center"><i class="far fa-list-alt text-secondary fw-light"></i></div>
                                                     <div class="text-secondary text-center">
-                                                        <h6 class="mb-0 mt-2 text-secondary fw-light">Bookmark</h6>
+                                                        <h6 onclick="bookmarkOption((<%= JSON.stringify(allInsurances[index]) %>), (<%= JSON.stringify(input) %>))" class="mb-0 mt-2 text-secondary fw-light">Bookmark</h6>
                                                     </div>
                                                 </div>
                                             </div>

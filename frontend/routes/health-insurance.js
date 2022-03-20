@@ -6,6 +6,12 @@ var backendURL = "http://localhost:9001/healthInsurance";
 
 router.get('/', async (req, res) => {
     var allInsurances = [];
+    let queryParams = {
+        noOfPeople : 2,
+        age : 23,
+        noOfDiseases : 2,
+        criteria: "premium"
+    }
     await axios
         .get(backendURL)
         .then((res) => {
@@ -16,7 +22,7 @@ router.get('/', async (req, res) => {
             console.error(error);
         });
     console.log(allInsurances.length, " insurances returned")
-    res.render('health-insurance', {allInsurances : allInsurances});
+    res.render('health-insurance', {allInsurances : allInsurances, input: queryParams});
 })
 
 router.post("/query", async (req, res) => {
@@ -45,10 +51,7 @@ router.post("/query", async (req, res) => {
     console.log(criteria);
     res.render('health-insurance', {
         allInsurances: allInsurances,
-        noOfDiseases: noOfDiseases,
-        noOfPeople: noOfPeople,
-        age: age,
-        criteria: criteria
+        input: queryParams
     });
 })
 

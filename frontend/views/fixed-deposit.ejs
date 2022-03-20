@@ -76,6 +76,7 @@
         )
         .then((res) => {
             result = res.data.status;
+            alert("Bookmark added")
             console.log("SUCCESSFUL")
         })
         .catch((error) => {
@@ -322,7 +323,7 @@
                         <div class="text-secondary text-center">
                           <!-- <h6 onclick="bookmarkOption((`<%= result[i] %>`))" class="mb-0 mt-2 text-secondary fw-light" onclick="bookmarkOption(i)">Bookmark</h6> -->
                           
-                          <h6 onclick="bookmarkOption((<%= JSON.stringify(result[i]) %>), (<%= JSON.stringify(input) %>))" class="mb-0 mt-2 text-secondary fw-light" onclick="bookmarkOption(i)">Bookmark</h6>
+                          <h6 onclick="bookmarkOption((<%= JSON.stringify(result[i]) %>), (<%= JSON.stringify(input) %>))" class="mb-0 mt-2 text-secondary fw-light">Bookmark</h6>
                           <!-- <button onclick="bookmarkOption(<%= result[i] %>)" style="width:auto;"><i class="fa fa-edit"></i></button> -->
                         </div>
                       </div>
