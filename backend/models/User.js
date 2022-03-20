@@ -27,27 +27,50 @@ const UserSchema = mongoose.Schema({
     required: true
   },
   bookmarks: {
-    loan: [{
+    personalLoan: [{
       type: String,
       required: true
     }],
     healthInsurance: [{
-        //output
-        //premium, agency, cover, cashless hospitals : num, diseases covered : []
-    }],
-    homeLoan : [{
-        // inputs : 
-        // outputs : processing fee, interest rate, EMI, name
-    }],
-    travelInsurance: [{
       input: {
-        destination: {
-          type: String
+        noOfPeople: {
+          type: Number
+        },
+        noOfDiseases: {
+          type: Number
+        },
+        age: {
+          type: Number
+        },
+        criteria: {
+          type: Number
         }
       },
       output: {
-
+        premium: {
+          type: Number
+        },
+        agency: {
+          type: String
+        },
+        cover: {
+          type: Number
+        },
+        cashless_hospitals: {
+          type: Number
+        },
+        diseases: [{
+          type: String
+        }]
       }
+      // output
+      // premium, agency, cover, cashless hospitals : num, diseases covered : []
+    }],
+    homeLoan: [{
+      // inputs :
+      // outputs : processing fee, interest rate, EMI, name
+    }],
+    travelInsurance: [{
     }],
     fd: [{
       output: {

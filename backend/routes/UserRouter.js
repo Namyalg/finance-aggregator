@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     await User.find({ email: req.body.email }).then(data => {
-      if (data[0].password = req.body.password) {
+      if (data[0].password === req.body.password) {
         res.status(200).json({ message: 'successful', status: 1 })
       }
     }).catch(err => {
@@ -75,7 +75,7 @@ router.post('/bookmark/:type', async (req, res) => {
   try {
     const allUsers = await User.find()
     for (const obj of allUsers) {
-      if (obj.email === 'liza@gmail.com') {
+      if (obj.email === 'xyz@mail.com') {
         const allBookmarks = obj.bookmarks
         if (req.params.type === 'fd') {
           const fd = allBookmarks.fd
@@ -84,10 +84,21 @@ router.post('/bookmark/:type', async (req, res) => {
           newObj.input = req.body.input
           fd.push(newObj)
           allBookmarks.fd = fd
-        } else if (req.params.type === 'loan') {
-          const loan = allBookmarks.loan
-          loan.push(req.body.bookmarks.loan)
-          allBookmarks.loan = loan
+        } else if (req.params.type === 'healthInsurance') {
+          const healthInsurance = allBookmarks.healthInsurance
+          console.log("The input is ")
+          console.log(req.body.input)
+          console.log("The output is ")
+          console.log(req.body.output)
+          const newObj = { output: {}, input: {} }
+          newObj.output = req.body.output
+          newObj.input = req.body.input
+          healthInsurance.push(newObj)
+          allBookmarks.healthInsurance = healthInsurance
+
+          // const loan = allBookmarks.healthInsurance
+          // loan.push(req.body.bookmarks.loan)
+          // allBookmarks.loan = loan
         } else if (req.params.type === 'insurance') {
           const insurance = allBookmarks.insurance
           insurance.push(req.body.bookmarks.insurance)
