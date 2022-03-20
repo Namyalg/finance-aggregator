@@ -4,17 +4,9 @@ var router = express.Router();
 
 var backendURL = "http://localhost:8800/travelInsurance";
 
-function calcluateEMI(principal, tenure, rate) {
-  rate = rate / 100 / 12;
-  tenure = tenure * 12;
-  return (
-    (principal * rate * Math.pow(rate + 1, tenure)) /
-    (Math.pow(rate + 1, tenure) - 1)
-  ).toFixed(2);
-}
-
 router.get("/", async (req, res) => {
   var dest = [];
+  var input = {};
   await axios
     .get(backendURL + "/alldest")
     .then((res) => {
@@ -23,13 +15,20 @@ router.get("/", async (req, res) => {
     .catch((error) => {
       console.error(error);
     });
-  res.render("travel-insurance", { destinations: dest, loans: [], emi: [], insurances: [] });
+  res.render("travel-insurance", {
+    destinations: dest,
+    insurances: [],
+    input: input,
+  });
 });
 
 router.post("/query", async (req, res) => {
   console.log(req.body);
   var queryDestination = req.body.destination;
-  var dest = []; 
+  var sortBy = req.body.sortBy;
+  var dest = [];
+  var eligibleInsurances = [];
+  var input = {};
 
   await axios
     .get(backendURL + "/alldest")
@@ -44,6 +43,9 @@ router.post("/query", async (req, res) => {
   if (queryDestination) {
     queryParams["destination"] = dest[queryDestination];
   }
+  if (sortBy) {
+    queryParams["sortBy"] = sortBy;
+  }
   await axios
     .post(backendURL + "/query", queryParams)
     .then((res) => {
@@ -53,11 +55,12 @@ router.post("/query", async (req, res) => {
       console.error(error);
     });
 
+  input.destination = dest[queryDestination];
+
   res.render("travel-insurance", {
     destinations: dest,
-    loans: [],
-    emi: [],
     insurances: eligibleInsurances,
+    input: input,
   });
 });
 
