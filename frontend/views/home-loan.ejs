@@ -25,8 +25,9 @@
     <meta name="theme-color" content="#ffffff">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&family=Tajawal&family=Ubuntu&display=swap"
+        rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- ===============================================-->
     <!--    Stylesheets-->
     <!-- ===============================================-->
@@ -197,10 +198,11 @@
                                     <!-- card to display loans-->
                                     <p style="color: red;"><%= msg %></p>
                                     <% for(var i=0; i<loans.length;i++) { %>
-                                    <div class="card mt-2">
+                                    <div class="card mt-2 result" onclick="expand('<%= i %>')">
                                         <div class="py-3 px-2 row">
-                                            <div class="col-sm-2 border-end py-4">
-                                                <p class="my-0" style="font-family:'Times New Roman', Times, serif">
+                                            <div class="col-sm-2 border-end py-2">
+                                                <p class="my-0"
+                                                    style="font-family: 'Tajawal', serif; text-align: center; letter-spacing: 0.75px; color: #5A5A5A;">
                                                     <% if(computedLoans.length) { %>
                                                     <%= loans[computedLoans[i]["index"]]["Bank"]%>
                                                     <% } else{ %>
@@ -212,17 +214,19 @@
                                             <!-- <div class="vr"></div> -->
                                             <div
                                                 class="col-sm-3 d-flex justify-content-center text-center align-items-center">
-                                                <p class="my-0" style="font-family:'Times New Roman', Times, serif">
+                                                <h4 style="font-family: 'PT Sans';" class="mb-0">
                                                     <% if(computedLoans.length) { %>
+                                                    <span
+                                                        style="font-family: Arial, Helvetica, sans-serif;">&#8377</span>
                                                     <%= computedLoans[i]["processing_fee"] %>
                                                     <% } else{ %>
                                                     -
                                                     <% } %>
-                                                </p>
+                                                </h4>
                                             </div>
                                             <div
                                                 class="col-sm-3 d-flex justify-content-center text-center align-items-center">
-                                                <h3 style="font-family: 'PT Sans';">
+                                                <h4 style="font-family: 'PT Sans';" class="mb-0">
                                                     <% if(computedLoans.length) { %>
                                                     <span
                                                         style="font-family: Arial, Helvetica, sans-serif;">&#8377</span>
@@ -230,11 +234,11 @@
                                                     <% } else{ %>
                                                     <%= loans[i]["starting_interest_rate"]%>
                                                     <% } %>
-                                                </h3>
+                                                </h4>
                                             </div>
                                             <div
                                                 class="col-sm-3 d-flex justify-content-center text-center align-items-center">
-                                                <h3 style="font-family: 'PT Sans';">
+                                                <h4 style="font-family: 'PT Sans';" class="mb-0">
                                                     <% if(computedLoans.length) { %>
                                                     <span
                                                         style="font-family: Arial, Helvetica, sans-serif;">&#8377</span>
@@ -242,19 +246,25 @@
                                                     <% } else{ %>
                                                     -
                                                     <% } %>
-                                                </h3>
+                                                </h4>
                                             </div>
                                             <div
                                                 class="col-sm-1 d-flex flex-column align-items-center justify-content-center">
                                                 <div class="d-flex justify-content-center"><i
-                                                        class="far fa-list-alt text-secondary fw-light"></i></div>
+                                                        class="far fa-solid fa-star text-danger fw-light"></i></div>
                                                 <div class="text-secondary text-center">
-                                                    <h6 class="mb-0 mt-2 text-secondary fw-light">Details</h6>
+                                                    <h6 class="mb-0 mt-2 text-danger fw-light">Bookmark</h6>
                                                 </div>
                                             </div>
 
                                         </div>
-
+                                        <!-- <div id="<%= i %>" class="details" style="display: none;">
+                                            <ul>
+                                                <li>No collateral required</li>
+                                                <li>Loan available for amount of Rs 50,000 to 40,00,000 for upto 5 years
+                                                </li>
+                                            </ul>
+                                        </div> -->
                                     </div>
                                     <% } %>
                                 </div>
@@ -293,8 +303,52 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800&amp;display=swap"
         rel="stylesheet">
 </body>
-<!-- <script>
-    console.log(loans);
-</script> -->
+<script>
+    $("#result").click(function () {
+        console.log("sdfg");
+    })
+    function expand(index) {
+        var i, x;
+        x = document.getElementsByClassName("details");
+        if (getComputedStyle(document.getElementById(index)).display === "block") {
+            document.getElementById(index).style.display = "none";
+        }
+        else {
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            document.getElementById(index).style.display = "block";
+        }
+    }
+
+    function backgroundScheme() {
+        var col;
+        if (index % 3 === 0) {
+            col = "#F3E4F1";
+        }
+        else if (index % 3 == 1) {
+            col = "#D5EBDA";
+        }
+        else {
+            col = "#F4DACD";
+        }
+        document.getElementById(index).style.color = col;
+    }
+    // var cards = document.getElementsByClassName("result");
+    // console.log(cards.length);
+    // var col;
+    // for (var i = 0; i < cards.length; i++) {
+    //     if (i % 3 === 0) {
+    //         col = "#f7f0f6";
+    //     }
+    //     else if (i % 3 === 1) {
+    //         col = "#e9f7ec";
+    //     }
+    //     else {
+    //         col = "#fff5e0";
+    //     }
+    //     cards[i].style.backgroundColor = col;
+    // }
+</script>
 
 </html>
