@@ -23,7 +23,7 @@ router.post('/query', async (req, res) => {
     const tenure = parseFloat(req.body.tenure)
     const interest = parseFloat(req.body.interest)
     const queryConditions = {}
-    addChoiceToLog(req.body, 'personalLoan')
+    addChoiceToLog(req.body, "personalLoan")
     if (loanAmount) {
       queryConditions['amount.general.minimum'] = { $lte: loanAmount }
       queryConditions['amount.general.maximum'] = { $gte: loanAmount }
