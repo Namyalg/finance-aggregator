@@ -66,8 +66,7 @@
         async function bookmarkOption(option, input) {
             console.log(option)
             console.log(input)
-            localStorage.setItem('email', 'xyz@mail.com')
-            let email = 'xyz@mail.com'
+            let email = localStorage.setItem('email')
             const body = {
                 email: email,
                 output: option,

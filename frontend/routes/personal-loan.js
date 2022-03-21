@@ -23,7 +23,7 @@ router.get("/", async(req, res) => {
         .catch((error) => {
             console.error(error);
         });
-    res.render("personal-loan", { loans: loans, emi: [] });
+    res.render("personal-loan", { loans: loans, emi: [], input: {} });
 });
 
 router.post("/query", async(req, res) => {
