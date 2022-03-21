@@ -18,7 +18,6 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="assets/js/product.js"></script>
     <!-- <script src="assets/js/fixeddeposit.js"></script> -->
-
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
     <!-- ===============================================-->
     <!--    Document Title-->
@@ -46,7 +45,7 @@
     <link href="assets/css/theme.css" rel="stylesheet" />
     <link href="assets/css/fixed-deposit.css" rel="stylesheet" />
     <!-- <link href="assets/css/product.css" rel="stylesheet" /> -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 
 
@@ -66,7 +65,8 @@
         async function bookmarkOption(option, input) {
             console.log(option)
             console.log(input)
-            let email = localStorage.setItem('email')
+            localStorage.setItem('email', 'liza@gmail.com')
+            let email = 'liza@gmail.com'
             const body = {
                 email: email,
                 output: option,
@@ -74,10 +74,11 @@
             }
             await axios
                 .post(
-                    "http://localhost:9001/user/bookmark/personalLoan", body
+                    "http://localhost:9001/user/bookmark/fd", body
                 )
                 .then((res) => {
                     result = res.data.status;
+                    alert("Bookmark added")
                     console.log("SUCCESSFUL")
                 })
                 .catch((error) => {
@@ -131,15 +132,6 @@
                                 </div>
                                 <div>
                                     <form id="form" action="/fixed-deposit" method="post">
-                                        <!-- <div class="select">
-                      <select name="filters" id="filters">
-
-                        <option name="filter" name="filter" value="interestRate">Interest principal</option>
-                        <option name="filter" name="filter" value="safety">Safety</option>
-                      
-                      </select>
-                    </div> -->
-
                                         <label for="filter">Filter Criteria</label>
                                         <div class="flex">
                                             <span>Interest Amount</span>
@@ -153,14 +145,12 @@
                                             <% if(typeof(safety) == 'undefined') { %> <input id="safety" type="radio" name="filterType" value="safety" />
                                                 <% } else { %> <input id="safety" type="radio" name="filterType" value="safety" <%=s afety ? "checked" : "" %> />
                                                     <% } %>
-                                                        <!-- <input id="noncumulative" type="radio" onchange="showOptions()" name="interestType" value="noncumulative"/> -->
                                         </div>
                                         <hr>
                                         <br>
                                         <label for="principal">Principal</label>
                                         <div class="flex">
                                             <span class="currency">&#8377</span>
-                                            <!-- <input id="principal" name="principal" type="number" maxlength="15" min="1000" max="50000000" value="1000"/> -->
                                             <% if(typeof(principal) == 'undefined') { %> <input id="principal" name="principal" type="text" maxlength="15" required />
                                                 <% } else { %> <input id="principal" name="principal" type="text" maxlength="15" value="<%= principal %>" required />
                                                     <% } %>
@@ -321,7 +311,7 @@
                                                     <div class="text-secondary text-center">
                                                         <!-- <h6 onclick="bookmarkOption((`<%= result[i] %>`))" class="mb-0 mt-2 text-secondary fw-light" onclick="bookmarkOption(i)">Bookmark</h6> -->
 
-                                                        <h6 onclick="bookmarkOption((<%= JSON.stringify(result[i]) %>), (<%= JSON.stringify(input) %>))" class="mb-0 mt-2 text-secondary fw-light" onclick="bookmarkOption(i)">Bookmark</h6>
+                                                        <h6 onclick="bookmarkOption((<%= JSON.stringify(result[i]) %>), (<%= JSON.stringify(input) %>))" class="mb-0 mt-2 text-secondary fw-light">Bookmark</h6>
                                                         <!-- <button onclick="bookmarkOption(<%= result[i] %>)" style="width:auto;"><i class="fa fa-edit"></i></button> -->
                                                     </div>
                                                 </div>

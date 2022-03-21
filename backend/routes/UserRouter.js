@@ -91,7 +91,7 @@ router.post("/bookmark/:type", async(req, res) => {
                     newObj.input = req.body.input;
                     fd.push(newObj);
                     allBookmarks.fd = fd;
-                } else if (req.params.type === "loan") {
+                } else if (req.params.type === "personalLoan") {
                     const loan = allBookmarks.loan;
                     loan.push(req.body.bookmarks.loan);
                     allBookmarks.loan = loan;

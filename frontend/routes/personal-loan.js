@@ -27,7 +27,6 @@ router.get("/", async(req, res) => {
 });
 
 router.post("/query", async(req, res) => {
-    console.log(req.body)
     var eligibleLoans = [];
     var emis = [];
     var loanAmount = req.body.amount;
@@ -89,7 +88,6 @@ router.post("/query", async(req, res) => {
         );
     });
     if (req.body.filters = "emi") {
-        console.log(eligibleLoans)
         eligibleLoans.sort(function(a, b) {
             return a.emi - b.emi
         })
