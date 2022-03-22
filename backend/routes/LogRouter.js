@@ -15,13 +15,7 @@ router.get('/', async (req, res) => {
 router.post('/:type', async (req, res) => {
   const log = await Log.find()
   const id = log[0].id
-  const flog = log[0].toObject()
-
-  console.log('The first item is ')
-  console.log(req.body.input)
-  // console.log('uetmm')
-  // //console.log(req.body.input)
-  // console.log(log[0].personalLoan)
+  // const flog = log[0].toObject()
   if (req.params.type === 'fd') {
     Log.findOneAndUpdate({ _id: log[0].id }, {
       $push: { fixedDeposit: req.body.input }

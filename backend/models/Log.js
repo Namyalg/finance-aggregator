@@ -78,6 +78,14 @@ const LogSchema = mongoose.Schema({
     sector: {
       type: String
     }
+  }],
+  travelInsurance: [{
+    sortBy: {
+      type: String
+    },
+    destination: {
+      type: String
+    }
   }]
 }, { timestamp: true })
 

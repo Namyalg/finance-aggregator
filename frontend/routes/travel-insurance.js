@@ -2,7 +2,7 @@ var express = require("express");
 const axios = require("axios");
 var router = express.Router();
 
-var backendURL = "http://localhost:8800/travelInsurance";
+var backendURL = "http://localhost:9001/travelInsurance";
 
 router.get("/", async (req, res) => {
   var dest = [];
@@ -27,6 +27,7 @@ router.post("/query", async (req, res) => {
   var queryDestination = req.body.destination;
   var sortBy = req.body.sortBy;
   var dest = [];
+  addChoiceToLog(req.body, 'travelInsurance')
   var eligibleInsurances = [];
   var input = {};
 
