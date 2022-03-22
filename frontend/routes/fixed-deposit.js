@@ -54,8 +54,6 @@ router.get('/', async (req, res) => {
 })
 
 router.post("/", async(req, res) => {
-    console.log("params are ")
-    console.log(req.body)
     let result = []
     let inputs = []
     let queryParams = parseInput(req)
@@ -70,8 +68,7 @@ router.post("/", async(req, res) => {
         .catch((error) => {
             console.error(error);
         });
-    // console.log("sending to frontend ")
-    // console.log(result)
+
     res.render("fixed-deposit", {
         result : result, principal: req.body.principal, 
         input: input,
@@ -146,5 +143,7 @@ function parseInput (req){
 function tenureInDays(years, months, days){
     return 365 * years + 30 * months + days
 }
+
+
 
 module.exports = router;

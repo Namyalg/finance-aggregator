@@ -86,23 +86,22 @@ router.post('/bookmark/:type', async (req, res) => {
           allBookmarks.fd = fd
         } else if (req.params.type === 'healthInsurance') {
           const healthInsurance = allBookmarks.healthInsurance
-          console.log("The input is ")
-          console.log(req.body.input)
-          console.log("The output is ")
-          console.log(req.body.output)
           const newObj = { output: {}, input: {} }
           newObj.output = req.body.output
           newObj.input = req.body.input
           healthInsurance.push(newObj)
           allBookmarks.healthInsurance = healthInsurance
-
-          // const loan = allBookmarks.healthInsurance
-          // loan.push(req.body.bookmarks.loan)
-          // allBookmarks.loan = loan
-        } else if (req.params.type === 'insurance') {
-          const insurance = allBookmarks.insurance
-          insurance.push(req.body.bookmarks.insurance)
-          allBookmarks.insurance = insurance
+        } else if (req.params.type === 'homeLoan') {
+          const homeLoan = allBookmarks.homeLoan
+          console.log('The input is ')
+          console.log(req.body.input)
+          console.log('The output is ')
+          console.log(req.body.output)
+          const newObj = { output: {}, input: {} }
+          newObj.output = req.body.output
+          newObj.input = req.body.input
+          homeLoan.push(newObj)
+          allBookmarks.homeLoan = homeLoan
         }
         User.findOneAndUpdate({ _id: obj._id }, { bookmarks: allBookmarks }, { upsert: true }, function (err, res) {
           if (err != null) {

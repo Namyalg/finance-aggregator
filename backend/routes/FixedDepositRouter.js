@@ -50,10 +50,11 @@ router.post('/', async (req, res) => {
         req.body.cumulative, req.body.nonCumulative,
         req.body.monthly, req.body.quarterly, req.body.semiAnnually, 1)
     }
-    console.log('The results are ')
-    for (const x of result) {
-      addChoiceToLog(x.policy, 'fd')
-    }
+
+    console.log("This will be stored")
+    console.log(req.body)
+    addChoiceToLog(req.body, 'fd')
+
     res.status(200).json({ message: result, status: 1, input: req.body })
   } catch (err) {
     res.status(400).json({ message: 'Error is ' + err, status: 0 })
@@ -65,8 +66,6 @@ router.post('/bookmark', async (req, res) => {
     console.log(req.body)
     const data = await FD.find()
     let result = []
-    // console.log('In the backend CHECKING FOR FILTER')
-    // console.log(req.body.filters)
     if (req.body.filters === 'amount') {
       result = recommendOptions(data, req.body.principal,
         req.body.totalTenure, req.body.isSenior,
@@ -112,8 +111,6 @@ function recommendOptions (data, principal, totalTenure, isSenior, cumulative, n
   }
   // Filter chosen is safety
   if (filter === 1) {
-    // console.log('results here ')
-    // console.log(results)
     // group by public_banks, privateBanks banks
     const group = results.reduce((r, a) => {
       r[a.type] = [...r[a.type] || [], a]
@@ -214,13 +211,14 @@ function bookmarkOption (policy, type) {
     .then(response => {
       if (response.data.status === 1) {
         console.log('bookmark added')
+        console.log(response.data.message)
       } else {
         alert('An error occured, try again :(')
       }
     })
 }
 
-function addChoiceToLog (policy, type) {
+function addChoiceToLog (input, type) {
   const currentdate = new Date()
   const datetime = currentdate.getDate() + '/' +
               (currentdate.getMonth() + 1) + '/' +
@@ -228,17 +226,21 @@ function addChoiceToLog (policy, type) {
               currentdate.getHours() + ':' +
               currentdate.getMinutes() + ':' +
               currentdate.getSeconds() + ' IST'
-  const log = { policy: policy, type: type, date: datetime }
+  const log = { input: input, date: datetime }
   console.log(log)
-  const URL = 'http://localhost:9001/log/'
-  axios.post(URL, log)
-    .then(response => {
-      if (response.data.status === 1) {
-        console.log('log added')
-      } else {
-        alert('An error occured, try again :(')
-      }
-    })
+  const URL = 'http://localhost:9001/log/' + type
+  try {
+    axios.post(URL, log)
+      .then(response => {
+        if (response.data.status === 1) {
+          console.log('log added')
+        } else {
+          console.log('An error occured, try again :(')
+        }
+      })
+  } catch (e) {
+    console.log('Error is ' + e)
+  }
 }
 
 // custom comparator to sort banks based on decreasing interest

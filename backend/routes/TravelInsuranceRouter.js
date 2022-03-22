@@ -29,13 +29,23 @@ router.post('/query', async (req, res) => {
   console.log('query recvd', req.body)
   try {
     const destination = req.body.destination
+    const sortBy = req.body.sortBy
     const queryConditions = {}
 
     if (destination) {
       queryConditions.destination = { $eq: destination }
     }
     const eligibleInsurances = await travelInsuranceDB.find(queryConditions)
-    eligibleInsurances.sort(function (a, b) { return a.premium - b.premium })
+    eligibleInsurances.sort(function (a, b) {
+      if (sortBy === 'duration') {
+        const x = a.duration.split(' ')[0]
+        const y = b.duration.split(' ')[0]
+        return y - x
+      } else if (sortBy === 'premium') {
+        return a.premium - b.premium
+      }
+      return 1
+    })
     res.status(200).json({ message: eligibleInsurances, status: 1 })
   } catch (err) {
     console.log(err)

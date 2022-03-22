@@ -67,10 +67,66 @@ const UserSchema = mongoose.Schema({
       // premium, agency, cover, cashless hospitals : num, diseases covered : []
     }],
     homeLoan: [{
+      input: {
+        amount: {
+          type: Number
+        },
+        tenure: {
+          type: Number
+        },
+        age: {
+          type: Number
+        },
+        employment_type: {
+          type: String
+        },
+        rate_packages: {
+          type: String
+        },
+        income: {
+          type: Number
+        },
+        gender: {
+          type: String
+        }
+      },
+      output: {
+        interest: {
+          type: Number
+        },
+        emi: {
+          type: Number
+        },
+        processing_fee: {
+          type: Number
+        }
+      }
       // inputs :
       // outputs : processing fee, interest rate, EMI, name
     }],
     travelInsurance: [{
+      output: {
+        agency_name: {
+          type: String
+        },
+        product_name: {
+          type: String
+        },
+        destination: {
+          type: String
+        },
+        premium: {
+          type: Number
+        },
+        duration: {
+          type: String
+        }
+      },
+      input: {
+        destination: {
+          type: String
+        }
+      }
     }],
     fd: [{
       output: {
