@@ -64,6 +64,20 @@ const LogSchema = mongoose.Schema({
     gender: {
       type: String
     }
+  }],
+  personalLoan: [{
+    amount: {
+      type: Number
+    },
+    tenure: {
+      type: Number
+    },
+    interest: {
+      type: Number
+    },
+    sector: {
+      type: String
+    }
   }]
 }, { timestamp: true })
 
