@@ -42,6 +42,9 @@ app.use(sessions({
 }));
 
 // assign routers
+app.get('/', (req, res) => {
+    res.render('landingpage')
+});
 app.use('/user', userRouter);
 app.use('/fixed-deposit', fixedDepositRouter);
 app.use('/personal-loan', personalLoanRouter);

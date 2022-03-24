@@ -14,7 +14,7 @@ router.get("/signup", (req, res) => {
     });
 });
 
-router.post("/signup", async(req, res) => {
+router.post("/signup", async (req, res) => {
     const email = req.body.email
     if (emailRegex.test(email)) {
         // const salt = await bcrypt.genSalt(10);
@@ -49,7 +49,7 @@ router.get("/login", (req, res) => {
     });
 });
 
-router.post("/login", async(req, res) => {
+router.post("/login", async (req, res) => {
     await axios.post(backendURL + "/login", {
         email: req.body.email,
         password: req.body.pwd
@@ -58,14 +58,28 @@ router.post("/login", async(req, res) => {
             res.render("login", { error: "Invalid Credentials" })
         } else {
             req.session.email = req.body.email
-            res.render("index")
+            res.redirect("/user/dashboard")
         }
     })
 });
 
 // dashboard
-router.get("/dashboard", (req, res) => {
-    res.render("dashboard");
+router.get("/dashboard", async (req, res) => {
+    var name = "",
+        email = req.session.email
+    await axios.post(backendURL + "/data", {
+        email: email
+    }).then((userDetails) => {
+        console.log(userDetails);
+        name = userDetails.data.name
+    }).catch((error) => {
+        console.log(error)
+    })
+    console.log(name);
+    res.render("dashboard", {
+        name: name,
+        email: email
+    });
 });
 
 module.exports = router;

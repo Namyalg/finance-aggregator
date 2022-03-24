@@ -359,21 +359,21 @@
         }
         document.getElementById(index).style.color = col;
     }
-    // var cards = document.getElementsByClassName("result");
-    // console.log(cards.length);
-    // var col;
-    // for (var i = 0; i < cards.length; i++) {
-    //     if (i % 3 === 0) {
-    //         col = "#f7f0f6";
-    //     }
-    //     else if (i % 3 === 1) {
-    //         col = "#e9f7ec";
-    //     }
-    //     else {
-    //         col = "#fff5e0";
-    //     }
-    //     cards[i].style.backgroundColor = col;
-    // }
+    var cards = document.getElementsByClassName("result");
+    console.log(cards.length);
+    var col;
+    for (var i = 0; i < cards.length; i++) {
+        if (i % 3 === 0) {
+            col = "#f7f0f6";
+        }
+        else if (i % 3 === 1) {
+            col = "#e9f7ec";
+        }
+        else {
+            col = "#fff5e0";
+        }
+        cards[i].style.backgroundColor = col;
+    }
 </script>
 
 </html>

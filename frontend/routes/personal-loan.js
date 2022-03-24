@@ -23,7 +23,7 @@ router.get("/", async(req, res) => {
         .catch((error) => {
             console.error(error);
         });
-    res.render("personal-loan", { loans: loans, emi: [] });
+    res.render("personal-loan", { loans: loans, emi: [], input: {} });
 });
 
 router.post("/query", async(req, res) => {
@@ -35,6 +35,7 @@ router.post("/query", async(req, res) => {
     var age = req.body.age;
     var employment = req.body.employment;
     var income = req.body.income;
+    var filter = req.body.filters;
 
     queryParams = {
         amount: loanAmount,
@@ -52,6 +53,12 @@ router.post("/query", async(req, res) => {
     if (income) {
         queryParams["income"] = income
     }
+    if (filter) {
+        if (filter != "emi")
+            queryParams["sector"] = filter
+    } else {
+        filter = ""
+    }
     await axios
         .post(
             backendURL + "/query", queryParams
@@ -67,6 +74,11 @@ router.post("/query", async(req, res) => {
         var rate
         if (!interestRate) rate = loan["interest"]["general"]["range_from"];
         else rate = interestRate
+        loan.emi = calcluateEMI(
+            parseFloat(loanAmount),
+            parseFloat(tenure),
+            parseFloat(rate)
+        )
         emis.push(
             calcluateEMI(
                 parseFloat(loanAmount),
@@ -75,15 +87,20 @@ router.post("/query", async(req, res) => {
             )
         );
     });
+    if (req.body.filters = "emi") {
+        eligibleLoans.sort(function(a, b) {
+            return a.emi - b.emi
+        })
+    }
     res.render("personal-loan", {
         loans: eligibleLoans,
         emi: emis,
-        amount: loanAmount,
-        tenure: tenure,
-        interestRate: interestRate,
-        age: age,
-        employ: employment,
-        income: income
+        input: {
+            amount: loanAmount,
+            tenure: tenure,
+            interestRate: interestRate,
+            filter: filter
+        }
     });
 });
 
