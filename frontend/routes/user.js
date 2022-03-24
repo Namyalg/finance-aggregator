@@ -74,6 +74,15 @@ router.get("/dashboard", async(req, res) => {
     }).catch((error) => {
         console.log(error)
     })
+
+    await axios.get("https://localhost:9001/data/" + req.session.email , {
+        email: email
+    }).then((userDetails) => {
+        name = userDetails.data.name
+    }).catch((error) => {
+        console.log(error)
+    })
+
     res.render("dashboard", {
         name: name,
         email: email
