@@ -32,7 +32,7 @@ The main compoenents are :
 
 We cover five products : 
 - [Fixed Deposits](FixedDeposit.md)
-- Health Insurance
+- [Health Insurance](HealthInsurance.md)
 - Travel Insurance
 - Home Loan
 - Personal Loan
