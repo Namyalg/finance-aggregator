@@ -1,3 +1,8 @@
+/*
+  The requests to /user, will handle all the queries relating
+  to the user
+*/
+
 // imports and dependencies
 const express = require('express')
 const router = express.Router()
@@ -14,7 +19,6 @@ router.get('/', async (req, res) => {
 })
 
 // verify user login
-
 router.post('/login', async (req, res) => {
   console.log('recvd', req.body)
   try {
@@ -97,9 +101,6 @@ router.post('/', async (req, res) => {
 
 // based on type (fd, loan or insurance the update is made) the chosen policy is added as a bookmark
 router.post('/bookmark/:type', async (req, res) => {
-  console.log('BODY GOT IS ')
-  console.log(req.body)
-  console.log('params got is ' + req.params.type)
   try {
     const allUsers = await User.find()
     for (const obj of allUsers) {
@@ -137,6 +138,7 @@ router.post('/bookmark/:type', async (req, res) => {
   }
 })
 
+// get the details of the user based on email id (serves as the unique identifier)
 router.post('/data', async (req, res) => {
   try {
     const userDetails = await User.find({
@@ -149,4 +151,5 @@ router.post('/data', async (req, res) => {
     res.status(400).json({ status: 0, message: 'Could not fetch details' })
   }
 })
+
 module.exports = router

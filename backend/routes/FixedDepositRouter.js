@@ -1,9 +1,15 @@
+/*
+  The requests to /fd, will handle all the queries relating
+  to fixed deposits
+*/
+
 // imports and dependencies
 const express = require('express')
 const router = express.Router()
 const FD = require('../models/FixedDeposit')
 const axios = require('axios')
 
+// get all FDs stored in the database
 router.get('/', async (req, res) => {
   try {
     const allFDs = await FD.find()
@@ -13,6 +19,7 @@ router.get('/', async (req, res) => {
   }
 })
 
+// add an FD record based on the FD schema
 router.post('/add', async (req, res) => {
   const FDObject = new FD({
     name: req.body.name,
@@ -34,6 +41,7 @@ router.post('/add', async (req, res) => {
   }
 })
 
+// On receiving a query from the frontend, computations are performed and returned
 router.post('/', async (req, res) => {
   try {
     const data = await FD.find()
@@ -56,27 +64,27 @@ router.post('/', async (req, res) => {
   }
 })
 
-router.post('/bookmark', async (req, res) => {
-  try {
-    console.log(req.body)
-    const data = await FD.find()
-    let result = []
-    if (req.body.filters === 'amount') {
-      result = recommendOptions(data, req.body.principal,
-        req.body.totalTenure, req.body.isSenior,
-        req.body.cumulative, req.body.nonCumulative,
-        req.body.monthly, req.body.quarterly, req.body.semiAnnually, 0)
-    } else {
-      result = recommendOptions(data, req.body.principal,
-        req.body.totalTenure, req.body.isSenior,
-        req.body.cumulative, req.body.nonCumulative,
-        req.body.monthly, req.body.quarterly, req.body.semiAnnually, 1)
-    }
-    res.status(200).json({ message: result, status: 1 })
-  } catch (err) {
-    res.status(400).json({ message: 'Error is ' + err, status: 0 })
-  }
-})
+// router.post('/bookmark', async (req, res) => {
+//   try {
+//     console.log(req.body)
+//     const data = await FD.find()
+//     let result = []
+//     if (req.body.filters === 'amount') {
+//       result = recommendOptions(data, req.body.principal,
+//         req.body.totalTenure, req.body.isSenior,
+//         req.body.cumulative, req.body.nonCumulative,
+//         req.body.monthly, req.body.quarterly, req.body.semiAnnually, 0)
+//     } else {
+//       result = recommendOptions(data, req.body.principal,
+//         req.body.totalTenure, req.body.isSenior,
+//         req.body.cumulative, req.body.nonCumulative,
+//         req.body.monthly, req.body.quarterly, req.body.semiAnnually, 1)
+//     }
+//     res.status(200).json({ message: result, status: 1 })
+//   } catch (err) {
+//     res.status(400).json({ message: 'Error is ' + err, status: 0 })
+//   }
+// })
 
 // computation performed and choiced returned
 function recommendOptions (data, principal, totalTenure, isSenior, cumulative, nonCumulative, monthly, quarterly, semiAnnually, filter) {
@@ -118,9 +126,7 @@ function recommendOptions (data, principal, totalTenure, isSenior, cumulative, n
     publicBanks.push.apply(publicBanks, privateBanks)
     ret = publicBanks
   } else if (filter === 0) {
-    // console.log('The results are after sorting')
     results.sort(decreasingInterestOrder)
-    // showTable(results)
     ret = results
   }
   return ret
@@ -162,7 +168,6 @@ function findTenureSlab (slab, totalTenure) {
 
 // Based on the options chosen, the interest is calculated
 function compute (principal, totalTenure, interestRate, cumulative, nonCumulative, monthly, quarterly, semiAnnually) {
-  // console.log(principal, totalTenure, interestRate, cumulative, nonCumulative, monthly, quarterly, semiAnnually)
   if (cumulative) {
     return cumulativeFD(principal, totalTenure, interestRate)
   } else {
@@ -194,25 +199,7 @@ function nonCumulativeFD (principal, totalTenure, interestRate, monthly, quarter
   }
 }
 
-// bookmarks the option chosen
-function bookmarkOption (policy, type) {
-  // assuming that the user details will be stored in localStorage on login/signup, so that will be used
-  localStorage.setItem('email', 'test')
-  const email = localStorage.getItem('email', email)
-  const option = { email: email, bookmarks: { fd: policy } }
-  console.log('policy added is ' + policy)
-  const URL = 'http://localhost:9001/user/bookmark/' + type
-  axios.post(URL, option)
-    .then(response => {
-      if (response.data.status === 1) {
-        console.log('bookmark added')
-        console.log(response.data.message)
-      } else {
-        alert('An error occured, try again :(')
-      }
-    })
-}
-
+// add the choice to the log, on submit in the frontend
 function addChoiceToLog (input, type) {
   const currentdate = new Date()
   const datetime = currentdate.getDate() + '/' +
@@ -222,7 +209,6 @@ function addChoiceToLog (input, type) {
               currentdate.getMinutes() + ':' +
               currentdate.getSeconds() + ' IST'
   const log = { input: input, date: datetime }
-  console.log(log)
   const URL = 'http://localhost:9001/log/' + type
   try {
     axios.post(URL, log)

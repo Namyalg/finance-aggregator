@@ -1,8 +1,3 @@
-/* This file consists of the schema for each user
-    On creation a mongo db document with this schema is created
-    The name of the collection is examples
-*/
-
 /*
   The schema will have name of the bank
   Then one thing called below 2 crore -> normal and senior
