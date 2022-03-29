@@ -34,11 +34,9 @@
     <link href="assets/css/product.css" rel="stylesheet" />
     <script>
  async function bookmarkOption(option, input){
-      console.log(option)
-      console.log(input)
-    localStorage.setItem('email', 'liza@gmail.com')
-    let email = localStorage.getItem('email')
-    const body = { email: email, output: option, input: input }
+        let email = localStorage.getItem('email')
+        alert(email)
+        const body = { email: email, output: option, input: input }
       await axios
         .post(
             "http://localhost:9001/user/bookmark/homeLoan", body

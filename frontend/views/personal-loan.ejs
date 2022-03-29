@@ -212,11 +212,11 @@
             <script src="vendors/fontawesome/all.min.js"></script>
             <script src="../assets/js/theme.js"></script>
             <script src="../assets/js/product.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
             <script>
                 async function bookmarkOption(option, input) {
-                    console.log(option)
-                    console.log(input)
                     let email = localStorage.getItem('email')
+                    alert(email)
                     const body = {
                         email: email,
                         output: option,
@@ -224,13 +224,15 @@
                     }
                     await axios
                         .post(
-                            "http://localhost:9001/user/bookmark/fd", body
+                            "http://localhost:9001/user/bookmark/personalLoan", body
                         )
                         .then((res) => {
                             result = res.data.status;
+                            alert("Bookmark added")
                             console.log("SUCCESSFUL")
                         })
                         .catch((error) => {
+                            alert("Book mark not added")
                             console.error(error);
                         });
                 }

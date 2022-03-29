@@ -102,10 +102,13 @@ router.post('/', async (req, res) => {
 // based on type (fd, loan or insurance the update is made) the chosen policy is added as a bookmark
 router.post('/bookmark/:type', async (req, res) => {
   try {
+    console.log(req.body)
+    console.log('Body is ' + req.body.email)
     const allUsers = await User.find()
     for (const obj of allUsers) {
-      if (obj.email === 'liza@gmail.com') {
+      if (obj.email === req.body.email) {
         const allBookmarks = obj.bookmarks
+        // bookmark for fixed deposit
         if (req.params.type === 'fd') {
           const fd = allBookmarks.fd
           const newObj = { output: {}, input: {} }
@@ -113,14 +116,37 @@ router.post('/bookmark/:type', async (req, res) => {
           newObj.input = req.body.input
           fd.push(newObj)
           allBookmarks.fd = fd
-        } else if (req.params.type === 'personalLoan') {
-          const loan = allBookmarks.loan
-          loan.push(req.body.bookmarks.loan)
-          allBookmarks.loan = loan
-        } else if (req.params.type === 'insurance') {
-          const insurance = allBookmarks.insurance
-          insurance.push(req.body.bookmarks.insurance)
-          allBookmarks.insurance = insurance
+        } // bookmark for personal loan 
+        else if (req.params.type === 'personalLoan') {
+          console.log(req.body)
+          const personalLoan = allBookmarks.personalLoan
+          const newObj = { output: {}, input: {} }
+          newObj.output = {amount : req.body.output}
+          newObj.input = req.body.input
+          personalLoan.push(newObj)
+          allBookmarks.personalLoan = personalLoan
+        } // bookmark for health insurance  
+        else if (req.params.type === 'healthInsurance') {
+          const healthInsurance = allBookmarks.healthInsurance
+          const newObj = { output: {}, input: {} }
+          newObj.output = req.body.output
+          newObj.input = req.body.input
+          healthInsurance.push(newObj)
+          allBookmarks.healthInsurance = healthInsurance
+        } else if (req.params.type === 'travelInsurance') {
+          const travelInsurance = allBookmarks.travelInsurance
+          const newObj = { output: {}, input: {} }
+          newObj.output = req.body.output
+          newObj.input = req.body.input
+          travelInsurance.push(newObj)
+          allBookmarks.travelInsurance = travelInsurance
+        } else if (req.params.type === 'homeLoan') {
+          const homeLoan = allBookmarks.homeLoan
+          const newObj = { output: {}, input: {} }
+          newObj.output = req.body.output
+          newObj.input = req.body.input
+          homeLoan.push(newObj)
+          allBookmarks.homeLoan = homeLoan
         }
         User.findOneAndUpdate({ _id: obj._id }, { bookmarks: allBookmarks }, { upsert: true },
           function (err, res) {

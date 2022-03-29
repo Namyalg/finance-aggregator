@@ -33,24 +33,25 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
     async function bookmarkOption(option, input){
-        // console.log(option)
-        // console.log(input)
-        // localStorage.setItem('email', 'liza@gmail.com')
-        let email = localStorage.getItem('email')
-        const body = { email: email, output: option, input: input }
-        await axios
-            .post(
-                "http://localhost:9001/user/bookmark/healthInsurance", body
-            )
-            .then((res) => {
-                result = res.data.status;
-                alert("Bookmark added")
-                console.log("SUCCESSFUL")
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-        }
+      alert("here in health")
+      let email = localStorage.getItem('email')
+      console.log("sending from frontend ")
+      console.log("Email is " + email)
+
+      const body = { email: email, output: option, input: input }
+      await axios
+          .post(
+              "http://localhost:9001/user/bookmark/healthInsurance", body
+          )
+          .then((res) => {
+              result = res.data.status;
+              alert("Bookmark added")
+              console.log("SUCCESSFUL")
+          })
+          .catch((error) => {
+              console.error(error);
+      });
+    }
     </script>
 
 

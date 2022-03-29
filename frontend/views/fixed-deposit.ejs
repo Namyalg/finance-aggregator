@@ -42,7 +42,11 @@
     }
 
     async function bookmarkOption(option, input){
+      
       let email = localStorage.getItem('email')
+      console.log("sending from frontend ")
+      console.log("Email is " + email)
+      alert("here" + email)
       const body = { email: email, output: option, input: input }
       await axios
           .post(

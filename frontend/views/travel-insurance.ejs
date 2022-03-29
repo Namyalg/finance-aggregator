@@ -49,10 +49,12 @@
     <script>
     async function bookmarkOption(option, input){
         let email = localStorage.getItem('email')
+        alert(email)
+        
         const body = { email: email, output: option, input: input }
         await axios
             .post(
-                "http://localhost:8800/user/bookmark/travelInsurance", body
+                "http://localhost:9001/user/bookmark/travelInsurance", body
             )
             .then((res) => {
                 result = res.data.status;

@@ -43,7 +43,7 @@ const UserSchema = mongoose.Schema({
         }
       },
       output: {
-        emi: {
+        amount: {
           type: Number
         }
       }
