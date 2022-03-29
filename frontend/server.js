@@ -10,7 +10,7 @@ var sessions = require('express-session');
 const cookieParser = require("cookie-parser");
 
 // creating 24 hours from milliseconds
-const oneDay = 1000 * 60 * 60 * 24;
+const oneDay = 1000 * 60 * 60 * 24 * 24;
 
 // include sub-routers
 var fixedDepositRouter = require('./routes/fixed-deposit');

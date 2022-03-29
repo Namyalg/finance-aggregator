@@ -15,11 +15,14 @@ router.get("/", async(req, res) => {
 
 // verify user login
 router.post("/login", async(req, res) => {
+    console.log("recvd", req.body)
     try {
         await User.find({ email: req.body.email })
             .then((data) => {
-                if ((data[0].password = req.body.password)) {
+                if ((data[0].password == req.body.password)) {
                     res.status(200).json({ message: "successful", status: 1 });
+                } else {
+                    res.status(200).json({ message: "unsuccessful", status: 0 });
                 }
             })
             .catch((err) => {
@@ -116,11 +119,12 @@ router.post("/bookmark/:type", async(req, res) => {
     }
 });
 
-router.post("/data:email", async(req, res) => {
+router.post("/data", async(req, res) => {
     try {
         const userDetails = await User.find({
             email: req.body.email,
         });
+        console.log(req.body, userDetails)
         res.status(200).json({ status: 0, message: userDetails });
     } catch (error) {
         console.log(err);

@@ -43,7 +43,12 @@
             color: red;
         }
     </style>
-
+    <script>
+        function saveEmailInLocalStorage() {
+            var email = document.getElementById('inputEmail').value;
+            localStorage.setItem('email', email)
+        }
+    </script>
 </head>
 
 
@@ -117,7 +122,7 @@
                             <%= error %>
                         </p>
                     </div>
-                    <button type="submit " class="btn btn-primary">Submit</button>
+                    <button type="submit " class="btn btn-primary" onclick="saveEmailInLocalStorage()">Submit</button>
                 </form>
             </div>
         </div>

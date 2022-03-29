@@ -50,10 +50,12 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/login", async(req, res) => {
+    console.log("recvd", req.body)
     await axios.post(backendURL + "/login", {
         email: req.body.email,
         password: req.body.pwd
     }).then((response) => {
+        console.log(response)
         if (response.data.status == 0) {
             res.render("login", { error: "Invalid Credentials" })
         } else {
@@ -67,10 +69,11 @@ router.post("/login", async(req, res) => {
 router.get("/dashboard", async(req, res) => {
     var name = "",
         email = req.session.email
-    await axios.post(backendURL, {
+    await axios.post(backendURL + "/data", {
         email: email
     }).then((userDetails) => {
-        name = userDetails.data.name
+        userDetails = userDetails.data.message[0]
+        name = userDetails.name
     }).catch((error) => {
         console.log(error)
     })
