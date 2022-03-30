@@ -117,7 +117,15 @@
                                 </div>
                                 <div>
                                     <form id="form" method="post" action="/home-loan">
+                                        <label for="sort" class="mt-3">Sort By</label>
+                                        <div id="sort" class="mb-3">
 
+                                            <input type="radio" name="sort" value="interest"
+                                                <%= (sort==='interest') ? 'checked':'' %>>Interest Rate
+                                            <br>
+                                            <input type="radio" name="sort" value="procesing_fee"
+                                                <%= (sort==='processing_fee') ? "checked":'' %>>Processing Fee
+                                        </div>
                                         <label for="amount">Desired Loan amount</label>
                                         <div class="flex">
                                             <span class="currency">&#8377</span>
@@ -160,22 +168,28 @@
                                         </div>
                                         <label for="employment_type" class="mt-3">Employment type</label>
                                         <div id="employment_type">
-                                            <input type="radio" name="employment_type" value="salaried"> salaried
+                                            <input type="radio" name="employment_type" value="salaried"
+                                                <%= (employment_type==='salaried') ? 'checked':'' %>> salaried
                                             <br>
-                                            <input type="radio" name="employment_type" value="self_employed"> Self
+                                            <input type="radio" name="employment_type" value="self_employed"
+                                                <%= (employment_type==='self_employed') ? 'checked':'' %>> Self
                                             Employed
                                         </div>
                                         <label for="gender" class="mt-3">Gender</label>
                                         <div id="gender">
-                                            <input type="radio" name="gender" value="male"> Male
+                                            <input type="radio" name="gender" value="male"
+                                                <%= (gender==='male') ? 'checked':'' %>> Male
                                             <br>
-                                            <input type="radio" name="gender" value="female"> Female
+                                            <input type="radio" name="gender" value="female"
+                                                <%= (gender==='female') ? 'checked':'' %>> Female
                                         </div>
                                         <label for="rate_packages" class="mt-3">Rate packages</label>
                                         <div id="rate_packages">
-                                            <input type="radio" name="rate_packages" value="fixed"> Fixed
+                                            <input type="radio" name="rate_packages" value="fixed"
+                                                <%= (rate_packages==='fixed') ? 'checked':'' %>> Fixed
                                             <br>
-                                            <input type="radio" name="rate_packages" value="floating"> Floating
+                                            <input type="radio" name="rate_packages" value="floating"
+                                                <%= (rate_packages==='floating') ? 'checked':'' %>> Floating
                                         </div>
                                         <div class="text-center mb-5 mt-3">
                                             <!-- <div class="d-block"> -->
@@ -195,16 +209,6 @@
                                     <div class="card bg-light border-0">
                                         <div class="row py-2">
                                             <div class="col-sm-2">
-                                                <!-- <div class="filters">
-                                                    <div class="select">
-                                                        <select name="filters" id="filters">
-                                                            <option value="1" selected="selected">Interest rate</option>
-                                                            <option value="2">Users rating</option>
-                                                            <option value="3">Most visited</option>
-                                                            <option value="4">Security</option>
-                                                        </select>
-                                                    </div>
-                                                </div> -->
 
                                             </div>
                                             <div class="col-sm-3 text-center">
@@ -277,7 +281,7 @@
                                                         class="far fa-solid fa-star text-danger fw-light"></i></div>
                                                 <div class="text-secondary text-center">
                                                     <h6 onclick="bookmarkOption((<%= JSON.stringify(computedLoans[i]) %>), (<%= JSON.stringify(input) %>))"
-                                                        class="mb-0 mt-2 text-secondary fw-light">Bookmark</h6>
+                                                        class="mb-0 mt-2 text-danger fw-light">Bookmark</h6>
                                                 </div>
                                             </div>
 
@@ -348,14 +352,14 @@
 
     function backgroundScheme() {
         var col;
-        if (index % 3 === 0) {
+        if (index % 2 === 0) {
             col = "#F3E4F1";
         }
-        else if (index % 3 == 1) {
-            col = "#D5EBDA";
-        }
+        // else if (index % 3 == 1) {
+        //     col = "#D5EBDA";
+        // }
         else {
-            col = "#F4DACD";
+            col = "#ffdbb3";
         }
         document.getElementById(index).style.color = col;
     }
@@ -363,12 +367,12 @@
     console.log(cards.length);
     var col;
     for (var i = 0; i < cards.length; i++) {
-        if (i % 3 === 0) {
-            col = "#f7f0f6";
+        if (i % 2 === 0) {
+            col = "#ffebcb";
         }
-        else if (i % 3 === 1) {
-            col = "#e9f7ec";
-        }
+        // else if (i % 3 === 1) {
+        //     col = "";
+        // }
         else {
             col = "#fff5e0";
         }

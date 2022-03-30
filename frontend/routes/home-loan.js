@@ -40,16 +40,21 @@ router.get('/', async (req, res) => {
         .catch((error) => {
             console.error(error);
         });
-        let input = {
-            amount : 1000,
-            tenure: 2,
-            age: 23,
-            employment_type: "salaried",
-            rate_packages: "fixed",
-            income: 100000,
-            gender: "female"
+    var sort = "";
+    var employment_type = "";
+    var gender = "";
+    var rate_packages = "";
+    let input = {
+        amount: 1000,
+        tenure: 2,
+        age: 23,
+        employment_type: "salaried",
+        rate_packages: "fixed",
+        income: 100000,
+        gender: "female",
+        sort: "interest"
     }
-    res.render('home-loan', { loans: loans, computedLoans, msg, input: input });
+    res.render('home-loan', { loans: loans, computedLoans, msg, input: input, sort, employment_type, gender, rate_packages });
 })
 
 router.post("/", async (req, res) => {
@@ -62,6 +67,7 @@ router.post("/", async (req, res) => {
     var gender = req.body.gender;
     var rate_packages = req.body.rate_packages;
     var income = req.body.income;
+    var sort = req.body.sort;
     console.log(rate_packages);
     console.log(amount);
     await axios
@@ -96,7 +102,7 @@ router.post("/", async (req, res) => {
     });
     var msg = "";
     let input = {
-        amount : amount,
+        amount: amount,
         tenure: tenure,
         age: age,
         employment_type: employment_type,
@@ -107,8 +113,11 @@ router.post("/", async (req, res) => {
     console.log(computedLoans.length);
     if (!loans.length) msg = "Sorry, no offers for the given input available at the moment!!";
     else if (!computedLoans.length) msg = "Sorry, your income is not sufficient to acquire the loan. Please either increase the tenure or decrease the amount."
-    computedLoans.sort(function (a, b) { return a.interest - b.interest });
-    res.render('home-loan', { loans, computedLoans, amount, tenure, age, employment_type, rate_packages, msg, income, input: input });
+    if (sort == 'interest')
+        computedLoans.sort(function (a, b) { return a.interest - b.interest });
+    else
+        computedLoans.sort(function (a, b) { return a.processing_fee - b.processing_fee });
+    res.render('home-loan', { loans, computedLoans, amount, tenure, age, employment_type, rate_packages, msg, income, input: input, sort, gender });
 })
 
 module.exports = router;

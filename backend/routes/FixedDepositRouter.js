@@ -36,7 +36,6 @@ router.post('/add', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    console.log(req.body)
     const data = await FD.find()
     let result = []
     if (req.body.filters === 'amount') {
@@ -50,11 +49,7 @@ router.post('/', async (req, res) => {
         req.body.cumulative, req.body.nonCumulative,
         req.body.monthly, req.body.quarterly, req.body.semiAnnually, 1)
     }
-
-    console.log("This will be stored")
-    console.log(req.body)
     addChoiceToLog(req.body, 'fd')
-
     res.status(200).json({ message: result, status: 1, input: req.body })
   } catch (err) {
     res.status(400).json({ message: 'Error is ' + err, status: 0 })
