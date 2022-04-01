@@ -1,5 +1,5 @@
 
-## Fixed Deposit
+## Travel Insurance
 Travel Insurance is a type of insurance that covers different risks while travelling. It covers medical expenses, lost luggage, flight cancellations, and other losses that a traveller can incur while travelling. 
 
 ### Inputs
