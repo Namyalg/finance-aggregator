@@ -32,7 +32,7 @@ router.post("/signup", async(req, res) => {
                 // successfull signup
                 var session = req.session
                 session.email = email
-                res.render("index");
+                res.redirect('/user/dashboard')
             }
         }).catch((error) => {
             console.log(error)
@@ -60,7 +60,7 @@ router.post("/login", async(req, res) => {
             res.render("login", { error: "Invalid Credentials" })
         } else {
             req.session.email = req.body.email
-            res.render("index")
+            res.redirect('/user/dashboard')
         }
     })
 });
