@@ -4,7 +4,7 @@ It covers medical expenses incurred on hospitalization, surgeries, day care proc
 A health insurance policy either reimburses the medical costs or offers cashless treatment.
 
 Inputs
-The inputs are we follows- 
+The inputs are as follows- 
 
 1) Age- The age of the user is taken as input. Higher the age of the insurance policy buyer, more will be the premium to be paid because of higher chances of using the policy.
 2) No . Of chronic diseases- The number of chronic diseases the user is suffering from is taken as input. More the number of chronic diseases, higher is the premium to be paid.
@@ -18,3 +18,19 @@ The following outputs related to reach health insurance are displayed on the web
 3) Premium- Premium is the amount to be paid to the agency by the user after buying the insurance policy. The portal shows monthly premium and it is subjective to a variety of parameters like age, no. Of chronic diseases and no. Of family members. 
 4) Diseases covered- An array of chronic diseases convered by the insurance policy is displayed on the webpage. Sone of the examples of chronic diseases covered are hypertension, diabetes, arthritis etc.
 5) Cashless Hospitals- The number of cashless hospitals covered by the policy are displayed in the webpage. Cashless hospitals are those hospitals where the user doesn't have to pay a single penny out of his pocket in case of a hospitalization and the entire hospital bill is cleared directly by the Insurance Company.
+
+Data and Algorithms
+The data of the health insurance agencies and their policies have been extracted from various websites. All of the policies are active in India. Some changes have been made to the data as per the new algorithm applied.
+
+The algorithms have been mainly applied to calculate the premium to be paid to the agency by the user. There are 2 algorithms-
+1) Based on the number of chronic diseases the user is suffering from. A particular amount for each disease is added to the basic premium to calculate the final premium.
+2) Based on the number of family members the users want to add. The premium increases by certain amount for every extra person with whom the policy needs to be shared.
+
+The output can be sorted (optional) in non decreasing order based on the following parameters-
+1) Premium 
+2) Cover
+3) Number of cashless hospitals
+
+By default, the data is sorted based on the cashless hospitals. 
+
+The Schema model is present at models/HealthInsurance.js

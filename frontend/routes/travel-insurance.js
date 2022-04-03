@@ -27,7 +27,7 @@ router.post("/query", async (req, res) => {
   var queryDestination = req.body.destination;
   var sortBy = req.body.sortBy;
   var dest = [];
-  addChoiceToLog(req.body, 'travelInsurance')
+  // addChoiceToLog(req.body, 'travelInsurance')
   var eligibleInsurances = [];
   var input = {};
 

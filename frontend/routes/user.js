@@ -50,10 +50,12 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
+    console.log("recvd", req.body)
     await axios.post(backendURL + "/login", {
         email: req.body.email,
         password: req.body.pwd
     }).then((response) => {
+        console.log(response)
         if (response.data.status == 0) {
             res.render("login", { error: "Invalid Credentials" })
         } else {
@@ -70,23 +72,25 @@ router.get("/dashboard", async (req, res) => {
     await axios.post(backendURL + "/data", {
         email: email
     }).then((userDetails) => {
-        console.log(userDetails);
-        name = userDetails.data.name
+        userDetails = userDetails.data.message[0]
+        name = userDetails.name
+        bookmarks = userDetails.bookmarks
     }).catch((error) => {
         console.log(error)
     })
 
-    await axios.get("https://localhost:9001/data/" + req.session.email, {
-        email: email
-    }).then((userDetails) => {
-        name = userDetails.data.name
-    }).catch((error) => {
-        console.log(error)
-    })
-    console.log(name);
+    // await axios.get("https://localhost:9001/data/" + req.session.email , {
+    //     email: email
+    // }).then((userDetails) => {
+    //     name = userDetails.data.name
+    // }).catch((error) => {
+    //     console.log(error)
+    // })
+    // console.log(bookmarks);
     res.render("dashboard", {
         name: name,
-        email: email
+        email: email,
+        bookmarks
     });
 });
 

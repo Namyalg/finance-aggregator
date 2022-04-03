@@ -1,94 +1,94 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 const HomeLoanSchema = mongoose.Schema({
-    Bank: {
-        type: String,
-        required: true,
+  Bank: {
+    type: String,
+    required: true
+  },
+  starting_interest_rate: {
+    type: Number,
+    required: true
+  },
+  processing_fee: {
+    percent: {
+      type: Number
     },
-    starting_interest_rate: {
-        type: Number,
-        required: true,
-    },
-    processing_fee: {
-        percent: {
-            type: Number,
-        },
-        max: {
-            type: Number,
-        }
-    },
-    max_tenure: {
-        type: Number,
-        default: 50,
-    },
-    rate_packages_available: {
-        fixed: {
-            type: Boolean,
-            default: false,
-        },
-        floating: {
-            type: Boolean,
-            default: false
-        }
-    },
-    interest_factor: {
-        salaried: {
-            type: Number,
-            default: 0,
-        },
-        self_employed: {
-            type: Number,
-            default: 0,
-        },
-        women: {
-            type: Number,
-            default: 0,
-        },
-        fixed: {
-            type: Number,
-            default: 0,
-        },
-        above30: {
-            type: Number,
-            default: 0,
-        }
-    },
-    avg_approval_time: {
-        type: Number,
-        default: 0,
-    },
-    age_limit: {
-        min: {
-            type: Number,
-            default: 0,
-        },
-        max: {
-            type: Number,
-            default: 0,
-        }
-    },
-    loan_amount: {
-        min: {
-            type: Number,
-            default: 0,
-        },
-        max: {
-            type: Number,
-            default: 0,
-        }
+    max: {
+      type: Number
     }
+  },
+  max_tenure: {
+    type: Number,
+    default: 50
+  },
+  rate_packages_available: {
+    fixed: {
+      type: Boolean,
+      default: false
+    },
+    floating: {
+      type: Boolean,
+      default: false
+    }
+  },
+  interest_factor: {
+    salaried: {
+      type: Number,
+      default: 0
+    },
+    self_employed: {
+      type: Number,
+      default: 0
+    },
+    women: {
+      type: Number,
+      default: 0
+    },
+    fixed: {
+      type: Number,
+      default: 0
+    },
+    above30: {
+      type: Number,
+      default: 0
+    }
+  },
+  avg_approval_time: {
+    type: Number,
+    default: 0
+  },
+  age_limit: {
+    min: {
+      type: Number,
+      default: 0
+    },
+    max: {
+      type: Number,
+      default: 0
+    }
+  },
+  loan_amount: {
+    min: {
+      type: Number,
+      default: 0
+    },
+    max: {
+      type: Number,
+      default: 0
+    }
+  }
 },
-    { timestamp: true });
+{ timestamp: true })
 
-const Loans = mongoose.model("home_loan", HomeLoanSchema);
+const Loans = mongoose.model('home_loan', HomeLoanSchema)
 // Loans.insertMany([
-//     //     { 
-//     //     Bank: '', 
-//     //     "starting_interest_rate": , 
+//     //     {
+//     //     Bank: '',
+//     //     "starting_interest_rate": ,
 //     //     "processing_fee": {
 //     //         percent: ,
-//     //         max: 
-//     //     }, 
+//     //         max:
+//     //     },
 //     //     "max_tenure": ,
 //     //     "rate_packages_available": {
 //     //         fixed: ,
@@ -98,7 +98,7 @@ const Loans = mongoose.model("home_loan", HomeLoanSchema);
 //     //         salaried: ,
 //     //         "self_employed": ,
 //     //         women: ,
-//     //         fixed: ,   
+//     //         fixed: ,
 //     //     },
 //     //     "average_approval_time": ,
 //     //     "age_limit": {
@@ -107,7 +107,7 @@ const Loans = mongoose.model("home_loan", HomeLoanSchema);
 //     //     },
 //     //     "loan_amount": {
 //     //         min: ,
-//     //         max: 
+//     //         max:
 //     //     }
 //     // },
 
@@ -397,4 +397,4 @@ const Loans = mongoose.model("home_loan", HomeLoanSchema);
 //         }
 //     },
 // ]).then(data => console.log(data));
-module.exports = Loans;
+module.exports = Loans

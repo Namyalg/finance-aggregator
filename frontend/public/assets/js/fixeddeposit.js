@@ -242,11 +242,8 @@ function showTable(resultTable){
 function bookmarkOption(policy, type){
 
     //assuming that the user details will be stored in localStorage on login/signup, so that will be used
-    
-    localStorage.setItem("email", "test")
     var email = localStorage.getItem("email", email)
     const option = { email : email, bookmarks : {fd : policy} };
-    console.log("policy added is " + policy)
     var URL = "http://localhost:9001/user/bookmark/" + type
     axios.post(URL, option)
     .then(response => {

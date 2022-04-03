@@ -45,9 +45,9 @@
     </style>
     <script>
         function saveEmailInLocalStorage() {
-            var email = document.getElementById('inputEmail').innerText;
-            console.log(email)
+            var email = document.getElementById('inputEmail').value;
             localStorage.setItem('email', email)
+            alert(localStorage.getItem('email'))
         }
     </script>
 </head>
