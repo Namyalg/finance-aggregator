@@ -15,13 +15,34 @@
     <meta name="msapplication-TileImage" content="../assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!-- ===============================================-->
     <!--    Stylesheets-->
     <!-- ===============================================-->
     <link href="../assets/css/theme.css" rel="stylesheet" />
+    <style>
+        .box-shadow {
+            -webkit-box-shadow: 0 5px 5px rgba(72, 78, 85, .6);
+            box-shadow: 0 3px 6px rgba(72, 78, 85, .6);
+            -webkit-transition: all .2s ease-out;
+            -moz-transition: all .2s ease-out;
+            -ms-transition: all .2s ease-out;
+            -o-transition: all .2s ease-out;
+            transition: all .2s ease-out;
+        }
 
+        .box-shadow:hover {
+            -webkit-box-shadow: 0 10px 20px rgba(72, 78, 85, .6);
+            box-shadow: 0 10px 20px rgba(72, 78, 85, .6);
+            -webkit-transform: translateY(-15px);
+            -moz-transform: translateY(-15px);
+            -ms-transform: translateY(-15px);
+            -o-transform: translateY(-15px);
+            transform: translateY(-15px);
+        }
+    </style>
 
 </head>
 
@@ -30,29 +51,40 @@
     <!--    Main Content-->
     <!-- ===============================================-->
     <main class="main" id="top">
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block"
+            data-navbar-on-scroll="data-navbar-on-scroll">
             <div class="container">
-                <a class="navbar-brand" href="index.html"><img src="../assets/img/gallery/logo.png" height="45" alt="logo" /></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
+                <a class="navbar-brand" href="index.html"><img src="../assets/img/gallery/logo.png" height="45"
+                        alt="logo" /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon">
+                    </span></button>
                 <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
-                        <li class="nav-item px-2"><a class="nav-link" aria-current="page" href="index.html">Home</a></li>
+                        <li class="nav-item px-2"><a class="nav-link" aria-current="page" href="index.html">Home</a>
+                        </li>
                         <li class="nav-item px-2"><a class="nav-link" href="#services">Our Services</a></li>
                         <li class="nav-item px-2"><a class="nav-link" href="#findUs">Find Us</a></li>
                     </ul>
                     <div class="dropdown d-none d-lg-block">
-                        <button class="btn bg-soft-warning ms-2" id="dropdownMenuButton1" type="submit" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search text-warning"></i></button>
-                        <div class="dropdown-menu dropdown-menu-lg-end p-0 rounded" aria-labelledby="dropdownMenuButton1" style="top:55px">
+                        <button class="btn bg-soft-warning ms-2" id="dropdownMenuButton1" type="submit"
+                            data-bs-toggle="dropdown" aria-expanded="false"><i
+                                class="fas fa-search text-warning"></i></button>
+                        <div class="dropdown-menu dropdown-menu-lg-end p-0 rounded"
+                            aria-labelledby="dropdownMenuButton1" style="top:55px">
                             <form>
-                                <input class="form-control border-200" type="search" placeholder="Search" aria-label="Search" style="background:#FDF1DF;" />
+                                <input class="form-control border-200" type="search" placeholder="Search"
+                                    aria-label="Search" style="background:#FDF1DF;" />
                             </form>
                         </div>
                     </div><a class="btn btn-primary order-1 order-lg-0 ms-lg-3" href="#!">Contact Us</a>
                     <%- include('partials/userMenu'); %>
-                        <form class="d-flex my-3 d-block d-lg-none">
-                            <input class="form-control me-2 border-200 bg-light" type="search" placeholder="Search" aria-label="Search" />
-                            <button class="btn btn-outline-primary" type="submit">Search</button>
-                        </form>
+                    <form class="d-flex my-3 d-block d-lg-none">
+                        <input class="form-control me-2 border-200 bg-light" type="search" placeholder="Search"
+                            aria-label="Search" />
+                        <button class="btn btn-outline-primary" type="submit">Search</button>
+                    </form>
                 </div>
             </div>
         </nav>
@@ -77,31 +109,36 @@
 
         <!-- ============================================-->
         <!-- <section> begin ============================-->
-        <br> <br>
-        <div class="col-sm-6">
-            <p>
-                <%= name %>
-            </p>
-            <p>
-                <%= email %>
-            </p>
-        </div>
+
         <section class="py-7" id="services" container-xl="container-xl">
 
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-md-8 col-lg-5 text-center mb-3">
+                    <div class="text-center mb-3">
+                        <h3 class="mb-3 mt-3">Welcome, <span class="text-danger"><%= name %></span></h3>
+                        <h4 class="mb-7">You are signed in as, <span class="text-danger"><%= email %></span></h4>
                         <h2 class="text-danger">SERVICES</h2>
                         <h5>Explore and compare the variety of options of each service</h5>
                     </div>
-                    <button id="fd-button" class="btn btn-outline-danger" type="submit">Fixed Deopsits </button>
-                    <button id="pl-button" class="btn btn-outline-danger" type="submit">Personal Loans </button>
-                    <button id="hl-button" class="btn btn-outline-danger" type="submit">Home Loans </button>
-                    <button id="hi-button" class="btn btn-outline-danger" type="submit">Health Insurance </button>
-                    <button id="ti-button" class="btn btn-outline-danger" type="submit">Travel Insurance </button>
+
+                    <button id="fd-button" class="btn btn-danger m-3 d-inline col-md-3 shadow-strong box-shadow"
+                        type="submit"
+                        style="width: 200px; padding-top: 50px; padding-bottom: 50px; font-weight: 600;">Fixed
+                        Deposits </button>
+                    <button id="pl-button" class="btn btn-danger col-md-3 m-3 box-shadow" type="submit"
+                        style="width: 200px; font-weight: 600;">Personal Loans </button>
+                    <button id="hl-button" class="btn btn-danger col-md-3 m-3 box-shadow" type="submit"
+                        style="width: 200px; font-weight: 600;">Home
+                        Loans </button>
+                    <button id="hi-button" class="btn btn-danger col-md-4 m-3 box-shadow" type="submit"
+                        style="width: 200px; font-weight: 600;">Health Insurance </button>
+                    <button id="ti-button" class="btn btn-danger col-md-4 m-3 box-shadow" type="submit"
+                        style="width: 200px; font-weight: 600;">Travel Insurance </button>
                 </div>
             </div>
             <!-- end of .container-->
+
+
 
         </section>
         <!-- <section> close ============================-->
@@ -112,131 +149,175 @@
 
         <!-- ============================================-->
         <!-- <section> begin ============================-->
-        <section class="pt-7 pb-0">
+        <section class="pt-3 pb-0">
             <div class="row flex-center">
 
                 <!--/.bg-holder-->
 
                 <div class="col-md-8 col-lg-5 text-center">
                     <h2 class="text-danger">BOOKMARKS</h2>
-                    <h5>Fixed Depsoits</h5>
+                    <h4 class="mt-4">Fixed Depsoits</h4>
                 </div>
             </div>
             <div class="container">
-                <div class="row">
-                    <div class="card h-100 card-span p-3">
+                <div class="row d-flex justify-content-center">
+                    <% for(var b in bookmarks['fd']){ %>
+                    <div class="card card-span p-3 mt-3" style="width: 80rem;">
                         <div class="card-body">
-                            <h5 class="mb-0 text-primary">Fantastic service!</h5>
-                            <p class="card-text pt-3">I purchased a phone from an e-commerce site, and this courier service provider assisted me in getting it delivered to my home. I received my phone within one day, and I was really satisfied with their service when I received
-                                it. </p>
-                            <div class="d-xl-flex justify-content-between align-items-center">
-                                <div class="d-flex align-items-center mb-3"><i class="fas fa-star text-primary me-1"></i><i class="fas fa-star text-primary me-1"></i><i class="fas fa-star text-primary me-1"></i><i class="fas fa-star text-primary me-1"></i><i class="fas fa-star text-primary me-1"></i></div>
-                                <div class="d-flex align-items-center"><img class="img-fluid" src="../assets/img/icons/avatar.png" alt="" />
-                                    <div class="flex-1 ms-3">
-                                        <h6 class="mb-0 fs--1 text-1000 fw-medium">Yves Tanguy</h6>
-                                        <p class="fs--2 fw-normal mb-0">Chief Executive, DLF</p>
-                                    </div>
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-6">
+                                    <h5>Input</h5>
+                                    <% for(var key in bookmarks['fd'][b]['input']){ %>
+                                    <p class="mb-1"><b><%= key %>:</b> <%= bookmarks['fd'][b]['input'][key] %></p>
+                                    <% } %>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Output</h5>
+                                    <% for(var key in bookmarks['fd'][b]['output']){ %>
+                                    <p class="mb-1"><b><%= key %>:</b> <%= bookmarks['fd'][b]['output'][key] %></p>
+                                    <% } %>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <% } %>
+                </div>
+            </div>
 
-                    <div class="row flex-center">
-                        <div class="col-md-8 col-lg-5 text-center">
-                            <h5>Personal Loans</h5>
 
-                        </div>
-                    </div>
-
-                    <div class="card h-100 card-span p-3">
-                        <div class="card-body">
-                            <h5 class="mb-0 text-primary">Fantastic service!</h5>
-                            <p class="card-text pt-3">I purchased a phone from an e-commerce site, and this courier service provider assisted me in getting it delivered to my home. I received my phone within one day, and I was really satisfied with their service when I received
-                                it. </p>
-                            <div class="d-xl-flex justify-content-between align-items-center">
-                                <div class="d-flex align-items-center mb-3"><i class="fas fa-star text-primary me-1"></i><i class="fas fa-star text-primary me-1"></i><i class="fas fa-star text-primary me-1"></i><i class="fas fa-star text-primary me-1"></i><i class="fas fa-star text-primary me-1"></i></div>
-                                <div class="d-flex align-items-center"><img class="img-fluid" src="../assets/img/icons/avatar.png" alt="" />
-                                    <div class="flex-1 ms-3">
-                                        <h6 class="mb-0 fs--1 text-1000 fw-medium">Yves Tanguy</h6>
-                                        <p class="fs--2 fw-normal mb-0">Chief Executive, DLF</p>
+            <div class="row flex-center">
+                <div class="col-md-8 col-lg-5 text-center mt-4">
+                    <h4>Personal Loans</h4>
+                </div>
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <% for(var b in bookmarks['personalLoan']){ %>
+                        <div class="card card-span p-3 mt-3" style="width: 80rem;">
+                            <div class="card-body">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-md-6">
+                                        <h5>Input</h5>
+                                        <% for(var key in bookmarks['personalLoan'][b]['input']){ %>
+                                        <p class="mb-1"><b><%= key %>:</b>
+                                            <%= bookmarks['personalLoan'][b]['input'][key] %></p>
+                                        <% } %>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Output</h5>
+                                        <% for(var key in bookmarks['personalLoan'][b]['output']){ %>
+                                        <p class="mb-1"><b><%= key %>:</b>
+                                            <%= bookmarks['personalLoan'][b]['output'][key] %></p>
+                                        <% } %>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row flex-center">
-                        <div class="col-md-8 col-lg-5 text-center">
-                            <h5>Home Loans</h5>
-
-                        </div>
-                    </div>
-
-                    <div class="card h-100 card-span p-3">
-                        <div class="card-body">
-                            <h5 class="mb-0 text-primary">Fantastic service!</h5>
-                            <p class="card-text pt-3">I purchased a phone from an e-commerce site, and this courier service provider assisted me in getting it delivered to my home. I received my phone within one day, and I was really satisfied with their service when I received
-                                it. </p>
-                            <div class="d-xl-flex justify-content-between align-items-center">
-                                <div class="d-flex align-items-center mb-3"><i class="fas fa-star text-primary me-1"></i><i class="fas fa-star text-primary me-1"></i><i class="fas fa-star text-primary me-1"></i><i class="fas fa-star text-primary me-1"></i><i class="fas fa-star text-primary me-1"></i></div>
-                                <div class="d-flex align-items-center"><img class="img-fluid" src="../assets/img/icons/avatar.png" alt="" />
-                                    <div class="flex-1 ms-3">
-                                        <h6 class="mb-0 fs--1 text-1000 fw-medium">Yves Tanguy</h6>
-                                        <p class="fs--2 fw-normal mb-0">Chief Executive, DLF</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row flex-center">
-                        <div class="col-md-8 col-lg-5 text-center">
-                            <h5>Health Insurances</h5>
-
-                        </div>
-                    </div>
-
-                    <div class="card h-100 card-span p-3">
-                        <div class="card-body">
-                            <h5 class="mb-0 text-primary">Fantastic service!</h5>
-                            <p class="card-text pt-3">I purchased a phone from an e-commerce site, and this courier service provider assisted me in getting it delivered to my home. I received my phone within one day, and I was really satisfied with their service when I received
-                                it. </p>
-                            <div class="d-xl-flex justify-content-between align-items-center">
-                                <div class="d-flex align-items-center mb-3"><i class="fas fa-star text-primary me-1"></i><i class="fas fa-star text-primary me-1"></i><i class="fas fa-star text-primary me-1"></i><i class="fas fa-star text-primary me-1"></i><i class="fas fa-star text-primary me-1"></i></div>
-                                <div class="d-flex align-items-center"><img class="img-fluid" src="../assets/img/icons/avatar.png" alt="" />
-                                    <div class="flex-1 ms-3">
-                                        <h6 class="mb-0 fs--1 text-1000 fw-medium">Yves Tanguy</h6>
-                                        <p class="fs--2 fw-normal mb-0">Chief Executive, DLF</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row flex-center">
-                        <div class="col-md-8 col-lg-5 text-center">
-                            <h5>Travel Insurances</h5>
-
-                        </div>
-                    </div>
-
-                    <div class="card h-100 card-span p-3">
-                        <div class="card-body">
-                            <h5 class="mb-0 text-primary">Fantastic service!</h5>
-                            <p class="card-text pt-3">I purchased a phone from an e-commerce site, and this courier service provider assisted me in getting it delivered to my home. I received my phone within one day, and I was really satisfied with their service when I received
-                                it. </p>
-                            <div class="d-xl-flex justify-content-between align-items-center">
-                                <div class="d-flex align-items-center mb-3"><i class="fas fa-star text-primary me-1"></i><i class="fas fa-star text-primary me-1"></i><i class="fas fa-star text-primary me-1"></i><i class="fas fa-star text-primary me-1"></i><i class="fas fa-star text-primary me-1"></i></div>
-                                <div class="d-flex align-items-center"><img class="img-fluid" src="../assets/img/icons/avatar.png" alt="" />
-                                    <div class="flex-1 ms-3">
-                                        <h6 class="mb-0 fs--1 text-1000 fw-medium">Yves Tanguy</h6>
-                                        <p class="fs--2 fw-normal mb-0">Chief Executive, DLF</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <% } %>
                     </div>
                 </div>
+            </div>
+
+            <div class="row flex-center">
+                <div class="col-md-8 col-lg-5 text-center mt-4">
+                    <h4>Home Loans</h4>
+
+                </div>
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <% for(var b in bookmarks['homeLoan']){ %>
+                        <div class="card card-span p-3 mt-3" style="width: 80rem;">
+                            <div class="card-body">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-md-6">
+                                        <h5>Input</h5>
+                                        <% for(var key in bookmarks['homeLoan'][b]['input']){ %>
+                                        <p class="mb-1"><b><%= key %>:</b> <%= bookmarks['homeLoan'][b]['input'][key] %>
+                                        </p>
+                                        <% } %>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Output</h5>
+                                        <% for(var key in bookmarks['homeLoan'][b]['output']){ %>
+                                        <p class="mb-1"><b><%= key %>:</b>
+                                            <%= bookmarks['homeLoan'][b]['output'][key] %></p>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row flex-center">
+                <div class="col-md-8 col-lg-5 text-center mt-4">
+                    <h4>Health Insurances</h4>
+
+                </div>
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <% for(var b in bookmarks['healthInsurance']){ %>
+                        <div class="card card-span p-3 mt-3" style="width: 80rem;">
+                            <div class="card-body">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-md-6">
+                                        <h5>Input</h5>
+                                        <% for(var key in bookmarks['healthInsurance'][b]['input']){ %>
+                                        <p class="mb-1"><b><%= key %>:</b>
+                                            <%= bookmarks['healthInsurance'][b]['input'][key] %></p>
+                                        <% } %>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Output</h5>
+                                        <% for(var key in bookmarks['healthInsurance'][b]['output']){ %>
+                                        <p class="mb-1"><b><%= key %>:</b>
+                                            <%= bookmarks['healthInsurance'][b]['output'][key] %></p>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row flex-center">
+                <div class="col-md-8 col-lg-5 text-center mt-4">
+                    <h4>Travel Insurances</h4>
+
+                </div>
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <% for(var b in bookmarks['travelInsurance']){ %>
+                        <div class="card card-span p-3 mt-3" style="width: 80rem;">
+                            <div class="card-body">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-md-6">
+                                        <h5>Input</h5>
+                                        <% for(var key in bookmarks['travelInsurance'][b]['input']){ %>
+                                        <p class="mb-1"><b><%= key %>:</b>
+                                            <%= bookmarks['travelInsurance'][b]['input'][key] %></p>
+                                        <% } %>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Output</h5>
+                                        <% for(var key in bookmarks['travelInsurance'][b]['output']){ %>
+                                        <p class="mb-1"><b><%= key %>:</b>
+                                            <%= bookmarks['travelInsurance'][b]['output'][key] %></p>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+
+            </div>
 
             </div>
             <!-- end of .container-->
@@ -258,9 +339,13 @@
                     </div>
                     <div class="col-12 col-sm-8 col-md-6">
                         <p class="fs--1 my-2 text-center text-md-end text-200"> Made with&nbsp;
-                            <svg class="bi bi-suit-heart-fill" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#F95C19" viewBox="0 0 16 16">
-                  <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"></path>
-                </svg>&nbsp;by&nbsp;<a class="fw-bold text-primary" href="https://themewagon.com/" target="_blank">ThemeWagon </a>
+                            <svg class="bi bi-suit-heart-fill" xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                fill="#F95C19" viewBox="0 0 16 16">
+                                <path
+                                    d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z">
+                                </path>
+                            </svg>&nbsp;by&nbsp;<a class="fw-bold text-primary" href="https://themewagon.com/"
+                                target="_blank">ThemeWagon </a>
                         </p>
                     </div>
                 </div>
@@ -280,7 +365,8 @@
     <script src="../assets/js/theme.js"></script>
     <script src="../assets/js/dashboard-helper.js"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"> >>>>>>> d8b1d3dfd310303e901e992b8a46350f171149e8
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet"> >>>>>>> d8b1d3dfd310303e901e992b8a46350f171149e8
 
 </body>
 

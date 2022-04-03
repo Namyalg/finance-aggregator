@@ -14,7 +14,7 @@ router.get("/signup", (req, res) => {
     });
 });
 
-router.post("/signup", async(req, res) => {
+router.post("/signup", async (req, res) => {
     const email = req.body.email
     if (emailRegex.test(email)) {
         // const salt = await bcrypt.genSalt(10);
@@ -49,7 +49,7 @@ router.get("/login", (req, res) => {
     });
 });
 
-router.post("/login", async(req, res) => {
+router.post("/login", async (req, res) => {
     console.log("recvd", req.body)
     await axios.post(backendURL + "/login", {
         email: req.body.email,
@@ -66,7 +66,7 @@ router.post("/login", async(req, res) => {
 });
 
 // dashboard
-router.get("/dashboard", async(req, res) => {
+router.get("/dashboard", async (req, res) => {
     var name = "",
         email = req.session.email
     await axios.post(backendURL + "/data", {
@@ -74,6 +74,7 @@ router.get("/dashboard", async(req, res) => {
     }).then((userDetails) => {
         userDetails = userDetails.data.message[0]
         name = userDetails.name
+        bookmarks = userDetails.bookmarks
     }).catch((error) => {
         console.log(error)
     })
@@ -85,10 +86,11 @@ router.get("/dashboard", async(req, res) => {
     // }).catch((error) => {
     //     console.log(error)
     // })
-
+    // console.log(bookmarks);
     res.render("dashboard", {
         name: name,
-        email: email
+        email: email,
+        bookmarks
     });
 });
 

@@ -25,31 +25,32 @@
     <meta name="theme-color" content="#ffffff">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&family=Tajawal&family=Ubuntu&display=swap"
+        rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- ===============================================-->
     <!--    Stylesheets-->
     <!-- ===============================================-->
     <link href="assets/css/theme.css" rel="stylesheet" />
     <link href="assets/css/product.css" rel="stylesheet" />
     <script>
- async function bookmarkOption(option, input){
-        let email = localStorage.getItem('email')
-        alert(email)
-        const body = { email: email, output: option, input: input }
-      await axios
-        .post(
-            "http://localhost:9001/user/bookmark/homeLoan", body
-        )
-        .then((res) => {
-            result = res.data.status;
-            alert("Bookmark added")
-            console.log("SUCCESSFUL")
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-    }
+        async function bookmarkOption(option, input) {
+            let email = localStorage.getItem('email')
+            alert(email)
+            const body = { email: email, output: option, input: input }
+            await axios
+                .post(
+                    "http://localhost:9001/user/bookmark/homeLoan", body
+                )
+                .then((res) => {
+                    result = res.data.status;
+                    alert("Bookmark added")
+                    console.log("SUCCESSFUL")
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
 
     </script>
 
@@ -114,7 +115,15 @@
                                 </div>
                                 <div>
                                     <form id="form" method="post" action="/home-loan">
+                                        <label for="sort" class="mt-3">Sort By</label>
+                                        <div id="sort" class="mb-3">
 
+                                            <input type="radio" name="sort" value="interest"
+                                                <%= (sort==='interest') ? 'checked':'' %>>Interest Rate
+                                            <br>
+                                            <input type="radio" name="sort" value="procesing_fee"
+                                                <%= (sort==='processing_fee') ? "checked":'' %>>Processing Fee
+                                        </div>
                                         <label for="amount">Desired Loan amount</label>
                                         <div class="flex">
                                             <span class="currency">&#8377</span>
@@ -157,22 +166,28 @@
                                         </div>
                                         <label for="employment_type" class="mt-3">Employment type</label>
                                         <div id="employment_type">
-                                            <input type="radio" name="employment_type" value="salaried"> salaried
+                                            <input type="radio" name="employment_type" value="salaried"
+                                                <%= (employment_type==='salaried') ? 'checked':'' %>> salaried
                                             <br>
-                                            <input type="radio" name="employment_type" value="self_employed"> Self
+                                            <input type="radio" name="employment_type" value="self_employed"
+                                                <%= (employment_type==='self_employed') ? 'checked':'' %>> Self
                                             Employed
                                         </div>
                                         <label for="gender" class="mt-3">Gender</label>
                                         <div id="gender">
-                                            <input type="radio" name="gender" value="male"> Male
+                                            <input type="radio" name="gender" value="male"
+                                                <%= (gender==='male') ? 'checked':'' %>> Male
                                             <br>
-                                            <input type="radio" name="gender" value="female"> Female
+                                            <input type="radio" name="gender" value="female"
+                                                <%= (gender==='female') ? 'checked':'' %>> Female
                                         </div>
                                         <label for="rate_packages" class="mt-3">Rate packages</label>
                                         <div id="rate_packages">
-                                            <input type="radio" name="rate_packages" value="fixed"> Fixed
+                                            <input type="radio" name="rate_packages" value="fixed"
+                                                <%= (rate_packages==='fixed') ? 'checked':'' %>> Fixed
                                             <br>
-                                            <input type="radio" name="rate_packages" value="floating"> Floating
+                                            <input type="radio" name="rate_packages" value="floating"
+                                                <%= (rate_packages==='floating') ? 'checked':'' %>> Floating
                                         </div>
                                         <div class="text-center mb-5 mt-3">
                                             <!-- <div class="d-block"> -->
@@ -192,16 +207,6 @@
                                     <div class="card bg-light border-0">
                                         <div class="row py-2">
                                             <div class="col-sm-2">
-                                                <!-- <div class="filters">
-                                                    <div class="select">
-                                                        <select name="filters" id="filters">
-                                                            <option value="1" selected="selected">Interest rate</option>
-                                                            <option value="2">Users rating</option>
-                                                            <option value="3">Most visited</option>
-                                                            <option value="4">Security</option>
-                                                        </select>
-                                                    </div>
-                                                </div> -->
 
                                             </div>
                                             <div class="col-sm-3 text-center">
@@ -218,10 +223,11 @@
                                     <!-- card to display loans-->
                                     <p style="color: red;"><%= msg %></p>
                                     <% for(var i=0; i<loans.length;i++) { %>
-                                    <div class="card mt-2">
+                                    <div class="card mt-2 result" onclick="expand('<%= i %>')">
                                         <div class="py-3 px-2 row">
-                                            <div class="col-sm-2 border-end py-4">
-                                                <p class="my-0" style="font-family:'Times New Roman', Times, serif">
+                                            <div class="col-sm-2 border-end py-2">
+                                                <p class="my-0"
+                                                    style="font-family: 'Tajawal', serif; text-align: center; letter-spacing: 0.75px; color: #5A5A5A;">
                                                     <% if(computedLoans.length) { %>
                                                     <%= loans[computedLoans[i]["index"]]["Bank"]%>
                                                     <% } else{ %>
@@ -233,17 +239,19 @@
                                             <!-- <div class="vr"></div> -->
                                             <div
                                                 class="col-sm-3 d-flex justify-content-center text-center align-items-center">
-                                                <p class="my-0" style="font-family:'Times New Roman', Times, serif">
+                                                <h4 style="font-family: 'PT Sans';" class="mb-0">
                                                     <% if(computedLoans.length) { %>
+                                                    <span
+                                                        style="font-family: Arial, Helvetica, sans-serif;">&#8377</span>
                                                     <%= computedLoans[i]["processing_fee"] %>
                                                     <% } else{ %>
                                                     -
                                                     <% } %>
-                                                </p>
+                                                </h4>
                                             </div>
                                             <div
                                                 class="col-sm-3 d-flex justify-content-center text-center align-items-center">
-                                                <h3 style="font-family: 'PT Sans';">
+                                                <h4 style="font-family: 'PT Sans';" class="mb-0">
                                                     <% if(computedLoans.length) { %>
                                                     <span
                                                         style="font-family: Arial, Helvetica, sans-serif;">&#8377</span>
@@ -251,11 +259,11 @@
                                                     <% } else{ %>
                                                     <%= loans[i]["starting_interest_rate"]%>
                                                     <% } %>
-                                                </h3>
+                                                </h4>
                                             </div>
                                             <div
                                                 class="col-sm-3 d-flex justify-content-center text-center align-items-center">
-                                                <h3 style="font-family: 'PT Sans';">
+                                                <h4 style="font-family: 'PT Sans';" class="mb-0">
                                                     <% if(computedLoans.length) { %>
                                                     <span
                                                         style="font-family: Arial, Helvetica, sans-serif;">&#8377</span>
@@ -263,19 +271,26 @@
                                                     <% } else{ %>
                                                     -
                                                     <% } %>
-                                                </h3>
+                                                </h4>
                                             </div>
                                             <div
                                                 class="col-sm-1 d-flex flex-column align-items-center justify-content-center">
                                                 <div class="d-flex justify-content-center"><i
-                                                        class="far fa-list-alt text-secondary fw-light"></i></div>
+                                                        class="far fa-solid fa-star text-danger fw-light"></i></div>
                                                 <div class="text-secondary text-center">
-                                                    <h6 onclick="bookmarkOption((<%= JSON.stringify(computedLoans[i]) %>), (<%= JSON.stringify(input) %>))" class="mb-0 mt-2 text-secondary fw-light">Bookmark</h6>
+                                                    <h6 onclick="bookmarkOption((<%= JSON.stringify(computedLoans[i]) %>), (<%= JSON.stringify(input) %>))"
+                                                        class="mb-0 mt-2 text-danger fw-light">Bookmark</h6>
                                                 </div>
                                             </div>
 
                                         </div>
-
+                                        <!-- <div id="<%= i %>" class="details" style="display: none;">
+                                            <ul>
+                                                <li>No collateral required</li>
+                                                <li>Loan available for amount of Rs 50,000 to 40,00,000 for upto 5 years
+                                                </li>
+                                            </ul>
+                                        </div> -->
                                     </div>
                                     <% } %>
                                 </div>
@@ -315,8 +330,52 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800&amp;display=swap"
         rel="stylesheet">
 </body>
-<!-- <script>
-    console.log(loans);
-</script> -->
+<script>
+    $("#result").click(function () {
+        console.log("sdfg");
+    })
+    function expand(index) {
+        var i, x;
+        x = document.getElementsByClassName("details");
+        if (getComputedStyle(document.getElementById(index)).display === "block") {
+            document.getElementById(index).style.display = "none";
+        }
+        else {
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            document.getElementById(index).style.display = "block";
+        }
+    }
+
+    function backgroundScheme() {
+        var col;
+        if (index % 2 === 0) {
+            col = "#F3E4F1";
+        }
+        // else if (index % 3 == 1) {
+        //     col = "#D5EBDA";
+        // }
+        else {
+            col = "#ffdbb3";
+        }
+        document.getElementById(index).style.color = col;
+    }
+    var cards = document.getElementsByClassName("result");
+    console.log(cards.length);
+    var col;
+    for (var i = 0; i < cards.length; i++) {
+        if (i % 2 === 0) {
+            col = "#ffebcb";
+        }
+        // else if (i % 3 === 1) {
+        //     col = "";
+        // }
+        else {
+            col = "#fff5e0";
+        }
+        cards[i].style.backgroundColor = col;
+    }
+</script>
 
 </html>
