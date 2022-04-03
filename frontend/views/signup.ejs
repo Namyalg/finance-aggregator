@@ -45,6 +45,7 @@
     </style>
     <script>
         function saveEmailInLocalStorage() {
+            console.log(document.getElementById('inputEmail'))
             var email = document.getElementById('inputEmail').value;
             localStorage.setItem('email', email)
         }
@@ -122,7 +123,9 @@
                             <%= error %>
                         </p>
                     </div>
-                    <button type="submit " class="btn btn-primary" onclick="saveEmailInLocalStorage()">Submit</button>
+                    <!-- <input type="submit"> -->
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <!-- <button type="submit " class="btn btn-primary" onclick="saveEmailInLocalStorage()">Submit</button> -->
                 </form>
             </div>
         </div>

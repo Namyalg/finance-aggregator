@@ -16,22 +16,29 @@ router.get("/signup", (req, res) => {
 
 router.post("/signup", async(req, res) => {
     const email = req.body.email
+    console.log("body from frontend")
+    console.log(req.body.email)
+    req.session.email = email
     if (emailRegex.test(email)) {
         // const salt = await bcrypt.genSalt(10);
         await axios.post(backendURL, {
             name: req.body.name,
-            email: email,
+            email: req.body.email,
             age: req.body.age,
             // password: await bcrypt.hash(req.body.pwd, salt),
             password: req.body.pwd,
             address: req.body.address
         }).then((response) => {
             if (response.data.status == 0) {
+                console.log("status is 0")
                 res.render("signup", { error: response.data.message });
             } else {
                 // successfull signup
-                var session = req.session
-                session.email = email
+                console.log("status is 1")
+                let session = req.session.email
+                // console.log("Session email id is")
+                console.log(session)
+                // session.email = email
                 res.render("index");
             }
         }).catch((error) => {

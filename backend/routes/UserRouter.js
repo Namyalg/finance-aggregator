@@ -21,9 +21,12 @@ router.get('/', async (req, res) => {
 // verify user login
 router.post('/login', async (req, res) => {
   console.log('recvd', req.body)
+  console.log(req.body.password)
+
   try {
     await User.find({ email: req.body.email })
       .then((data) => {
+        console.log(data)
         if ((data[0].password == req.body.password)) {
           res.status(200).json({ message: 'successful', status: 1 })
         } else {
@@ -39,25 +42,10 @@ router.post('/login', async (req, res) => {
   }
 })
 
-router.post('/login', async (req, res) => {
-  try {
-    await User.find({ email: req.body.email })
-      .then((data) => {
-        if ((data[0].password = req.body.password)) {
-          res.status(200).json({ message: 'successful', status: 1 })
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    res.status(400)
-  } catch (err) {
-    console.log(err)
-  }
-})
-
 // create a user, for the first time (Bookmarks are null here, only personal details added)
 router.post('/', async (req, res) => {
+  console.log('in the backend UserRouter.js')
+  console.log(req.body)
   const UserObject = new User({
     name: req.body.name,
     email: req.body.email,
@@ -73,30 +61,43 @@ router.post('/', async (req, res) => {
     }
   })
   try {
-    // check if a user with this email already exits
-    await User.find({ email: req.body.email }).then((data) => {
-      if (data.length > 0) {
-        res
-          .status(200)
-          .json({
-            status: 0,
-            message: 'A user with this email already exists. Please login instead.'
-          })
-      } else {
-        // create user
-        User.create(UserObject)
-          .then((data) => {
-            res.status(200).json({ status: 1 })
-          })
-          .catch((err) => {
-            const resp = { status: 0, message: 'Error is ' + err }
-            res.status(400).json(resp)
-          })
-      }
-    })
+    User.create(UserObject)
+      .then((data) => {
+        res.status(200).json({ status: 1 })
+      })
+      .catch((err) => {
+        const resp = { status: 0, message: 'Error is ' + err }
+        res.status(400).json(resp)
+      })
   } catch (err) {
-    res.status(400).json({ status: 0, message: 'Error is ' + err })
+    console.log(err)
   }
+
+  // try {
+  //   // check if a user with this email already exits
+  //   await User.find({ email: req.body.email }).then((data) => {
+  //     if (data.length > 0) {
+  //       res
+  //         .status(200)
+  //         .json({
+  //           status: 0,
+  //           message: 'A user with this email already exists. Please login instead.'
+  //         })
+  //     } else {
+  //       // create user
+  //       User.create(UserObject)
+  //         .then((data) => {
+  //           res.status(200).json({ status: 1 })
+  //         })
+  //         .catch((err) => {
+  //           const resp = { status: 0, message: 'Error is ' + err }
+  //           res.status(400).json(resp)
+  //         })
+  //     }
+  //   })
+  // } catch (err) {
+  //   res.status(400).json({ status: 0, message: 'Error is ' + err })
+  // }
 })
 
 // based on type (fd, loan or insurance the update is made) the chosen policy is added as a bookmark
@@ -116,16 +117,16 @@ router.post('/bookmark/:type', async (req, res) => {
           newObj.input = req.body.input
           fd.push(newObj)
           allBookmarks.fd = fd
-        } // bookmark for personal loan 
+        } // bookmark for personal loan
         else if (req.params.type === 'personalLoan') {
           console.log(req.body)
           const personalLoan = allBookmarks.personalLoan
           const newObj = { output: {}, input: {} }
-          newObj.output = {amount : req.body.output}
+          newObj.output = { amount: req.body.output }
           newObj.input = req.body.input
           personalLoan.push(newObj)
           allBookmarks.personalLoan = personalLoan
-        } // bookmark for health insurance  
+        } // bookmark for health insurance
         else if (req.params.type === 'healthInsurance') {
           const healthInsurance = allBookmarks.healthInsurance
           const newObj = { output: {}, input: {} }
