@@ -28,6 +28,7 @@ The backend and frontend are independent applications. Within both, each product
 
 The main compoenents are :
 - Login/Signup 
+  
   Users can sign up and login to access various features of the appliation. To Signup, the user is required to provide details like `name`, `email`, `age`, `address` and set a `password`. The details are stored in a database and the user may login later with the same credentials.
 
   The signup and login routes redirect to the dashboard on success. After each signup/login the user session is maintained using a sessions cookie on the client side and relevant session information is stored in the frontend server. This allows for concurrency when the application is used by many people at the same time.
