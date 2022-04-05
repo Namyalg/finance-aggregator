@@ -35,7 +35,7 @@ We cover five products :
 - [Health Insurance](HealthInsurance.md)
 - [Travel Insurance](TravelInsurance.md)
 - Home Loan
-- Personal Loan
+- [Personal Loan](PersonalLoan.md)
 
 Each component is modular in nature and has separate backend and frontend components
 
