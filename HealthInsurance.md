@@ -3,14 +3,14 @@ Health insurance is a contract where an insurance company provides medical cover
 It covers medical expenses incurred on hospitalization, surgeries, day care procedures, etc. 
 A health insurance policy either reimburses the medical costs or offers cashless treatment.
 
-Inputs
+## Inputs
 The inputs are as follows- 
 
 1) `Age`- The age of the user is taken as input. Higher the age of the insurance policy buyer, more will be the premium to be paid because of higher chances of using the policy.
 2) `No . Of chronic diseases` - The number of chronic diseases the user is suffering from is taken as input. More the number of chronic diseases, higher is the premium to be paid.
 3) `No. Of family members to be added` - If the users want to include any family members like parents, children or spouse, they can write the total number in this input. More the number of people too be included, higher is the premium to be paid.
 
-Outputs
+## Outputs
 The following outputs related to reach health insurance are displayed on the webpage-
 
 1) `Insurance Policy`- The name of the insurance policy along with the agency's name that is offering the policy is displayed.
@@ -19,7 +19,7 @@ The following outputs related to reach health insurance are displayed on the web
 4) `Diseases covered` - An array of chronic diseases convered by the insurance policy is displayed on the webpage. Sone of the examples of chronic diseases covered are hypertension, diabetes, arthritis etc.
 5) `Cashless Hospitals` - The number of cashless hospitals covered by the policy are displayed in the webpage. Cashless hospitals are those hospitals where the user doesn't have to pay a single penny out of his pocket in case of a hospitalization and the entire hospital bill is cleared directly by the Insurance Company.
 
-Data and Algorithms
+## Data and Algorithms
 The data of the health insurance agencies and their policies have been extracted from various websites. All of the policies are active in India. Some changes have been made to the data as per the new algorithm applied.
 
 The algorithms have been mainly applied to calculate the premium to be paid to the agency by the user. There are 2 algorithms-
@@ -34,3 +34,7 @@ The output can be sorted (optional) in non decreasing order based on the followi
 By default, the data is sorted based on the cashless hospitals. 
 
 The Schema model is present at models/HealthInsurance.js
+
+## Endpoints
+- `/health-insurance`, `GET` : Retrieves data about all health insurance policies offered from the database.
+- `/health-insurance/query`, `POST` : Based on the inputs entered by the user, filters are applied on the database and results are retrieved accordingly.
