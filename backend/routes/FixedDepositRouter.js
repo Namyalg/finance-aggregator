@@ -64,28 +64,6 @@ router.post('/', async (req, res) => {
   }
 })
 
-// router.post('/bookmark', async (req, res) => {
-//   try {
-//     console.log(req.body)
-//     const data = await FD.find()
-//     let result = []
-//     if (req.body.filters === 'amount') {
-//       result = recommendOptions(data, req.body.principal,
-//         req.body.totalTenure, req.body.isSenior,
-//         req.body.cumulative, req.body.nonCumulative,
-//         req.body.monthly, req.body.quarterly, req.body.semiAnnually, 0)
-//     } else {
-//       result = recommendOptions(data, req.body.principal,
-//         req.body.totalTenure, req.body.isSenior,
-//         req.body.cumulative, req.body.nonCumulative,
-//         req.body.monthly, req.body.quarterly, req.body.semiAnnually, 1)
-//     }
-//     res.status(200).json({ message: result, status: 1 })
-//   } catch (err) {
-//     res.status(400).json({ message: 'Error is ' + err, status: 0 })
-//   }
-// })
-
 // computation performed and choiced returned
 function recommendOptions (data, principal, totalTenure, isSenior, cumulative, nonCumulative, monthly, quarterly, semiAnnually, filter) {
   // stores the resulting ordering of options

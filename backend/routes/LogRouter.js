@@ -12,11 +12,11 @@ router.get('/', async (req, res) => {
   }
 })
 
+//adapt to the schema based on the type of product
 router.post('/:type', async (req, res) => {
   const log = await Log.find()
   const id = log[0].id
-  // const flog = log[0].toObject()
-  if (req.params.type === 'fd') {
+  if (req.params.type === 'fd') { //for fixed deposit
     Log.findOneAndUpdate({ _id: log[0].id }, {
       $push: { fixedDeposit: req.body.input }
     }, { new: true, safe: true, upsert: true }).then((result) => {
@@ -32,7 +32,7 @@ router.post('/:type', async (req, res) => {
         data: error
       })
     })
-  } else if (req.params.type === 'healthInsurance') {
+  } else if (req.params.type === 'healthInsurance') { // for health insurance
     const healthInsurance = log[0].healthInsurance
     healthInsurance.push(req.body.input)
     Log.findOneAndUpdate({ _id: id }, {
@@ -50,7 +50,7 @@ router.post('/:type', async (req, res) => {
         data: error
       })
     })
-  } else if (req.params.type === 'homeLoan') {
+  } else if (req.params.type === 'homeLoan') { // for home loan
     Log.findOneAndUpdate({ _id: log[0].id }, {
       $push: { homeLoan: req.body.input }
     }, { new: true, safe: true, upsert: true }).then((result) => {
@@ -66,7 +66,7 @@ router.post('/:type', async (req, res) => {
         data: error
       })
     })
-  } else if (req.params.type === 'personalLoan') {
+  } else if (req.params.type === 'personalLoan') { // for personal loan
     const personalLoan = log[0].personalLoan
     personalLoan.push(req.body.input)
     Log.findOneAndUpdate({ _id: log[0].id }, { personalLoan: personalLoan }
@@ -84,7 +84,7 @@ router.post('/:type', async (req, res) => {
       })
     })
   } else {
-    Log.findOneAndUpdate({ _id: log[0].id }, {
+    Log.findOneAndUpdate({ _id: log[0].id }, { // for travel insurance
       $push: { travelInsurance: req.body.input }
     }, { new: true, safe: true, upsert: true }).then((result) => {
       return res.status(200).json({

@@ -24,8 +24,14 @@ The frontend is written in NodeJS using EJS
 
 ## Components
 
+The backend and frontend are independent applications. Within both, each product and major feature is decoupled using an isolated router to support independent development cycles and failure handling. This is achieved using express routers in NodeJS.
+
 The main compoenents are :
 - Login/Signup 
+  Users can sign up and login to access various features of the appliation. To Signup, the user is required to provide details like `name`, `email`, `age`, `address` and set a `password`. The details are stored in a database and the user may login later with the same credentials.
+
+  The signup and login routes redirect to the dashboard on success. After each signup/login the user session is maintained using a sessions cookie on the client side and relevant session information is stored in the frontend server. This allows for concurrency when the application is used by many people at the same time.
+
 - User Dashboard
 - Product pages
 ## Products
@@ -34,7 +40,7 @@ We cover five products :
 - [Fixed Deposits](FixedDeposit.md)
 - [Health Insurance](HealthInsurance.md)
 - [Travel Insurance](TravelInsurance.md)
-- Home Loan
+- [Home Loan](homeLoan.md)
 - [Personal Loan](PersonalLoan.md)
 
 Each component is modular in nature and has separate backend and frontend components

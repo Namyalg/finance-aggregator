@@ -1,9 +1,16 @@
+/*
+  The requests to /fd, will handle all the queries relating
+  to health insurance
+*/
+
+// imports and dependencies
 const express = require('express')
 const mongoose = require('mongoose')
 const router = express.Router()
 const healthInsuranceDB = require('../models/HealthInsurance')
 const axios = require('axios')
 
+// On receiving a query from the frontend, computations are performed and returned
 router.post('/query', async (req, res) => {
   try {
     const age = parseFloat(req.body.age)
@@ -25,6 +32,9 @@ router.post('/query', async (req, res) => {
     res.status(400).json({ message: err, status: 0 })
   }
 })
+
+
+// get all health insurances data stored in the database
 router.get('/', async (req, res) => {
   try {
     const allInsurances = await healthInsuranceDB.find()
@@ -46,7 +56,6 @@ function addChoiceToLog (input, type) {
                 currentdate.getMinutes() + ':' +
                 currentdate.getSeconds() + ' IST'
   const log = { input: input, date: datetime }
-  console.log(log)
   const URL = 'http://localhost:9001/log/' + type
   try {
     axios.post(URL, log)

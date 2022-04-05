@@ -1,9 +1,16 @@
+/*
+  The requests to /fd, will handle all the queries relating
+  to Home loan
+*/
+
+//imports and dependencies
 const express = require('express')
 const mongoose = require('mongoose')
 const router = express.Router()
 const homeLoanDB = require('../models/HomeLoan')
 const axios = require('axios')
 
+// get all home loans stored in the database
 router.get('/', async (req, res) => {
   try {
     const allLoans = await homeLoanDB.find()
@@ -14,6 +21,7 @@ router.get('/', async (req, res) => {
   }
 })
 
+// add a home loan record based on the home loan schema
 router.post('/', async (req, res) => {
   try {
     const amount = parseFloat(req.body.amount)
@@ -40,9 +48,7 @@ router.post('/', async (req, res) => {
         { 'age.max': { $gte: age } }
       ],
       max_tenure: { $gte: tenure }
-      // ['rate_packages_available.' + rate_package]: true,
     }
-    console.log(rate_package)
     query['rate_packages_available.' + rate_package] = true
     const loans = await homeLoanDB.find(query)
     res.status(200).json({ message: loans, status: 1 })
@@ -61,7 +67,6 @@ function addChoiceToLog (input, type) {
                   currentdate.getMinutes() + ':' +
                   currentdate.getSeconds() + ' IST'
   const log = { input: input, date: datetime }
-  console.log(log)
   const URL = 'http://localhost:9001/log/' + type
   try {
     axios.post(URL, log)

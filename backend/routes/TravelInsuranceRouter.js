@@ -1,11 +1,16 @@
+/*
+  The requests to /fd, will handle all the queries relating
+  to travel insurance
+*/
+
 // imports and dependencies
 const express = require('express')
-// eslint-disable-next-line no-unused-vars
 const mongoose = require('mongoose')
 const router = express.Router()
 const travelInsuranceDB = require('../models/TravelInsurance')
 const axios = require('axios')
 
+// get all travel insurance records from the database
 router.get('/', async (req, res) => {
   try {
     const allInsurances = await travelInsuranceDB.find()
@@ -16,6 +21,7 @@ router.get('/', async (req, res) => {
   }
 })
 
+// get all destinations
 router.get('/alldest', async (req, res) => {
   try {
     const allInsurances = await travelInsuranceDB.distinct('destination')
@@ -26,6 +32,7 @@ router.get('/alldest', async (req, res) => {
   }
 })
 
+// based on the inputs provided, the computation is performed
 router.post('/query', async (req, res) => {
   console.log('query recvd', req.body)
   try {
