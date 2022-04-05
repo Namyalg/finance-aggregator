@@ -21,6 +21,20 @@ The output contains :
 - An option to bookmark any result for future reference
 
 ### Data and Algorithms
+
+#### Schema
+
+`Bank name` 
+
+`under_two_cr` : // principal amount is < 2,00,00,000, an array of time slabs and rate of interest for general population and seniors 
+
+`two_five_cr`  : // principal amount  is  >= 2,00,00,000, <= 5,00,00,000, same as above
+
+`type` : // type of bank 
+
+
+
+#### Algorithm
 - The data about banks and fixed deposit rates have been extracted from various webistes. The data is stored as the tenure slab each having an interest rate for senior citizens and a general rate of interest
 
 - Based on the sorting criteria chosen, the algorithm is applied. Two algorithms exist : 
