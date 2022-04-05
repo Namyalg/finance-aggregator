@@ -1,3 +1,9 @@
+/*
+  The requests to /fd, will handle all the queries relating
+  to personal loan
+*/
+
+ 
 // imports and dependencies
 const express = require('express')
 const mongoose = require('mongoose')
@@ -5,6 +11,7 @@ const router = express.Router()
 const personalLoanDB = require('../models/PersonalLoan')
 const axios = require('axios')
 
+// get all personal loan records in the database
 router.get('/', async (req, res) => {
   try {
     const allLoans = await personalLoanDB.find()
@@ -16,6 +23,7 @@ router.get('/', async (req, res) => {
   }
 })
 
+// based on the inputs supplied the computation is performed 
 router.post('/query', async (req, res) => {
   try {
     const loanAmount = parseFloat(req.body.amount)
