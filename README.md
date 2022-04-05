@@ -34,7 +34,7 @@ We cover five products :
 - [Fixed Deposits](FixedDeposit.md)
 - [Health Insurance](HealthInsurance.md)
 - [Travel Insurance](TravelInsurance.md)
-- Home Loan
+- [Home Loan](homeLoan.md)
 - [Personal Loan](PersonalLoan.md)
 
 Each component is modular in nature and has separate backend and frontend components
