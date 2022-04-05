@@ -139,38 +139,48 @@
 
                 <div class="col-md-8 col-lg-5 text-center">
                     <h2 class="text-danger">BOOKMARKS</h2>
-                    <h4 class="mt-4">Fixed Depsoits</h4>
                 </div>
             </div>
-            <div class="container">
-                <div class="row d-flex justify-content-center">
-                    <% for(var b in bookmarks['fd']){ %>
-                    <div class="card card-span p-3 mt-3" style="width: 80rem;">
-                        <div class="card-body">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-md-6">
-                                    <h5>Input</h5>
-                                    <% for(var key in bookmarks['fd'][b]['input']){ %>
-                                    <p class="mb-1"><b><%= key %>:</b> <%= bookmarks['fd'][b]['input'][key] %></p>
-                                    <% } %>
-                                </div>
-                                <div class="col-md-6">
-                                    <h5>Output</h5>
-                                    <% for(var key in bookmarks['fd'][b]['output']){ %>
-                                    <p class="mb-1"><b><%= key %>:</b> <%= bookmarks['fd'][b]['output'][key] %></p>
-                                    <% } %>
+            <% if(bookmarks['fd'].length){ %>
+            <div class="row flex-center">
+                <div class="col-md-8 col-lg-5 text-center mt-4">
+
+                    <h4>Fixed Deposits</h4>
+
+                </div>
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <% for(var b in bookmarks['fd']){ %>
+                        <div class="card card-span p-3 mt-3" style="width: 80rem;">
+                            <div class="card-body">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-md-6">
+                                        <h5>Input</h5>
+                                        <% for(var key in bookmarks['fd'][b]['input']){ %>
+                                        <p class="mb-1"><b><%= key %>:</b> <%= bookmarks['fd'][b]['input'][key] %></p>
+                                        <% } %>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Output</h5>
+                                        <% for(var key in bookmarks['fd'][b]['output']){ %>
+                                        <p class="mb-1"><b><%= key %>:</b> <%= bookmarks['fd'][b]['output'][key] %></p>
+                                        <% } %>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <% } %>
                     </div>
-                    <% } %>
                 </div>
             </div>
+            <% } %>
 
-
+            <% if(bookmarks['personalLoan'].length){ %>
             <div class="row flex-center">
                 <div class="col-md-8 col-lg-5 text-center mt-4">
+
                     <h4>Personal Loans</h4>
+
                 </div>
                 <div class="container">
                     <div class="row d-flex justify-content-center">
@@ -199,7 +209,9 @@
                     </div>
                 </div>
             </div>
+            <% } %>
 
+            <% if(bookmarks['homeLoan'].length){ %>
             <div class="row flex-center">
                 <div class="col-md-8 col-lg-5 text-center mt-4">
                     <h4>Home Loans</h4>
@@ -232,7 +244,9 @@
                     </div>
                 </div>
             </div>
+            <% } %>
 
+            <% if(bookmarks['healthInsurance'].length){ %>
             <div class="row flex-center">
                 <div class="col-md-8 col-lg-5 text-center mt-4">
                     <h4>Health Insurances</h4>
@@ -265,8 +279,9 @@
                     </div>
                 </div>
             </div>
+            <% } %>
 
-
+            <% if(bookmarks['travelInsurance'].length){ %>
             <div class="row flex-center">
                 <div class="col-md-8 col-lg-5 text-center mt-4">
                     <h4>Travel Insurances</h4>
@@ -299,6 +314,7 @@
                     </div>
                 </div>
             </div>
+            <% } %>
 
             </div>
 
