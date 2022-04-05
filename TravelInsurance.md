@@ -20,6 +20,23 @@ The output contains :
 - An option to bookmark any result for future reference
 
 ### Data and Algorithms
+
+#### Data
+The Schema model is present at `models/TravelInsurance.js`
+ 
+`agency_name` : String
+
+`agency_type`	: // Travel Agency/Airline
+
+`product_name` : String
+
+`destination` : String
+
+`premium`: Integer
+
+`duration` : // Time for which the plan is valid, ranges from 1-12 months
+    
+#### Algorithm
 - The data about agencies, the destination and the various plans offered in each of these has been extracted from a date set on Kaggle. Their premiums and durations have been produced artificially.
 
 - Based on the sorting criteria chosen, the algorithm is applied. Two algorithms exist : 
@@ -27,7 +44,8 @@ The output contains :
     
     - `Sort based on Duration` : The results are ordered in decreasing order of the duration for which they are valid. 
 
- The Schema model is present at `models/TravelInsurance.js`
+
+
 
 ### Endpoints 
 
